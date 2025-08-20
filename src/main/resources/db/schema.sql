@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS mensaje (
     contenido TEXT NOT NULL,
     tipo TINYINT NOT NULL DEFAULT 0,
     estado TINYINT NOT NULL DEFAULT 0,
+    comentario TEXT NULL,
     usuario_id INT NOT NULL,
     FOREIGN KEY (usuario_id) REFERENCES usuario (id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -62,7 +63,6 @@ CREATE TABLE IF NOT EXISTS cotizacion_detalle (
     producto_id INT NOT NULL,
     cotizacion_id INT NOT NULL,
     cantidad INT NOT NULL,
-    comentario TEXT NULL,
     PRIMARY KEY (producto_id, cotizacion_id),
     FOREIGN KEY (producto_id) REFERENCES producto (id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (cotizacion_id) REFERENCES cotizacion (id) ON DELETE CASCADE ON UPDATE CASCADE
