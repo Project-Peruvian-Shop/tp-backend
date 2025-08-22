@@ -22,16 +22,18 @@ import static com.ecommerce.backend.mapper.UsuarioMapper.toEntity;
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
-    public List<UsuarioResponseDTO> findAll(){
+    public List<UsuarioResponseDTO> findAll() {
         return usuarioRepository.findAll()
                 .stream()
                 .map(UsuarioMapper::toDTO)
                 .toList();
     }
+
     public Usuario findById(Long id) {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - id: " + id));
     }
+
     public UsuarioResponseDTO save(UsuarioRequestDTO usuarioRequestDTO) {
         if (usuarioRepository.existsByEmail(usuarioRequestDTO.getEmail())) {
             throw new RuntimeException("El email " + usuarioRequestDTO.getEmail() + " ya está en uso.");
@@ -40,6 +42,7 @@ public class UsuarioService {
         Usuario savedUsuario = usuarioRepository.save(usuario);
         return UsuarioMapper.toDTO(savedUsuario);
     }
+
     public UsuarioResponseDTO update(Long id, UsuarioRequestDTO usuarioRequestDTO) {
         Usuario existingUser = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - id: " + id));
@@ -59,15 +62,18 @@ public class UsuarioService {
         }
         usuarioRepository.deleteById(id);
     }
+
     public Usuario findByEmail(String email) {
         return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - email: " + email));
     }
+
     public UsuarioResponseDTO findByNombreCompleto(String nombre, String apellidos) {
-        Usuario usuario = usuarioRepository.findByNombreAndApellidos(nombre,apellidos)
+        Usuario usuario = usuarioRepository.findByNombreAndApellidos(nombre, apellidos)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - nombre: " + nombre));
         return UsuarioMapper.toDTO(usuario);
     }
+
     public List<UsuarioResponseDTO> findByRol(UserRole rol) {
         return usuarioRepository.findByRol(rol)
                 .stream()
@@ -76,7 +82,7 @@ public class UsuarioService {
     }
 
 
-    public  UsuarioResponseDTO register(UsuarioRequestDTO usuarioRequestDTO) {
+    public UsuarioResponseDTO register(UsuarioRequestDTO usuarioRequestDTO) {
         if (usuarioRepository.existsByEmail(usuarioRequestDTO.getEmail())) {
             throw new RuntimeException("El email " + usuarioRequestDTO.getEmail() + " ya está en uso.");
         }
@@ -86,8 +92,9 @@ public class UsuarioService {
 
         return UsuarioMapper.toDTO(savedUsuario);
     }
-    public UsuarioResponseDTO login(String email, String passwordd){
-        Usuario usuario= usuarioRepository.findByEmail(email)
+
+    public UsuarioResponseDTO login(String email, String passwordd) {
+        Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - email: " + email));
         if (!usuario.getPasswordd().equals(passwordd)) {
             throw new InvalidCredentialsException("Contraseña incorrecta, intente de nuevo.");
