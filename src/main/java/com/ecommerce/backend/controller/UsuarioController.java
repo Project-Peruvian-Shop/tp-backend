@@ -2,14 +2,15 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
+import com.ecommerce.backend.dto.request.LoginRequestDTO;
+import com.ecommerce.backend.dto.request.UsuarioRequestDTO;
+import com.ecommerce.backend.dto.response.UsuarioResponseDTO;
+import com.ecommerce.backend.role.UserRole;
 import com.ecommerce.backend.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
-
 
     @GetMapping
     public ResponseEntity<GlobalResponse> getAllUsuarios(){
@@ -59,6 +59,165 @@ public class UsuarioController {
             status = HttpStatus.NOT_FOUND;
             data = null;
             message = "Error retrieving usuario with id: " +id;
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+    @PostMapping("/save")
+    public ResponseEntity<GlobalResponse> saveUsuario( @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+
+        try {
+            data = usuarioService.save(usuarioRequestDTO);
+            status = HttpStatus.CREATED;
+            message = "Usuario created successfully";
+        } catch (Exception e) {
+            status = HttpStatus.BAD_REQUEST;
+            data = null;
+            message = "Error creating usuario";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+    @PostMapping("/register")
+    public ResponseEntity<GlobalResponse> addUser(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+
+        try {
+            data = usuarioService.register(usuarioRequestDTO);
+            status = HttpStatus.CREATED;
+            message = "Usuario created successfully";
+        } catch (Exception e) {
+            status = HttpStatus.BAD_REQUEST;
+            data = null;
+            message = "Error creating usuario";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+    @PostMapping("/login")
+    public ResponseEntity<GlobalResponse> login(@RequestBody LoginRequestDTO loginRequestDTO) {
+        UsuarioResponseDTO data = usuarioService.login(loginRequestDTO.getEmail(), loginRequestDTO.getPasswordd());
+
+        return ResponseEntity.ok(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message("Login successful")
+                        .data(data)
+                        .details(null)
+                        .build()
+        );
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<GlobalResponse> updateUsuario(@PathVariable Long id, @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+
+        try {
+            data = usuarioService.update(id,usuarioRequestDTO);
+            status = HttpStatus.OK;
+            message = "Usuario updated successfully - id: " + id;
+        } catch (Exception e) {
+            status = HttpStatus.NOT_FOUND;
+            data = null;
+            message = "Error updating usuario with id: " + id;
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<GlobalResponse> deleteUsuario(@PathVariable Long id) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            usuarioService.deleteById(id);
+            status = HttpStatus.OK;
+            message = "Usuario deleted successfully - id: " + id;
+        } catch (Exception e) {
+            status = HttpStatus.NOT_FOUND;
+            message = "Error deleting usuario with id: " + id;
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(status == HttpStatus.OK)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+    @GetMapping("/buscar")
+    public ResponseEntity<GlobalResponse> findUsers(@RequestParam(required = false) String nombre, @RequestParam(required = false) String apellidos,
+                                                       @RequestParam(required = false) String email, @RequestParam(required = false) String rol) {
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+
+        try {
+            if (email != null) {
+                data = usuarioService.findByEmail(email);
+                message = "Usuario encontrado por email: " + email;
+            } else if (nombre != null && apellidos != null) {
+                data = usuarioService.findByNombreCompleto(nombre, apellidos);
+                message = "Usuario encontrado por nombre completo: " + nombre + " " + apellidos;
+            } else if (rol != null) {
+                UserRole roleEnum = UserRole.fromString(rol);
+                data = usuarioService.findByRol(roleEnum);
+                message = "Usuarios encontrado por rol: " + rol;
+            } else {
+                throw new IllegalArgumentException("Debe proporcionar al menos un criterio de búsqueda (email, nombre+apellidos o rol).");
+            }
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.NOT_FOUND;
+            data = null;
+            message = "Error retrieving usuario with nombre: " + nombre + " " + apellidos;
             details = e.getMessage();
         }
 

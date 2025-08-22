@@ -35,19 +35,9 @@ public class UsuarioMapper {
         usuario.setNombre(dto.getNombre());
         usuario.setApellidos(dto.getApellidos());
         usuario.setEmail(dto.getEmail());
-        usuario.setPasswordd(dto.getPassword());
+        usuario.setPasswordd(dto.getPasswordd());
         usuario.setTelefono(dto.getTelefono());
-        usuario.setRol(UserRole.valueOf(dto.getRol()));
-
+        usuario.setRol(UserRole.valueOf(dto.getRol().toUpperCase()));
         return usuario;
-    }
-    public static List<UsuarioResponseDTO> toDTOList(List<Usuario> usuarios){
-        if (usuarios == null)
-        {
-            return null;
-        }
-        return usuarios.stream()
-                .map(UsuarioMapper::toDTO)
-                .collect(Collectors.toList());
     }
 }
