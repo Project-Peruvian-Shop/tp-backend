@@ -37,7 +37,12 @@ public class UsuarioMapper {
         usuario.setEmail(dto.getEmail());
         usuario.setPasswordd(dto.getPasswordd());
         usuario.setTelefono(dto.getTelefono());
-        usuario.setRol(UserRole.valueOf(dto.getRol().toUpperCase()));
+        if (dto.getRol() != null) {
+            usuario.setRol(UserRole.valueOf(dto.getRol().toUpperCase()));
+        } else {
+            usuario.setRol(UserRole.ROLE_USER);
+        }
+
         return usuario;
     }
 }
