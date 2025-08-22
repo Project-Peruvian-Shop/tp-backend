@@ -15,4 +15,5 @@ public class Constant {
     public static final String TABLE_MENSAJES = "mensaje";
     public static final String TABLE_COTIZACION= "cotizacion";
     public static final String TABLE_COTIZACION_DETALLE = "cotizacion_detalle";
+    public static final String AUTH="auth";
 }

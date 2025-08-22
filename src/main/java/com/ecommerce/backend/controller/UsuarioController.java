@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(Constant.API_VERSION + "/" + Constant.TABLE_USUARIOS)
+@RequestMapping(Constant.API_VERSION + "/" +Constant.TABLE_USUARIOS)
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
     @GetMapping
-    public ResponseEntity<GlobalResponse> getAllUsuarios() {
+    public ResponseEntity<GlobalResponse> getAllUsuarios(){
         HttpStatus status;
         Object data;
         String message;
@@ -44,7 +44,6 @@ public class UsuarioController {
                         .build()
         );
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<GlobalResponse> findById(@PathVariable Long id) {
         HttpStatus status;
@@ -59,7 +58,7 @@ public class UsuarioController {
         } catch (Exception e) {
             status = HttpStatus.NOT_FOUND;
             data = null;
-            message = "Error retrieving usuario with id: " + id;
+            message = "Error retrieving usuario with id: " +id;
             details = e.getMessage();
         }
 
@@ -72,9 +71,8 @@ public class UsuarioController {
                         .build()
         );
     }
-
     @PostMapping("/save")
-    public ResponseEntity<GlobalResponse> saveUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+    public ResponseEntity<GlobalResponse> saveUsuario( @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
         HttpStatus status;
         Object data;
         String message;
@@ -100,49 +98,6 @@ public class UsuarioController {
                         .build()
         );
     }
-
-    @PostMapping("/register")
-    public ResponseEntity<GlobalResponse> addUser(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
-
-        try {
-            data = usuarioService.register(usuarioRequestDTO);
-            status = HttpStatus.CREATED;
-            message = "Usuario created successfully";
-        } catch (Exception e) {
-            status = HttpStatus.BAD_REQUEST;
-            data = null;
-            message = "Error creating usuario";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<GlobalResponse> login(@RequestBody LoginRequestDTO loginRequestDTO) {
-        UsuarioResponseDTO data = usuarioService.login(loginRequestDTO.getEmail(), loginRequestDTO.getPasswordd());
-
-        return ResponseEntity.ok(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message("Login successful")
-                        .data(data)
-                        .details(null)
-                        .build()
-        );
-    }
-
     @PutMapping("/update/{id}")
     public ResponseEntity<GlobalResponse> updateUsuario(@PathVariable Long id, @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
         HttpStatus status;
@@ -151,7 +106,7 @@ public class UsuarioController {
         String details = null;
 
         try {
-            data = usuarioService.update(id, usuarioRequestDTO);
+            data = usuarioService.update(id,usuarioRequestDTO);
             status = HttpStatus.OK;
             message = "Usuario updated successfully - id: " + id;
         } catch (Exception e) {
@@ -170,7 +125,6 @@ public class UsuarioController {
                         .build()
         );
     }
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<GlobalResponse> deleteUsuario(@PathVariable Long id) {
         HttpStatus status;
@@ -197,10 +151,9 @@ public class UsuarioController {
                         .build()
         );
     }
-
     @GetMapping("/buscar")
     public ResponseEntity<GlobalResponse> findUsers(@RequestParam(required = false) String nombre, @RequestParam(required = false) String apellidos,
-                                                    @RequestParam(required = false) String email, @RequestParam(required = false) String rol) {
+                                                       @RequestParam(required = false) String email, @RequestParam(required = false) String rol) {
         HttpStatus status;
         Object data;
         String message;
