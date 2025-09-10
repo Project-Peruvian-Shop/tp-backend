@@ -16,16 +16,16 @@ public class MensajeController {
 
     private final MensajeService mensajeService;
 
-    @PostMapping("/contactenos")
-    public ResponseEntity<GlobalResponse> send_contactenos(@RequestBody MensajeRequestDTO mensajeRequestDTO){
+    @PostMapping("/reclamos")
+    public ResponseEntity<GlobalResponse> send_reclamos(@RequestBody MensajeRequestDTO mensajeRequestDTO){
         HttpStatus status;
         Object data;
         String message;
         String details = null;
         try {
-            data = mensajeService.send_contactenos(mensajeRequestDTO);
+            data = mensajeService.send_reclamos(mensajeRequestDTO);
             status = HttpStatus.OK;
-            message = "Mensaje sent successfully";
+            message = "Claim sent successfully";
         } catch (Exception e) {
             status = HttpStatus.BAD_REQUEST;
             data = null;

@@ -16,7 +16,7 @@ public class MensajeService {
     private final MensajeRepository mensajeRepository;
 
     @Transactional
-    public MensajeResponseDTO send_contactenos(MensajeRequestDTO mensajeRequestDTO){
+    public MensajeResponseDTO send_reclamos(MensajeRequestDTO mensajeRequestDTO){
         Mensaje mensaje = MensajeMapper.toEntity(mensajeRequestDTO,0);
         Mensaje saved_mensaje = mensajeRepository.save(mensaje);
 
