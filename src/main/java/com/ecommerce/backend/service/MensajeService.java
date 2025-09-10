@@ -1,6 +1,7 @@
 package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.dto.request.MensajeRequestDTO;
+import com.ecommerce.backend.dto.response.MensajeDashboardDTO;
 import com.ecommerce.backend.dto.response.MensajeResponseDTO;
 import com.ecommerce.backend.entity.Mensaje;
 import com.ecommerce.backend.mapper.MensajeMapper;
@@ -16,11 +17,24 @@ public class MensajeService {
     private final MensajeRepository mensajeRepository;
 
     @Transactional
+    public MensajeResponseDTO send_contactenos(MensajeRequestDTO mensajeRequestDTO){
+        Mensaje mensaje = MensajeMapper.toEntity(mensajeRequestDTO,0);
+        Mensaje saved_mensaje = mensajeRepository.save(mensaje);
+
+        return new MensajeResponseDTO(saved_mensaje.getId());
+    }
+    @Transactional
     public MensajeResponseDTO send_reclamos(MensajeRequestDTO mensajeRequestDTO){
         Mensaje mensaje = MensajeMapper.toEntity(mensajeRequestDTO,0);
         Mensaje saved_mensaje = mensajeRepository.save(mensaje);
 
         return new MensajeResponseDTO(saved_mensaje.getId());
+    }
+    public MensajeDashboardDTO get_dashboard_menssage(Long mes){
+        Long respondidos= mensajeRepository.count_response_mes(mes);
+        Long pendientes= mensajeRepository.count_pending_mes(mes);
+
+        return new MensajeDashboardDTO(respondidos,pendientes);
     }
 
 }
