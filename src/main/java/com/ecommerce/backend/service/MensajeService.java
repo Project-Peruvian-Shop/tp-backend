@@ -30,6 +30,15 @@ public class MensajeService {
 
         return new MensajeResponseDTO(saved_mensaje.getId());
     }
+
+    public MensajeResponseDTO change_state(Long id, Integer new_state){
+        Mensaje mensaje = mensajeRepository.findById(id).orElseThrow(()-> new RuntimeException("Mensaje no encontrado - ID: " + id));
+        mensaje.setEstado(new_state);
+        Mensaje updated_mensaje = mensajeRepository.save(mensaje);
+
+        return new MensajeResponseDTO(updated_mensaje.getId());
+    }
+
     public MensajeDashboardDTO get_dashboard_menssage(Long mes){
         Long respondidos= mensajeRepository.count_response_mes(mes);
         Long pendientes= mensajeRepository.count_pending_mes(mes);

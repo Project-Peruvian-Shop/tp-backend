@@ -2,6 +2,7 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
+import com.ecommerce.backend.dto.request.ChangeStateMensajeRequestDTO;
 import com.ecommerce.backend.dto.request.MensajeRequestDTO;
 import com.ecommerce.backend.dto.response.MensajeDashboardDTO;
 import com.ecommerce.backend.service.MensajeService;
@@ -81,6 +82,31 @@ public class MensajeController {
             status = HttpStatus.BAD_REQUEST;
             data = null;
             message = "Error sending mensaje";
+            details = e.getMessage();
+        }
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+    @PutMapping("/change_state/{id}")
+    public ResponseEntity<GlobalResponse> change_state(@PathVariable Long id, @RequestBody ChangeStateMensajeRequestDTO changeStateMensajeRequestDTO){
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+        try {
+            data = mensajeService.change_state(id,changeStateMensajeRequestDTO.getNew_state());
+            status = HttpStatus.OK;
+            message = "Message state changed successfully";
+        } catch (Exception e) {
+            status = HttpStatus.NOT_FOUND;
+            data = null;
+            message = "Error changing message state";
             details = e.getMessage();
         }
         return ResponseEntity.status(status).body(
