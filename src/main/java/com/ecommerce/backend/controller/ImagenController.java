@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class ImagenController {
     private final ImagenService imagenService;
 
+    // Funcion: Encontrar una imagen por ID
+    // Seguridad: publico
+    // Ubicacion: llamadas a la API
+    // Metodo: GET
+    // Request: id
+    // Response: Imagen
     @GetMapping("/{id}")
     public ResponseEntity<GlobalResponse> findById(@PathVariable Long id) {
         HttpStatus status;
@@ -47,6 +53,12 @@ public class ImagenController {
         );
     }
 
+    // Funcion: Crear una nueva imagen
+    // Seguridad: publico
+    // Ubicacion: llamadas a la API
+    // Metodo: POST
+    // Request: ImagenRequestDTO
+    // Response: Imagen
     @PostMapping
     public ResponseEntity<GlobalResponse> create(@Valid @RequestBody ImagenRequestDTO imagen) {
         HttpStatus status;
