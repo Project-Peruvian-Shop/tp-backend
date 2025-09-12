@@ -93,6 +93,33 @@ public class MensajeController {
                         .build()
         );
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<GlobalResponse> get_mensaje_by_id(@PathVariable Long id){
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+        try {
+            data = mensajeService.get_mensaje_by_id(id);
+            status = HttpStatus.OK;
+            message = "Message retrieved successfully";
+        } catch (Exception e) {
+            status = HttpStatus.NOT_FOUND;
+            data = null;
+            message = "Error retrieving message";
+            details = e.getMessage();
+        }
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+
     @PutMapping("/change_state/{id}")
     public ResponseEntity<GlobalResponse> change_state(@PathVariable Long id, @RequestBody ChangeStateMensajeRequestDTO changeStateMensajeRequestDTO){
         HttpStatus status;
