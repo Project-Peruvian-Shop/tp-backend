@@ -2,15 +2,14 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
+import com.ecommerce.backend.dto.imagen.ImagenRequestDTO;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.service.ImagenService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(Constant.API_VERSION + "/" + Constant.TABLE_IMAGEN)
@@ -36,6 +35,32 @@ public class ImagenController {
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             message = "An error occurred while retrieving the imagen";
+            details = e.getMessage();
+        }
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+    @PostMapping
+    public ResponseEntity<GlobalResponse> create(@Valid @RequestBody ImagenRequestDTO imagen) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            status = HttpStatus.CREATED;
+            data = imagenService.create(imagen);
+            message = "Imagen created successfully";
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "An error occurred while creating the imagen";
             details = e.getMessage();
         }
         return ResponseEntity.status(status).body(
