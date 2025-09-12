@@ -11,10 +11,11 @@ public class Constant {
 
     // tables
     public static final String TABLE_IMAGEN = "imagen";
-    public static final String TABLE_PRODUCTO = "producto";
     public static final String TABLE_CATEGORIA = "categoria";
-    public static final String TABLE_USUARIO = "usuario";
-    public static final String TABLE_COTIZACION = "cotizacion";
+    public static final String TABLE_USUARIOS = "usuario";
+    public static final String TABLE_PRODUCTOS = "producto";
+    public static final String TABLE_MENSAJES = "mensaje";
+    public static final String TABLE_COTIZACION= "cotizacion";
     public static final String TABLE_COTIZACION_DETALLE = "cotizacion_detalle";
-
+    public static final String AUTH="auth";
 }

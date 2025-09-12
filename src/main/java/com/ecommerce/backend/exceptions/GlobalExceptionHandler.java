@@ -63,6 +63,13 @@ public class GlobalExceptionHandler {
         errorResponse.setMessage(Constant.GR_ERROR_NO_HANDLER);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
+    // InvalidCredentialsException
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<GlobalResponse> handleInvalidCredentialsException(InvalidCredentialsException e, HttpServletRequest req) {
+        GlobalResponse res = createResponse(e, req);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(res);
+    }
+
 
     // private
     private GlobalResponse createResponse(Exception e, HttpServletRequest req) {
