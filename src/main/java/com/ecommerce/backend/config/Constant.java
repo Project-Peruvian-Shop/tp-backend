@@ -9,7 +9,9 @@ public class Constant {
     public static final String GR_ERROR_PARAMETER_TYPE = "The parameter '%s' must be of type '%s'";
     public static final String GR_ERROR_DETAILS = "[%s] %s";
 
-    //TABLES NAMES
+    // tables
+    public static final String TABLE_IMAGEN = "imagen";
+    public static final String TABLE_CATEGORIA = "categoria";
     public static final String TABLE_USUARIOS = "usuario";
     public static final String TABLE_PRODUCTOS = "producto";
     public static final String TABLE_MENSAJES = "mensaje";
