@@ -17,3 +17,14 @@ insert into categoria (nombre, usos, norma, imagen_id) values
 ('Tuberías HDPE 160mm', 'Redes de distribución de agua potable y alcantarillado', 'ISO 4427', 4),
 ('Codo PVC 90°', 'Conexión de tuberías en ángulo recto para redes de agua', 'ASTM D2466', 5),
 ('Tee de Agua PVC', 'Distribución de flujo en redes de agua potable', 'ASTM D2466', 6);
+
+-- Productos relacionados con las categorías existentes
+INSERT INTO producto (nombre, descripcion, imagen_id, categoria_id) VALUES
+('Tubería PVC 110mm x 6m', 'Ideal para desagüe y agua fría, resistente y duradera', 1, 1),
+('Tubería PVC 90mm x 6m', 'Ligera y fácil de instalar, utilizada en redes domiciliarias', 1, 2),
+('Tubería HDPE 63mm PN10', 'Alta resistencia a la presión, especial para riego agrícola', 2, 3),
+('Tubería HDPE 160mm PN12.5', 'Gran diámetro para redes principales de agua potable', 3, 4),
+('Codo PVC 90° 110mm', 'Accesorio para desvío de tuberías en ángulo recto', 4, 5),
+('Codo PVC 90° 90mm', 'Conexión en ángulo para tuberías de menor diámetro', 5, 5),
+('Tee de Agua PVC 110mm', 'Permite dividir el flujo en redes domiciliarias', 3, 3),
+('Tee de Agua PVC 90mm', 'Accesorio para derivaciones en instalaciones de agua', 3, 4);
