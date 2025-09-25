@@ -1,6 +1,6 @@
 package com.ecommerce.backend.mapper;
 
-import com.ecommerce.backend.dto.request.MensajeRequestDTO;
+import com.ecommerce.backend.dto.mensaje.request.MensajeRequestDTO;
 import com.ecommerce.backend.entity.Mensaje;
 import org.springframework.stereotype.Component;
 

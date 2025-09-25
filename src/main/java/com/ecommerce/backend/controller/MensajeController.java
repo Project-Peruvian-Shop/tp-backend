@@ -2,9 +2,8 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
-import com.ecommerce.backend.dto.request.ChangeStateMensajeRequestDTO;
-import com.ecommerce.backend.dto.request.MensajeRequestDTO;
-import com.ecommerce.backend.dto.response.MensajeDashboardDTO;
+import com.ecommerce.backend.dto.mensaje.request.ChangeStateMensajeRequestDTO;
+import com.ecommerce.backend.dto.mensaje.request.MensajeRequestDTO;
 import com.ecommerce.backend.service.MensajeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
