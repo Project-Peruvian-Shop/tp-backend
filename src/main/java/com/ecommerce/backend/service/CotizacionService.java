@@ -13,7 +13,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -31,6 +33,7 @@ public class CotizacionService {
     private final CotizacionRepository cotizacionRepository;
     private final CotizacionDetalleRepository detalleRepository;
     private final CotizacionPdfRepository pdfRepository;
+    private final FileUploadService fileUploadService;
 
     @Transactional
     public CotizacionResponseDTO save_cotizacion(CotizacionRequestDTO request) {
@@ -74,12 +77,17 @@ public class CotizacionService {
         );
     }
 
-    public CotizacionPdfDTO save_pdf(Long cotizacionId, String archivo) {
+    public CotizacionPdfDTO savePdf(Long cotizacionId, MultipartFile archivo) throws IOException {
+
         Cotizacion cotizacion = cotizacionRepository.findById(cotizacionId)
                 .orElseThrow(() -> new RuntimeException("Cotización no encontrada"));
 
+        String fileName = UUID.randomUUID().toString().substring(0,6) + ".pdf";
+
+        String filePath = fileUploadService.uploadFile(archivo, fileName, "uploads/cotizaciones");
+
         CotizacionPDF pdf = new CotizacionPDF();
-        pdf.setArchivo(archivo);
+        pdf.setArchivo(filePath);
         pdf.setCreacion(LocalDateTime.now());
         pdf.setCotizacion(cotizacion);
 

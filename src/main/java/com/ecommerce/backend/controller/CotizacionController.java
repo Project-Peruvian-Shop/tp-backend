@@ -3,11 +3,21 @@ package com.ecommerce.backend.controller;
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.cotizacion.CotizacionRequestDTO;
+import com.ecommerce.backend.entity.CotizacionPDF;
 import com.ecommerce.backend.service.CotizacionService;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping(Constant.API_VERSION + "/" + Constant.TABLE_COTIZACION)
@@ -42,14 +52,15 @@ public class CotizacionController {
                         .build()
         );
     }
-    @PostMapping("/{id}/pdf")
-    public ResponseEntity<GlobalResponse> create_Pdf(@PathVariable Long id, @RequestParam String archivo){
+    @PostMapping("/create_pdf/{id}")
+    public ResponseEntity<GlobalResponse> createPdf(@PathVariable Long id, @RequestParam("archivo") MultipartFile archivo) {
         HttpStatus status;
         Object data;
         String message;
         String details = null;
+
         try {
-            data = cotizacionService.save_pdf(id, archivo);
+            data = cotizacionService.savePdf(id, archivo);
             status = HttpStatus.CREATED;
             message = "PDF created successfully";
         } catch (Exception e) {
@@ -58,6 +69,7 @@ public class CotizacionController {
             message = "Error creating PDF";
             details = e.getMessage();
         }
+
         return ResponseEntity.status(status).body(
                 GlobalResponse.builder()
                         .ok(data != null)
