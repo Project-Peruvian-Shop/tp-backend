@@ -1,16 +1,25 @@
 package com.ecommerce.backend.service;
 
-import com.ecommerce.backend.dto.cotizacion.CotizacionPdfDTO;
-import com.ecommerce.backend.dto.cotizacion.CotizacionProductoDTO;
-import com.ecommerce.backend.dto.cotizacion.CotizacionRequestDTO;
-import com.ecommerce.backend.dto.cotizacion.CotizacionResponseDTO;
+import com.ecommerce.backend.dto.cotizacion.CategoriaMesDTO;
+import com.ecommerce.backend.dto.cotizacion.*;
+import com.ecommerce.backend.dto.cotizacion.ProductoCotizadoMesDTO;
+import com.ecommerce.backend.dto.cotizacion.UsuarioCotizacionMesDTO;
 import com.ecommerce.backend.entity.*;
 import com.ecommerce.backend.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.TextStyle;
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 @Service
@@ -82,5 +91,45 @@ public class CotizacionService {
                 guardado.getCreacion(),
                 guardado.getCotizacion().getId()
         );
+    }
+    public List<ProductoCotizadoMesDTO> get_productos_cotizados_mes(Integer mes, Integer year) {
+        LocalDate now = LocalDate.now();
+        int m = (year != null) ? mes : now.getMonthValue();
+        int y = (year != null) ? year : now.getYear();
+        return detalleRepository.productos_cotizados_mes(m, y);
+    }
+
+    public UsuarioCotizacionMesDTO get_usuarios_mes(Integer mes, Integer year){
+        LocalDate now = LocalDate.now();
+        int m = (mes != null) ? mes : now.getMonthValue();
+        int y = (year != null) ? year : now.getYear();
+        Long nuevos = cotizacionRepository.count_usuarios_nuevos_mes(m, y);
+        Long cotizadores = cotizacionRepository.count_usuarios_cotizadores_mes(m, y);
+        return new UsuarioCotizacionMesDTO(nuevos, cotizadores);
+    }
+
+    public List<CategoriaMesDTO> get_lineas_cotizadas_mes(Integer mes, Integer year){
+        LocalDate now = LocalDate.now();
+        int m = (mes != null) ? mes : now.getMonthValue();
+        int y = (year != null) ? year : now.getYear();
+        return detalleRepository.lineasCotizadasMes(m, y);
+    }
+
+    public List<CotizacionYearDTO> get_cotizacion_year(Integer year){
+        int y = (year != null) ? year : LocalDate.now().getYear();
+
+        return cotizacionRepository.cotizacionesForYear(y).stream()
+                .map(row -> {
+                    Integer mesNumero = ((Number) row[0]).intValue();
+                    Long cantidad = ((Number) row[1]).longValue();
+                    String mesNombre = Month.of(mesNumero)
+                            .getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+                    return new CotizacionYearDTO(mesNombre, cantidad);
+                })
+                .toList();
+    }
+    public Page<CotizacionDashboardDTO> get_cotizaciones_dashboard(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return cotizacionRepository.findAllCotizacionesDashboard(pageable);
     }
 }
