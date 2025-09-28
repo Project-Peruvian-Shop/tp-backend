@@ -267,4 +267,36 @@ public class CotizacionController {
                         .build()
         );
     }
+
+    @GetMapping("/{id}")
+    @Operation(
+            summary = "Traer cotizaciones por ID",
+            description = "Ubicación: cotizacion particular  \n" +
+                    "Seguridad: Usuario, Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse> getCotizacionesById(@PathVariable Long id) {
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+
+        try {
+            data = cotizacionService.getByID(id);
+            status = HttpStatus.OK;
+            message = "Cotizaciones por ID";
+        } catch (Exception e) {
+            status = HttpStatus.BAD_REQUEST;
+            data = null;
+            message = "Error al traer cotizaciones por ID";
+            details = e.getMessage();
+        }
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
 }

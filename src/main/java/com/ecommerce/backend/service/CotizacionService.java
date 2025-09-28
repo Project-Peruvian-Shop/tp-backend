@@ -5,6 +5,7 @@ import com.ecommerce.backend.dto.cotizacion.*;
 import com.ecommerce.backend.dto.cotizacion.ProductoCotizadoMesDTO;
 import com.ecommerce.backend.dto.cotizacion.UsuarioCotizacionMesDTO;
 import com.ecommerce.backend.entity.*;
+import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.CotizacionMapper;
 import com.ecommerce.backend.repository.*;
 import jakarta.transaction.Transactional;
@@ -145,11 +146,17 @@ public class CotizacionService {
     }
 
     public List<CotizacionByUsuarioResponseDTO> getByUser(Long id) {
-        List<Cotizacion> listaUsuariosPorUsuario = cotizacionRepository.findByUsuarioId(id);
-
-        return listaUsuariosPorUsuario.stream()
+        return cotizacionRepository.findByUsuarioId(id)
+                .stream()
                 .map(CotizacionMapper::toDTOGetByUser)
                 .toList();
+    }
+
+    public CotizacionFullResponseDTO getByID(Long id) {
+        Cotizacion cotizacion = cotizacionRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cotización no encontrada con id: " + id));
+
+        return CotizacionMapper.toDTOGetByID(cotizacion);
     }
 
     private String getNumberFromDB() {
