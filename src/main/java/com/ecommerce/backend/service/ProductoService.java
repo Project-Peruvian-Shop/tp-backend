@@ -11,6 +11,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductoService {
@@ -22,11 +25,22 @@ public class ProductoService {
                 .map(ProductoMapper::toDTO);
     }
 
-    public ProductoFullResponseDTO findByID(Long id){
+    public ProductoFullResponseDTO findByID(Long id) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrada con id: " + id));
 
         return ProductoMapper.toDTOGetByID(producto);
+    }
+
+    public List<PaginatedProductoResponseDTO> findSugeridosByID(Long producto, Long categoria) {
+        List<Producto> productos = productoRepository.findTop4ExceptByCategoria(producto, categoria);
+
+        Collections.shuffle(productos);
+
+        return productos.stream()
+                .limit(4)
+                .map(ProductoMapper::toDTO)
+                .toList();
     }
 }
 

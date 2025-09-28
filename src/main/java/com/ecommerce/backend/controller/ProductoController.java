@@ -57,7 +57,7 @@ public class ProductoController {
     @GetMapping("/{id}")
     @Operation(
             summary = "Traer al producto por id",
-            description = "Ubicación: Tienda  \n" +
+            description = "Ubicación: Producto en Tienda  \n" +
                     "Seguridad: Pública"
     )
     public ResponseEntity<GlobalResponse> getByID(@PathVariable Long id) {
@@ -74,6 +74,42 @@ public class ProductoController {
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             message = "Error al traer el producto";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+    @GetMapping("/sugeridos/")
+    @Operation(
+            summary = "Traer productos sugeridos por id",
+            description = "Ubicación: Producto en Tienda  \n" +
+                    "Seguridad: Pública"
+    )
+    public ResponseEntity<GlobalResponse> getProductosByID(
+            @RequestParam(defaultValue = "1") Long producto,
+            @RequestParam(defaultValue = "1") Long categoria
+    ){
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+
+        try {
+            data = productoService.findSugeridosByID(producto, categoria);
+            message = "Producto sugeridos " + producto;
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "Error al traer productos sugeridos";
             details = e.getMessage();
         }
 
