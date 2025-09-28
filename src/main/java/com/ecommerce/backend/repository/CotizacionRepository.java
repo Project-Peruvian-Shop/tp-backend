@@ -47,4 +47,6 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
     Page<CotizacionDashboardDTO> findAllCotizacionesDashboard(Pageable pageable);
 
     Optional<Cotizacion> findTopByOrderByIdDesc();
+
+    List<Cotizacion> findByUsuarioId(Long id);
 }
