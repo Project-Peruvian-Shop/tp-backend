@@ -50,9 +50,6 @@ public class CotizacionController {
     }
 
     @PostMapping("/create_pdf/{id}")
-    @Operation(
-            summary = "Subir PDF al backend"
-    )
     public ResponseEntity<GlobalResponse> createPdf(@PathVariable Long id, @RequestParam("archivo") MultipartFile archivo) {
         HttpStatus status;
         Object data;
@@ -81,11 +78,6 @@ public class CotizacionController {
     }
 
     @GetMapping("/productos_mes")
-    @Operation(
-            summary = "Traer productos del mes",
-            description = "Seguridad: ROLE_MANAGER, ROLE_ADMIN\n" +
-                    "Ubicacion: dashboard"
-    )
     public ResponseEntity<GlobalResponse> productos_cotizados_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year) {
         HttpStatus status;
         Object data;
@@ -112,11 +104,6 @@ public class CotizacionController {
     }
 
     @GetMapping("/usuarios_mes")
-    @Operation(
-            summary = "Traer usuarios del mes",
-            description = "Seguridad: ROLE_MANAGER, ROLE_ADMIN\n" +
-                    "Ubicacion: dashboard"
-    )
     public ResponseEntity<GlobalResponse> get_usuarios_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year) {
         HttpStatus status;
         Object data;
@@ -143,11 +130,6 @@ public class CotizacionController {
     }
 
     @GetMapping("/lineas_mes")
-    @Operation(
-            summary = "Traer categorias/lineas del mes",
-            description = "Seguridad: ROLE_MANAGER, ROLE_ADMIN\n" +
-                    "Ubicacion: dashboard"
-    )
     public ResponseEntity<GlobalResponse> get_lineas_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year) {
         HttpStatus status;
         Object data;
@@ -174,11 +156,6 @@ public class CotizacionController {
     }
 
     @GetMapping("cotizaciones_year")
-    @Operation(
-            summary = "Traer cotizaciones del mes",
-            description = "Seguridad: ROLE_MANAGER, ROLE_ADMIN\n" +
-                    "Ubicacion: dashboard"
-    )
     public ResponseEntity<GlobalResponse> get_cotizaciones_year(@RequestParam(required = false) Integer year) {
         HttpStatus status;
         Object data;
@@ -205,11 +182,6 @@ public class CotizacionController {
     }
 
     @GetMapping("/paginated")
-    @Operation(
-            summary = "Traer cotizaciones paginadas",
-            description = "Seguridad: ROLE_MANAGER, ROLE_ADMIN  \n" +
-                    "Ubicacion: dashboard"
-    )
     public ResponseEntity<GlobalResponse> get_cotizaciones_dashboard(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         HttpStatus status;
         Object data;

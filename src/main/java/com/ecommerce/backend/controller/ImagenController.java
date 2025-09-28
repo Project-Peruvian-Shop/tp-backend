@@ -19,11 +19,6 @@ public class ImagenController {
     private final ImagenService imagenService;
 
     @GetMapping("/{id}")
-    @Operation(
-            summary = "Traer imagen por id",
-            description = "Seguridad: publico\n" +
-                    "Ubicacion: llamadas a la API"
-    )
     public ResponseEntity<GlobalResponse> findById(@PathVariable Long id) {
         HttpStatus status;
         Object data = null;
@@ -54,11 +49,6 @@ public class ImagenController {
     }
 
     @PostMapping
-    @Operation(
-            summary = "Crear imagen",
-            description = "Seguridad: publico\n" +
-                    "Ubicacion: llamadas a la API"
-    )
     public ResponseEntity<GlobalResponse> create(@Valid @RequestBody ImagenRequestDTO imagen) {
         HttpStatus status;
         Object data = null;

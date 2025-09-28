@@ -19,10 +19,6 @@ public class CategoriaController {
     private final CategoriaService categoriaService;
 
     @GetMapping("/all-and-quantity")
-    @Operation(
-            summary = "Traer las categorias y cantidad de productos",
-            description = "Ubicación: Tienda (barra lateral). Seguridad: Pública."
-    )
     public ResponseEntity<GlobalResponse> findAllAndQuantity() {
         HttpStatus status;
         Object data = null;
