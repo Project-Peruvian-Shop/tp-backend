@@ -14,6 +14,7 @@ public class ProductoFullResponseDTO {
     private String productoEnlace;
     private String productoAlt;
 
+    private Long categoriaId;
     private String categoria;
     private String categoriaEnlace;
     private String categoriaAlt;
