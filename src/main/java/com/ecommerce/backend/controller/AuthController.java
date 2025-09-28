@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(Constant.API_VERSION + "/" +Constant.AUTH  )
+@RequestMapping(Constant.API_VERSION + "/" + Constant.AUTH)
 public class AuthController {
     private final UsuarioService usuarioService;
 
     @PostMapping("/register")
     @Operation(
             summary = "Registar a nuevo usuario",
-            description = "Ubicación: Tienda (barra lateral).\n" +
-                    "Seguridad: Pública."
+            description = "Ubicación: Registrar  \n" +
+                    "Seguridad: Pública"
     )
     public ResponseEntity<GlobalResponse> addUser(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
         HttpStatus status;
@@ -53,8 +53,13 @@ public class AuthController {
                         .build()
         );
     }
+
     @PostMapping("/login")
-    @Operation(summary = "Logear a un usuario")
+    @Operation(
+            summary = "Logear a un usuario",
+            description = "Ubicación: Login  \n" +
+                    "Seguridad: Pública"
+    )
     public ResponseEntity<GlobalResponse> login(@RequestBody LoginRequestDTO loginRequestDTO) {
         UsuarioResponseDTO data = usuarioService.login(loginRequestDTO.getEmail(), loginRequestDTO.getPasswordd());
 
