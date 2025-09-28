@@ -4,6 +4,7 @@ import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.mensaje.ChangeStateMensajeRequestDTO;
 import com.ecommerce.backend.dto.mensaje.MensajeRequestDTO;
+import com.ecommerce.backend.dto.mensaje.ReclamacionesRequestDTO;
 import com.ecommerce.backend.service.MensajeService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -50,12 +51,18 @@ public class MensajeController {
         );
     }
 
-    @PostMapping("/reclamos")
-    public ResponseEntity<GlobalResponse> send_reclamos(@RequestBody MensajeRequestDTO mensajeRequestDTO) {
+    @PostMapping("/reclamaciones")
+    @Operation(
+            summary = "Crear mensaje de libro de reclamaciones",
+            description = "Ubicación: Libro de reclamaciones  \n" +
+                    "Seguridad: Pública"
+    )
+    public ResponseEntity<GlobalResponse> send_reclamos(@RequestBody ReclamacionesRequestDTO mensajeRequestDTO) {
         HttpStatus status;
         Object data;
         String message;
         String details = null;
+
         try {
             data = mensajeService.send_reclamos(mensajeRequestDTO);
             status = HttpStatus.OK;

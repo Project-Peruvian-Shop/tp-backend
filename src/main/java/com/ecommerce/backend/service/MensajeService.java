@@ -1,9 +1,6 @@
 package com.ecommerce.backend.service;
 
-import com.ecommerce.backend.dto.mensaje.MensajeRequestDTO;
-import com.ecommerce.backend.dto.mensaje.MensajeDashboardDTO;
-import com.ecommerce.backend.dto.mensaje.MensajeDetalleResponseDTO;
-import com.ecommerce.backend.dto.mensaje.MensajeResponseDTO;
+import com.ecommerce.backend.dto.mensaje.*;
 import com.ecommerce.backend.entity.Mensaje;
 import com.ecommerce.backend.mapper.MensajeMapper;
 import com.ecommerce.backend.repository.MensajeRepository;
@@ -26,8 +23,8 @@ public class MensajeService {
     }
 
     @Transactional
-    public MensajeResponseDTO send_reclamos(MensajeRequestDTO mensajeRequestDTO) {
-        Mensaje mensaje = MensajeMapper.toEntity(mensajeRequestDTO, 0);
+    public MensajeResponseDTO send_reclamos(ReclamacionesRequestDTO mensajeRequestDTO) {
+        Mensaje mensaje = MensajeMapper.toReclamacionesEntity(mensajeRequestDTO);
         Mensaje saved_mensaje = mensajeRepository.save(mensaje);
 
         return new MensajeResponseDTO(saved_mensaje.getId());
