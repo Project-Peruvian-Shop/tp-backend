@@ -87,7 +87,7 @@ public class CotizacionService {
         String filePath = fileUploadService.uploadFile(archivo, fileName, "uploads/cotizaciones");
 
         CotizacionPDF pdf = new CotizacionPDF();
-        pdf.setArchivo(filePath);
+        pdf.setEnlace(filePath);
         pdf.setCreacion(LocalDateTime.now());
         pdf.setCotizacion(cotizacion);
 
@@ -95,7 +95,7 @@ public class CotizacionService {
 
         return new CotizacionPdfDTO(
                 guardado.getId(),
-                guardado.getArchivo(),
+                guardado.getEnlace(),
                 guardado.getCreacion(),
                 guardado.getCotizacion().getId()
         );

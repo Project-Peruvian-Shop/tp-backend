@@ -18,8 +18,8 @@ public class CotizacionPDF {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
-    private String archivo;
+    @Column(nullable = false)
+    private String enlace;
 
     @Column(nullable = false)
     private LocalDateTime creacion = LocalDateTime.now();
