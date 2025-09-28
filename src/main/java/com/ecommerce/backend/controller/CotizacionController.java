@@ -5,6 +5,7 @@ import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.cotizacion.CotizacionRequestDTO;
 import com.ecommerce.backend.service.CotizacionService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class CotizacionController {
             description = "Ubicación: Solicitud de Cotizacion  \n" +
                     "Seguridad: Usuario, Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> createCotizacion(@RequestBody CotizacionRequestDTO cotizacionRequestDTO) {
+    public ResponseEntity<GlobalResponse> createCotizacion(@Valid @RequestBody CotizacionRequestDTO cotizacionRequestDTO) {
         HttpStatus status;
         Object data;
         String message;

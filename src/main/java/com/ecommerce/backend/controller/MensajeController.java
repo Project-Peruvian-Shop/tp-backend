@@ -7,6 +7,7 @@ import com.ecommerce.backend.dto.mensaje.MensajeRequestDTO;
 import com.ecommerce.backend.dto.mensaje.ReclamacionesRequestDTO;
 import com.ecommerce.backend.service.MensajeService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class MensajeController {
             description = "Ubicación: Contactenos  \n" +
                     "Seguridad: Pública"
     )
-    public ResponseEntity<GlobalResponse> send_contactenos(@RequestBody MensajeRequestDTO mensajeRequestDTO) {
+    public ResponseEntity<GlobalResponse> send_contactenos(@Valid @RequestBody MensajeRequestDTO mensajeRequestDTO) {
         HttpStatus status;
         Object data;
         String message;
@@ -57,7 +58,7 @@ public class MensajeController {
             description = "Ubicación: Libro de reclamaciones  \n" +
                     "Seguridad: Pública"
     )
-    public ResponseEntity<GlobalResponse> send_reclamos(@RequestBody ReclamacionesRequestDTO mensajeRequestDTO) {
+    public ResponseEntity<GlobalResponse> send_reclamos(@Valid @RequestBody ReclamacionesRequestDTO mensajeRequestDTO) {
         HttpStatus status;
         Object data;
         String message;
