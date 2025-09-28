@@ -3,6 +3,7 @@ package com.ecommerce.backend.controller;
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.service.ProductoService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,13 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductoController {
     private final ProductoService productoService;
 
-    //    Funcion: traer productos paginados para la tienda
-    //    Seguridad: publica
-    //    Ubicacion: tienda, contenido principal
-    //    Metodo: GET
-    //    Request: {size, page}
-    //    Response: {productoID, productoNombre, imagenEnlace, imageAlt}
     @GetMapping("/paginated")
+    @Operation(
+            summary = "Traer productos paginados",
+            description = "Ubicación: Tienda  \n" +
+                    "Seguridad: Pública"
+    )
     public ResponseEntity<GlobalResponse> getAllPaginated(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
