@@ -1,13 +1,15 @@
 package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
+import com.ecommerce.backend.dto.producto.ProductoFullResponseDTO;
+import com.ecommerce.backend.entity.Producto;
+import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.ProductoMapper;
 import com.ecommerce.backend.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +20,13 @@ public class ProductoService {
     public Page<PaginatedProductoResponseDTO> findAllPaginated(Pageable pageable) {
         return productoRepository.findAll(pageable)
                 .map(ProductoMapper::toDTO);
+    }
+
+    public ProductoFullResponseDTO findByID(Long id){
+        Producto producto = productoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrada con id: " + id));
+
+        return ProductoMapper.toDTOGetByID(producto);
     }
 }
 

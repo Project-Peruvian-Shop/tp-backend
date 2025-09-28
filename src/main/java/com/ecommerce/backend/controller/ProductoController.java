@@ -9,10 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(Constant.API_VERSION + "/" + Constant.TABLE_PRODUCTOS)
@@ -44,6 +41,39 @@ public class ProductoController {
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             message = "An error occurred while retrieving paginated productos";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+    @GetMapping("/{id}")
+    @Operation(
+            summary = "Traer al producto por id",
+            description = "Ubicación: Tienda  \n" +
+                    "Seguridad: Pública"
+    )
+    public ResponseEntity<GlobalResponse> getByID(@PathVariable Long id) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+
+        try {
+            data = productoService.findByID(id);
+            message = "Producto con id " + id;
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "Error al traer el producto";
             details = e.getMessage();
         }
 
