@@ -19,11 +19,6 @@ public class MensajeController {
     private final MensajeService mensajeService;
 
     @PostMapping("/contactenos")
-    @Operation(
-            summary = "Crear Mensaje de contactenos",
-            description = "Seguridad: público  \n" +
-                    "Ubicación: llamadas a la API"
-    )
     public ResponseEntity<GlobalResponse> send_contactenos(@RequestBody MensajeRequestDTO mensajeRequestDTO) {
         HttpStatus status;
         Object data;
