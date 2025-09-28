@@ -236,4 +236,35 @@ public class CotizacionController {
         );
     }
 
+    @GetMapping("/by-usuario/{id}")
+    @Operation(
+            summary = "Traer cotizaciones del usuario",
+            description = "Ubicación: cotizaciones del mismo usuario  \n" +
+                    "Seguridad: Usuario, Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse> getCotizacionesByUsuario(@PathVariable Long id) {
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+
+        try {
+            data = cotizacionService.getByUser(id);
+            status = HttpStatus.OK;
+            message = "Cotizaciones del usuario";
+        } catch (Exception e) {
+            status = HttpStatus.BAD_REQUEST;
+            data = null;
+            message = "Error al traer cotizaciones del usuario";
+            details = e.getMessage();
+        }
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
 }

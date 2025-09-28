@@ -5,6 +5,7 @@ import com.ecommerce.backend.dto.cotizacion.*;
 import com.ecommerce.backend.dto.cotizacion.ProductoCotizadoMesDTO;
 import com.ecommerce.backend.dto.cotizacion.UsuarioCotizacionMesDTO;
 import com.ecommerce.backend.entity.*;
+import com.ecommerce.backend.mapper.CotizacionMapper;
 import com.ecommerce.backend.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -141,6 +142,14 @@ public class CotizacionService {
     public Page<CotizacionDashboardDTO> get_cotizaciones_dashboard(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return cotizacionRepository.findAllCotizacionesDashboard(pageable);
+    }
+
+    public List<CotizacionByUsuarioResponseDTO> getByUser(Long id) {
+        List<Cotizacion> listaUsuariosPorUsuario = cotizacionRepository.findByUsuarioId(id);
+
+        return listaUsuariosPorUsuario.stream()
+                .map(CotizacionMapper::toDTOGetByUser)
+                .toList();
     }
 
     private String getNumberFromDB() {
