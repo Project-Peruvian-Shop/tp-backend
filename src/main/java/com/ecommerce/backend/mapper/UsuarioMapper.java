@@ -1,7 +1,8 @@
 package com.ecommerce.backend.mapper;
 
-import com.ecommerce.backend.dto.usuario.request.UsuarioRequestDTO;
-import com.ecommerce.backend.dto.usuario.response.UsuarioResponseDTO;
+import com.ecommerce.backend.dto.usuario.UsuarioPerfilDTO;
+import com.ecommerce.backend.dto.usuario.UsuarioRequestDTO;
+import com.ecommerce.backend.dto.usuario.UsuarioResponseDTO;
 import com.ecommerce.backend.entity.Usuario;
 import com.ecommerce.backend.role.UserRole;
 import org.springframework.stereotype.Component;
@@ -9,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UsuarioMapper {
 
-    public static UsuarioResponseDTO toDTO(Usuario usuario){
-        if(usuario == null){
+    public static UsuarioResponseDTO toDTO(Usuario usuario) {
+        if (usuario == null) {
             return null;
         }
 
@@ -23,8 +24,9 @@ public class UsuarioMapper {
         dto.setRol(usuario.getRol().name());
         return dto;
     }
-    public static Usuario toEntity(UsuarioRequestDTO dto){
-        if(dto == null){
+
+    public static Usuario toEntity(UsuarioRequestDTO dto) {
+        if (dto == null) {
             return null;
         }
 
@@ -41,5 +43,19 @@ public class UsuarioMapper {
         }
 
         return usuario;
+    }
+
+    public static UsuarioPerfilDTO toFindById(Usuario usuario) {
+        if (usuario == null) {
+            return null;
+        }
+
+        return UsuarioPerfilDTO.builder()
+                .id(usuario.getId())
+                .nombre(usuario.getNombre() + " " + usuario.getApellidos())
+                .rol(usuario.getRol().name())
+                .email(usuario.getEmail())
+                .telefono(usuario.getTelefono())
+                .build();
     }
 }
