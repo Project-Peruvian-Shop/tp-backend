@@ -5,6 +5,7 @@ import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.mensaje.ChangeStateMensajeRequestDTO;
 import com.ecommerce.backend.dto.mensaje.MensajeRequestDTO;
 import com.ecommerce.backend.service.MensajeService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,11 @@ public class MensajeController {
     private final MensajeService mensajeService;
 
     @PostMapping("/contactenos")
+    @Operation(
+            summary = "Crear mensaje de contactenos",
+            description = "Ubicación: Contactenos  \n" +
+                    "Seguridad: Pública"
+    )
     public ResponseEntity<GlobalResponse> send_contactenos(@RequestBody MensajeRequestDTO mensajeRequestDTO) {
         HttpStatus status;
         Object data;
