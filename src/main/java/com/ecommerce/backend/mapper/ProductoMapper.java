@@ -1,6 +1,7 @@
 package com.ecommerce.backend.mapper;
 
 import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
+import com.ecommerce.backend.dto.producto.ProductoDashboardResponseDTO;
 import com.ecommerce.backend.dto.producto.ProductoFullResponseDTO;
 import com.ecommerce.backend.entity.Imagen;
 import com.ecommerce.backend.entity.Producto;
@@ -51,6 +52,21 @@ public class ProductoMapper {
                 .categoriaEnlace(producto.getCategoria().getImagen().getEnlace())
                 .categoriaAlt(producto.getCategoria().getImagen().getAlt())
                 .categoriaUsos(producto.getCategoria().getUsos())
+                .build();
+    }
+
+    public static ProductoDashboardResponseDTO toDashboardDTO(Producto producto) {
+        if (producto == null) {
+            return null;
+        }
+
+        return ProductoDashboardResponseDTO.builder()
+                .id(producto.getId())
+                .categoriaImagen(producto.getCategoria().getImagen().getEnlace())
+                .categoriaAlt(producto.getCategoria().getImagen().getAlt())
+                .nombre(producto.getNombre())
+                .categoriaNombre(producto.getCategoria().getNombre())
+                .descripcion(producto.getDescripcion())
                 .build();
     }
 }
