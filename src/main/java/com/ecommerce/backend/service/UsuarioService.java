@@ -1,7 +1,8 @@
 package com.ecommerce.backend.service;
 
-import com.ecommerce.backend.dto.usuario.request.UsuarioRequestDTO;
-import com.ecommerce.backend.dto.usuario.response.UsuarioResponseDTO;
+import com.ecommerce.backend.dto.usuario.UsuarioPerfilDTO;
+import com.ecommerce.backend.dto.usuario.UsuarioRequestDTO;
+import com.ecommerce.backend.dto.usuario.UsuarioResponseDTO;
 import com.ecommerce.backend.entity.Usuario;
 import com.ecommerce.backend.exceptions.InvalidCredentialsException;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
@@ -27,9 +28,12 @@ public class UsuarioService {
                 .toList();
     }
 
-    public Usuario findById(Long id) {
-        return usuarioRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - id: " + id));
+    public UsuarioPerfilDTO findById(Long id) {
+        Usuario usuario =
+                usuarioRepository.findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - id: " + id));
+
+        return UsuarioMapper.toFindById(usuario);
     }
 
     public UsuarioResponseDTO save(UsuarioRequestDTO usuarioRequestDTO) {
