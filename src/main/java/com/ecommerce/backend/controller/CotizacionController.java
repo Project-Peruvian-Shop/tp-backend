@@ -20,12 +20,11 @@ public class CotizacionController {
 
     @PostMapping("/create")
     @Operation(
-            summary = "Crear cotizacion",
-            description = "Seguridad: ROLE_USER, ROLE_MANAGER, ROLE_ADMIN\n" +
-                    "Ubicacion: carrito de cotizaciones"
+            summary = "Crear una cotizacion",
+            description = "Ubicación: Solicitud de Cotizacion  \n" +
+                    "Seguridad: Usuario, Manager, Admin"
     )
     public ResponseEntity<GlobalResponse> createCotizacion(@RequestBody CotizacionRequestDTO cotizacionRequestDTO) {
-
         HttpStatus status;
         Object data;
         String message;
