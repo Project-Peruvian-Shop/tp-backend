@@ -10,9 +10,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface CotizacionRepository extends JpaRepository<Cotizacion,Long> {
+public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
 
 
     @Query("SELECT COUNT(DISTINCT c.usuario.id) " +
@@ -45,5 +46,5 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion,Long> {
     )
     Page<CotizacionDashboardDTO> findAllCotizacionesDashboard(Pageable pageable);
 
-
+    Optional<Cotizacion> findTopByOrderByIdDesc();
 }

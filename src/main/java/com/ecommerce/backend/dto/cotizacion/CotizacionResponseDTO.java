@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CotizacionResponseDTO {
     private Long cotizacionID;
+    private String numero;
     private Integer tipoDocumento;
     private String documento;
     private String email;

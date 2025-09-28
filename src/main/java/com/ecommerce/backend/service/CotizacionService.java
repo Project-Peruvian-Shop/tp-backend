@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +21,7 @@ import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -41,7 +41,7 @@ public class CotizacionService {
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         Cotizacion cotizacion = new Cotizacion();
-        cotizacion.setNumero(UUID.randomUUID().toString().substring(0,8));
+        cotizacion.setNumero(this.getNumberFromDB());
         cotizacion.setEstado(0);
         cotizacion.setCreacion(LocalDateTime.now());
         cotizacion.setComentario(request.getComentario());
@@ -50,7 +50,6 @@ public class CotizacionService {
         cotizacion.setDocumento(request.getDocumento());
         cotizacion.setTelefono(request.getTelefono());
         cotizacion.setEmail(request.getEmail());
-        cotizacion.setObservaciones(request.getObservaciones());
         cotizacion.setUsuario(usuario);
 
         Cotizacion cotizacionGuardada = cotizacionRepository.save(cotizacion);
@@ -70,6 +69,7 @@ public class CotizacionService {
 
         return new CotizacionResponseDTO(
                 cotizacionGuardada.getId(),
+                cotizacionGuardada.getNumero(),
                 cotizacionGuardada.getTipoDocumento(),
                 cotizacionGuardada.getDocumento(),
                 cotizacionGuardada.getEmail(),
@@ -82,7 +82,7 @@ public class CotizacionService {
         Cotizacion cotizacion = cotizacionRepository.findById(cotizacionId)
                 .orElseThrow(() -> new RuntimeException("Cotización no encontrada"));
 
-        String fileName = UUID.randomUUID().toString().substring(0,6) + ".pdf";
+        String fileName = UUID.randomUUID().toString().substring(0, 6) + ".pdf";
 
         String filePath = fileUploadService.uploadFile(archivo, fileName, "uploads/cotizaciones");
 
@@ -100,6 +100,7 @@ public class CotizacionService {
                 guardado.getCotizacion().getId()
         );
     }
+
     public List<ProductoCotizadoMesDTO> get_productos_cotizados_mes(Integer mes, Integer year) {
         LocalDate now = LocalDate.now();
         int m = (year != null) ? mes : now.getMonthValue();
@@ -107,7 +108,7 @@ public class CotizacionService {
         return detalleRepository.productos_cotizados_mes(m, y);
     }
 
-    public UsuarioCotizacionMesDTO get_usuarios_mes(Integer mes, Integer year){
+    public UsuarioCotizacionMesDTO get_usuarios_mes(Integer mes, Integer year) {
         LocalDate now = LocalDate.now();
         int m = (mes != null) ? mes : now.getMonthValue();
         int y = (year != null) ? year : now.getYear();
@@ -116,19 +117,19 @@ public class CotizacionService {
         return new UsuarioCotizacionMesDTO(nuevos, cotizadores);
     }
 
-    public List<CategoriaMesDTO> get_lineas_cotizadas_mes(Integer mes, Integer year){
+    public List<CategoriaMesDTO> get_lineas_cotizadas_mes(Integer mes, Integer year) {
         LocalDate now = LocalDate.now();
         int m = (mes != null) ? mes : now.getMonthValue();
         int y = (year != null) ? year : now.getYear();
         return detalleRepository.lineasCotizadasMes(m, y);
     }
 
-    public List<CotizacionYearDTO> get_cotizacion_year(Integer year){
+    public List<CotizacionYearDTO> get_cotizacion_year(Integer year) {
         int y = (year != null) ? year : LocalDate.now().getYear();
 
         return cotizacionRepository.cotizacionesForYear(y).stream()
                 .map(row -> {
-                    Integer mesNumero = ((Number) row[0]).intValue();
+                    int mesNumero = ((Number) row[0]).intValue();
                     Long cantidad = ((Number) row[1]).longValue();
                     String mesNombre = Month.of(mesNumero)
                             .getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
@@ -136,8 +137,23 @@ public class CotizacionService {
                 })
                 .toList();
     }
+
     public Page<CotizacionDashboardDTO> get_cotizaciones_dashboard(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return cotizacionRepository.findAllCotizacionesDashboard(pageable);
+    }
+
+    private String getNumberFromDB() {
+        int year = java.time.Year.now().getValue();
+        Optional<Cotizacion> ultimaCotizacion = cotizacionRepository.findTopByOrderByIdDesc();
+
+        if (ultimaCotizacion.isPresent()) {
+            String numero = ultimaCotizacion.get().getNumero();
+            String[] lista = numero.split("-");
+            String nuevoNumero = String.valueOf(Integer.parseInt(lista[2]) + 1);
+            return "COT-" + year + "-" + nuevoNumero;
+        }
+
+        return "COT-" + year + "-1";
     }
 }
