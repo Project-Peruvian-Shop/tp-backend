@@ -23,6 +23,7 @@ public class MensajeController {
         Object data;
         String message;
         String details = null;
+
         try {
             data = mensajeService.send_contactenos(mensajeRequestDTO);
             status = HttpStatus.OK;
@@ -120,7 +121,6 @@ public class MensajeController {
                         .build()
         );
     }
-
 
     @PutMapping("/change_state/{id}")
     public ResponseEntity<GlobalResponse> change_state(@PathVariable Long id, @RequestBody ChangeStateMensajeRequestDTO changeStateMensajeRequestDTO) {
