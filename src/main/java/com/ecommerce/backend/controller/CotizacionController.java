@@ -3,21 +3,13 @@ package com.ecommerce.backend.controller;
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.cotizacion.CotizacionRequestDTO;
-import com.ecommerce.backend.entity.CotizacionPDF;
 import com.ecommerce.backend.service.CotizacionService;
-import jakarta.annotation.Resource;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @RestController
 @RequestMapping(Constant.API_VERSION + "/" + Constant.TABLE_COTIZACION)
@@ -27,7 +19,12 @@ public class CotizacionController {
     private final CotizacionService cotizacionService;
 
     @PostMapping("/create")
-    public ResponseEntity<GlobalResponse> create_Cotizacion(@RequestBody CotizacionRequestDTO cotizacionRequestDTO){
+    @Operation(
+            summary = "Crear cotizacion",
+            description = "Seguridad: ROLE_USER, ROLE_MANAGER, ROLE_ADMIN\n" +
+                    "Ubicacion: carrito de cotizaciones"
+    )
+    public ResponseEntity<GlobalResponse> createCotizacion(@RequestBody CotizacionRequestDTO cotizacionRequestDTO) {
 
         HttpStatus status;
         Object data;
@@ -52,7 +49,11 @@ public class CotizacionController {
                         .build()
         );
     }
+
     @PostMapping("/create_pdf/{id}")
+    @Operation(
+            summary = "Subir PDF al backend"
+    )
     public ResponseEntity<GlobalResponse> createPdf(@PathVariable Long id, @RequestParam("archivo") MultipartFile archivo) {
         HttpStatus status;
         Object data;
@@ -79,8 +80,14 @@ public class CotizacionController {
                         .build()
         );
     }
+
     @GetMapping("/productos_mes")
-    public ResponseEntity<GlobalResponse> productos_cotizados_mes( @RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year){
+    @Operation(
+            summary = "Traer productos del mes",
+            description = "Seguridad: ROLE_MANAGER, ROLE_ADMIN\n" +
+                    "Ubicacion: dashboard"
+    )
+    public ResponseEntity<GlobalResponse> productos_cotizados_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year) {
         HttpStatus status;
         Object data;
         String message;
@@ -104,14 +111,20 @@ public class CotizacionController {
                         .build()
         );
     }
+
     @GetMapping("/usuarios_mes")
-    public ResponseEntity<GlobalResponse> get_usuarios_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year){
+    @Operation(
+            summary = "Traer usuarios del mes",
+            description = "Seguridad: ROLE_MANAGER, ROLE_ADMIN\n" +
+                    "Ubicacion: dashboard"
+    )
+    public ResponseEntity<GlobalResponse> get_usuarios_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year) {
         HttpStatus status;
         Object data;
         String message;
         String details = null;
         try {
-            data = cotizacionService.get_usuarios_mes(mes,year);
+            data = cotizacionService.get_usuarios_mes(mes, year);
             status = HttpStatus.OK;
             message = "Usuarios del mes retrieved successfully";
         } catch (Exception e) {
@@ -129,17 +142,23 @@ public class CotizacionController {
                         .build()
         );
     }
+
     @GetMapping("/lineas_mes")
-    public ResponseEntity<GlobalResponse> get_lineas_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year){
+    @Operation(
+            summary = "Traer categorias/lineas del mes",
+            description = "Seguridad: ROLE_MANAGER, ROLE_ADMIN\n" +
+                    "Ubicacion: dashboard"
+    )
+    public ResponseEntity<GlobalResponse> get_lineas_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year) {
         HttpStatus status;
         Object data;
         String message;
         String details = null;
         try {
-            data = cotizacionService.get_lineas_cotizadas_mes(mes,year);
+            data = cotizacionService.get_lineas_cotizadas_mes(mes, year);
             status = HttpStatus.OK;
             message = "Lineas del mes retrieved successfully";
-        }catch (Exception e){
+        } catch (Exception e) {
             status = HttpStatus.NOT_FOUND;
             data = null;
             message = "Error retrieving lineas del mes";
@@ -154,8 +173,14 @@ public class CotizacionController {
                         .build()
         );
     }
+
     @GetMapping("cotizaciones_year")
-    public ResponseEntity<GlobalResponse> get_cotizaciones_year(@RequestParam(required = false) Integer year){
+    @Operation(
+            summary = "Traer cotizaciones del mes",
+            description = "Seguridad: ROLE_MANAGER, ROLE_ADMIN\n" +
+                    "Ubicacion: dashboard"
+    )
+    public ResponseEntity<GlobalResponse> get_cotizaciones_year(@RequestParam(required = false) Integer year) {
         HttpStatus status;
         Object data;
         String message;
@@ -164,7 +189,7 @@ public class CotizacionController {
             data = cotizacionService.get_cotizacion_year(year);
             status = HttpStatus.OK;
             message = "Cotizaciones del año retrieved successfully";
-        }catch (Exception e){
+        } catch (Exception e) {
             status = HttpStatus.NOT_FOUND;
             data = null;
             message = "Error retrieving cotizaciones del año";
@@ -179,8 +204,14 @@ public class CotizacionController {
                         .build()
         );
     }
+
     @GetMapping("/paginated")
-    public ResponseEntity<GlobalResponse> get_cotizaciones_dashboard(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+    @Operation(
+            summary = "Traer cotizaciones paginadas",
+            description = "Seguridad: ROLE_MANAGER, ROLE_ADMIN  \n" +
+                    "Ubicacion: dashboard"
+    )
+    public ResponseEntity<GlobalResponse> get_cotizaciones_dashboard(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         HttpStatus status;
         Object data;
         String message;
@@ -190,7 +221,7 @@ public class CotizacionController {
             data = cotizacionService.get_cotizaciones_dashboard(page, size);
             status = HttpStatus.OK;
             message = "Cotizaciones del dashboard retrieved successfully";
-        }catch (Exception e){
+        } catch (Exception e) {
             status = HttpStatus.NOT_FOUND;
             data = null;
             message = "Error retrieving cotizaciones del dashboard";

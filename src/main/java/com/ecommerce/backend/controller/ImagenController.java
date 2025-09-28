@@ -5,6 +5,7 @@ import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.imagen.ImagenRequestDTO;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.service.ImagenService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,13 +18,12 @@ import org.springframework.web.bind.annotation.*;
 public class ImagenController {
     private final ImagenService imagenService;
 
-    // Funcion: Encontrar una imagen por ID
-    // Seguridad: publico
-    // Ubicacion: llamadas a la API
-    // Metodo: GET
-    // Request: id
-    // Response: Imagen
     @GetMapping("/{id}")
+    @Operation(
+            summary = "Traer imagen por id",
+            description = "Seguridad: publico\n" +
+                    "Ubicacion: llamadas a la API"
+    )
     public ResponseEntity<GlobalResponse> findById(@PathVariable Long id) {
         HttpStatus status;
         Object data = null;
@@ -53,13 +53,12 @@ public class ImagenController {
         );
     }
 
-    // Funcion: Crear una nueva imagen
-    // Seguridad: publico
-    // Ubicacion: llamadas a la API
-    // Metodo: POST
-    // Request: ImagenRequestDTO
-    // Response: Imagen
     @PostMapping
+    @Operation(
+            summary = "Crear imagen",
+            description = "Seguridad: publico\n" +
+                    "Ubicacion: llamadas a la API"
+    )
     public ResponseEntity<GlobalResponse> create(@Valid @RequestBody ImagenRequestDTO imagen) {
         HttpStatus status;
         Object data = null;

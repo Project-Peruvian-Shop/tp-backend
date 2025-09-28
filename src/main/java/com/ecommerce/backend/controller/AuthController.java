@@ -6,6 +6,7 @@ import com.ecommerce.backend.dto.usuario.request.LoginRequestDTO;
 import com.ecommerce.backend.dto.usuario.request.UsuarioRequestDTO;
 import com.ecommerce.backend.dto.usuario.response.UsuarioResponseDTO;
 import com.ecommerce.backend.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,11 @@ public class AuthController {
     private final UsuarioService usuarioService;
 
     @PostMapping("/register")
+    @Operation(
+            summary = "Registar a nuevo usuario",
+            description = "Ubicación: Tienda (barra lateral).\n" +
+                    "Seguridad: Pública."
+    )
     public ResponseEntity<GlobalResponse> addUser(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
         HttpStatus status;
         Object data;
@@ -48,6 +54,7 @@ public class AuthController {
         );
     }
     @PostMapping("/login")
+    @Operation(summary = "Logear a un usuario")
     public ResponseEntity<GlobalResponse> login(@RequestBody LoginRequestDTO loginRequestDTO) {
         UsuarioResponseDTO data = usuarioService.login(loginRequestDTO.getEmail(), loginRequestDTO.getPasswordd());
 
