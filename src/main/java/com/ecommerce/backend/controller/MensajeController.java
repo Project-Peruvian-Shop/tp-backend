@@ -2,10 +2,9 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
-import com.ecommerce.backend.dto.mensaje.request.ChangeStateMensajeRequestDTO;
-import com.ecommerce.backend.dto.mensaje.request.MensajeRequestDTO;
+import com.ecommerce.backend.dto.mensaje.ChangeStateMensajeRequestDTO;
+import com.ecommerce.backend.dto.mensaje.MensajeRequestDTO;
 import com.ecommerce.backend.service.MensajeService;
-import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

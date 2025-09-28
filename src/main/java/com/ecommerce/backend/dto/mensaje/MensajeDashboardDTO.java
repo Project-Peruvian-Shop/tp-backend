@@ -1,4 +1,4 @@
-package com.ecommerce.backend.dto.mensaje.response;
+package com.ecommerce.backend.dto.mensaje;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

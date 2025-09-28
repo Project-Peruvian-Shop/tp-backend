@@ -1,9 +1,9 @@
 package com.ecommerce.backend.service;
 
-import com.ecommerce.backend.dto.mensaje.request.MensajeRequestDTO;
-import com.ecommerce.backend.dto.mensaje.response.MensajeDashboardDTO;
-import com.ecommerce.backend.dto.mensaje.response.MensajeDetalleResponseDTO;
-import com.ecommerce.backend.dto.mensaje.response.MensajeResponseDTO;
+import com.ecommerce.backend.dto.mensaje.MensajeRequestDTO;
+import com.ecommerce.backend.dto.mensaje.MensajeDashboardDTO;
+import com.ecommerce.backend.dto.mensaje.MensajeDetalleResponseDTO;
+import com.ecommerce.backend.dto.mensaje.MensajeResponseDTO;
 import com.ecommerce.backend.entity.Mensaje;
 import com.ecommerce.backend.mapper.MensajeMapper;
 import com.ecommerce.backend.repository.MensajeRepository;
