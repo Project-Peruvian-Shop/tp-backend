@@ -2,9 +2,7 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
-import com.ecommerce.backend.dto.request.LoginRequestDTO;
-import com.ecommerce.backend.dto.request.UsuarioRequestDTO;
-import com.ecommerce.backend.dto.response.UsuarioResponseDTO;
+import com.ecommerce.backend.dto.usuario.request.UsuarioRequestDTO;
 import com.ecommerce.backend.role.UserRole;
 import com.ecommerce.backend.service.UsuarioService;
 import lombok.RequiredArgsConstructor;

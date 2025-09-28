@@ -1,13 +1,10 @@
 package com.ecommerce.backend.mapper;
 
-import com.ecommerce.backend.dto.request.UsuarioRequestDTO;
-import com.ecommerce.backend.dto.response.UsuarioResponseDTO;
+import com.ecommerce.backend.dto.usuario.request.UsuarioRequestDTO;
+import com.ecommerce.backend.dto.usuario.response.UsuarioResponseDTO;
 import com.ecommerce.backend.entity.Usuario;
 import com.ecommerce.backend.role.UserRole;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class UsuarioMapper {

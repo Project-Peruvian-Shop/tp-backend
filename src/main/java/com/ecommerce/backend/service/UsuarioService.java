@@ -1,7 +1,7 @@
 package com.ecommerce.backend.service;
 
-import com.ecommerce.backend.dto.request.UsuarioRequestDTO;
-import com.ecommerce.backend.dto.response.UsuarioResponseDTO;
+import com.ecommerce.backend.dto.usuario.request.UsuarioRequestDTO;
+import com.ecommerce.backend.dto.usuario.response.UsuarioResponseDTO;
 import com.ecommerce.backend.entity.Usuario;
 import com.ecommerce.backend.exceptions.InvalidCredentialsException;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
@@ -12,9 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-import static com.ecommerce.backend.mapper.UsuarioMapper.toDTO;
 import static com.ecommerce.backend.mapper.UsuarioMapper.toEntity;
 
 @Service

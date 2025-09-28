@@ -1,4 +1,4 @@
-package com.ecommerce.backend.dto.request;
+package com.ecommerce.backend.dto.mensaje.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
