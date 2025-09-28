@@ -32,7 +32,6 @@ public class ProductoController {
         String message;
         String details = null;
 
-
         try {
             Pageable pageable = PageRequest.of(page, size);
             data = productoService.findAllPaginated(pageable);
@@ -87,7 +86,7 @@ public class ProductoController {
         );
     }
 
-    @GetMapping("/sugeridos/")
+    @GetMapping("/sugeridos")
     @Operation(
             summary = "Traer productos sugeridos por id",
             description = "Ubicación: Producto en Tienda  \n" +
@@ -102,7 +101,6 @@ public class ProductoController {
         String message;
         String details = null;
 
-
         try {
             data = productoService.findSugeridosByID(producto, categoria);
             message = "Producto sugeridos " + producto;
@@ -110,6 +108,42 @@ public class ProductoController {
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             message = "Error al traer productos sugeridos";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+    @GetMapping("/dashboard-paginated")
+    @Operation(
+            summary = "Traer productos paginados",
+            description = "Ubicación: Dashboard - Productos  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> getAllPaginatedDashboard(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            data = productoService.findAllPaginatedDashboard(pageable);
+            message = "Paginated Productos para dashboard";
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "An error occurred while retrieving paginated productos";
             details = e.getMessage();
         }
 

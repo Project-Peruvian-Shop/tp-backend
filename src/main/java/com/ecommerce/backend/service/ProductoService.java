@@ -1,6 +1,7 @@
 package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
+import com.ecommerce.backend.dto.producto.ProductoDashboardResponseDTO;
 import com.ecommerce.backend.dto.producto.ProductoFullResponseDTO;
 import com.ecommerce.backend.entity.Producto;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
@@ -41,6 +42,11 @@ public class ProductoService {
                 .limit(4)
                 .map(ProductoMapper::toDTO)
                 .toList();
+    }
+
+    public Page<ProductoDashboardResponseDTO> findAllPaginatedDashboard(Pageable pageable) {
+        return productoRepository.findAll(pageable)
+                .map(ProductoMapper::toDashboardDTO);
     }
 }
 
