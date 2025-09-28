@@ -1,4 +1,4 @@
-package com.ecommerce.backend.dto.usuario.request;
+package com.ecommerce.backend.dto.usuario;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
