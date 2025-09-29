@@ -170,7 +170,6 @@ public class CategoriaController {
         String message;
         String details = null;
 
-
         try {
             data = categoriaService.findByID(id);
             message = "Categoria con id " + id;
@@ -178,6 +177,44 @@ public class CategoriaController {
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             message = "Error al traer el Categoria";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+
+    @GetMapping("/productos/{id}")
+    @Operation(
+            summary = "Traer los productos por categoria",
+            description = "Ubicación: Dashboard categoria one  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> getProductosByID(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            data = categoriaService.findProductosByCategoriaID(id, pageable);
+            message = "Productos de la categoria " + id;
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "Error al traer los productos de la categoria";
             details = e.getMessage();
         }
 

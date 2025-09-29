@@ -2,6 +2,7 @@ package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.dto.categoria.AllAndQuantityResponseDTO;
 import com.ecommerce.backend.dto.categoria.CategoriaDashboardResponseDTO;
+import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
 import com.ecommerce.backend.dto.producto.ProductoFullResponseDTO;
 import com.ecommerce.backend.entity.Categoria;
 import com.ecommerce.backend.entity.Producto;
@@ -57,10 +58,20 @@ public class CategoriaService {
                 .map(CategoriaMapper::toDashboardDTO);
     }
 
+
     public CategoriaDashboardResponseDTO findByID(Long id) {
         Categoria producto = categoriaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada con id: " + id));
 
         return CategoriaMapper.toDashboardDTO(producto);
+    }
+
+
+    public Page<PaginatedProductoResponseDTO> findProductosByCategoriaID(Long id, Pageable pageable) {
+        Categoria categoria = categoriaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria not found with id: " + id));
+
+        return categoriaRepository.findProductosByCategoriaId(id, pageable)
+                .map(ProductoMapper::toDTO);
     }
 }

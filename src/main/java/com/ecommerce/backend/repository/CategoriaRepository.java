@@ -13,7 +13,6 @@ import java.util.List;
 
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
-    // findAllAndQuantity
     @Query(value = """
             SELECT c.id, c.nombre, COUNT(p.id) AS cantidad
             FROM categoria c
@@ -33,4 +32,12 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
                OR LOWER(c.norma) LIKE LOWER(CONCAT('%', :filtro, '%'))
             """)
     Page<Categoria> searchByNombreUsosNorma(@Param("filtro") String filtro, Pageable pageable);
+
+    @Query("""
+       SELECT p 
+       FROM Producto p
+       WHERE p.categoria.id = :id
+       """)
+    Page<Producto> findProductosByCategoriaId(@Param("id") Long id, Pageable pageable);
+
 }
