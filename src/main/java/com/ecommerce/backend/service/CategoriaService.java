@@ -2,18 +2,22 @@ package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.dto.categoria.AllAndQuantityResponseDTO;
 import com.ecommerce.backend.dto.categoria.CategoriaDashboardResponseDTO;
+import com.ecommerce.backend.dto.categoria.CategoriaRequestDTO;
 import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
 import com.ecommerce.backend.dto.producto.ProductoFullResponseDTO;
 import com.ecommerce.backend.entity.Categoria;
+import com.ecommerce.backend.entity.Imagen;
 import com.ecommerce.backend.entity.Producto;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.CategoriaMapper;
 import com.ecommerce.backend.mapper.ProductoMapper;
 import com.ecommerce.backend.repository.CategoriaRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -73,5 +77,13 @@ public class CategoriaService {
 
         return categoriaRepository.findProductosByCategoriaId(id, pageable)
                 .map(ProductoMapper::toDTO);
+    }
+
+
+    public CategoriaDashboardResponseDTO save(CategoriaRequestDTO categoria) {
+        Imagen imagen = imagenService.findById(categoria.getImagenId());
+
+        Categoria nuevaCategoria = CategoriaMapper.toEntity(categoria, imagen);
+        return CategoriaMapper.toDashboardDTO(categoriaRepository.save(nuevaCategoria));
     }
 }

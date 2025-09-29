@@ -2,6 +2,7 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
+import com.ecommerce.backend.dto.categoria.CategoriaRequestDTO;
 import com.ecommerce.backend.service.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -215,6 +216,39 @@ public class CategoriaController {
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             message = "Error al traer los productos de la categoria";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+
+    @PostMapping("/")
+    @Operation(
+            summary = "Crear una nueva categoria",
+            description = "Ubicación: Dashboard - Categorias  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> createCategoria(@RequestBody CategoriaRequestDTO categoria) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            data = categoriaService.save(categoria);
+            message = "Categoria creada";
+            status = HttpStatus.CREATED;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "Error al crear categoria";
             details = e.getMessage();
         }
 
