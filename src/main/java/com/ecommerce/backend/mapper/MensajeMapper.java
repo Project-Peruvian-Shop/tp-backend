@@ -1,5 +1,6 @@
 package com.ecommerce.backend.mapper;
 
+import com.ecommerce.backend.dto.mensaje.MensajeDashboardResponseDTO;
 import com.ecommerce.backend.dto.mensaje.MensajeRequestDTO;
 import com.ecommerce.backend.dto.mensaje.ReclamacionesRequestDTO;
 import com.ecommerce.backend.entity.Mensaje;
@@ -43,5 +44,18 @@ public class MensajeMapper {
         mensaje.setEstado(0);
         mensaje.setCreacion(LocalDateTime.now());
         return mensaje;
+    }
+
+    public static MensajeDashboardResponseDTO toDashboardDTO(Mensaje mensaje) {
+        if (mensaje == null) {
+            return null;
+        }
+
+        return MensajeDashboardResponseDTO.builder()
+                .id(mensaje.getId())
+                .mensaje(mensaje.getContenido())
+                .creacion(mensaje.getCreacion())
+                .estado(mensaje.getEstado())
+                .build();
     }
 }
