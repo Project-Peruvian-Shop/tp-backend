@@ -30,12 +30,14 @@ public class ProductoService {
                 .map(ProductoMapper::toDTO);
     }
 
+
     public ProductoFullResponseDTO findByID(Long id) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrada con id: " + id));
 
         return ProductoMapper.toDTOGetByID(producto);
     }
+
 
     public List<PaginatedProductoResponseDTO> findSugeridosByID(Long producto, Long categoria) {
         List<Producto> productos = productoRepository.findTop4ExceptByCategoria(producto, categoria);
@@ -48,14 +50,17 @@ public class ProductoService {
                 .toList();
     }
 
+
     public Page<ProductoDashboardResponseDTO> findAllPaginatedDashboard(Pageable pageable) {
         return productoRepository.findAll(pageable)
                 .map(ProductoMapper::toDashboardDTO);
     }
 
+
     public Long countAllProductos() {
         return productoRepository.countAllProductos();
     }
+
 
     public Page<ProductoDashboardResponseDTO> searchByNombreOrCategoria(String busqueda, Pageable pageable) {
         return productoRepository.searchByNombreOrCategoria(busqueda, pageable)
@@ -66,9 +71,24 @@ public class ProductoService {
     public ProductoDashboardResponseDTO save(ProductoRequestDTO producto) {
         Imagen imagen = imagenService.findById(producto.getImagenID());
         Categoria categoria = categoriaService.findById(producto.getCategoriaID());
-        Producto nuevoProducto = ProductoMapper.toEntity(producto, imagen, categoria);
 
+        Producto nuevoProducto = ProductoMapper.toEntity(producto, imagen, categoria);
         return ProductoMapper.toDashboardDTO(productoRepository.save(nuevoProducto));
+    }
+
+
+    public ProductoDashboardResponseDTO update(Long id, ProductoRequestDTO producto) {
+        Producto productoEncontrado = productoRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrada con id: " + id));
+
+        Imagen imagen = imagenService.findById(producto.getImagenID());
+        Categoria categoria = categoriaService.findById(producto.getCategoriaID());
+
+        productoEncontrado.setNombre(producto.getNombre());
+        productoEncontrado.setDescripcion(producto.getDescripcion());
+        productoEncontrado.setImagen(imagen);
+        productoEncontrado.setCategoria(categoria);
+        return ProductoMapper.toDashboardDTO(productoRepository.save(productoEncontrado));
     }
 }
 

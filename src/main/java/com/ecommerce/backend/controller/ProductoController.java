@@ -247,11 +247,46 @@ public class ProductoController {
 
         try {
             data = productoService.save(producto);
-            message = "Busqueda de Productos para dashboard";
+            message = "Producto creado";
+            status = HttpStatus.CREATED;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "Error al crear producto";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+    @PutMapping("/{id}")
+    @Operation(
+            summary = "Actualizar productos",
+            description = "Ubicacion: Dashboard productos update  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> update(
+            @PathVariable Long id,
+            @Valid @RequestBody ProductoRequestDTO producto
+    ) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            data = productoService.update(id, producto);
+            message = "Producto actualizado";
             status = HttpStatus.OK;
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "An error occurred while retrieving search productos";
+            message = "Error al actualizar producto";
             details = e.getMessage();
         }
 
