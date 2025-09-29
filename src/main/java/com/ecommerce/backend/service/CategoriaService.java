@@ -31,4 +31,8 @@ public class CategoriaService {
         return categoriaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Categoria not found with id: " + id));
     }
+
+    public Long countAllCategorias() {
+        return categoriaRepository.countAllCategoria();
+    }
 }

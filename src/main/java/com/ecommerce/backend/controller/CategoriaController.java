@@ -49,4 +49,36 @@ public class CategoriaController {
                         .build()
         );
     }
+
+    @GetMapping("/dashboard-quantity")
+    @Operation(
+            summary = "Traer cantidad de categorias/lineas",
+            description = "Ubicación: Dashboard - Categorias  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> countAllCategorias() {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            data = categoriaService.countAllCategorias();
+            message = "Cantidad de categorias para dashboard";
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "Error al traer cantidad de categorias";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
 }

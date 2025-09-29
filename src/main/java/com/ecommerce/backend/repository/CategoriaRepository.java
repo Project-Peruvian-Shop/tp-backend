@@ -18,4 +18,6 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
             """, nativeQuery = true)
     List<Object[]> findAllAndQuantity();
 
+    @Query("SELECT COUNT(p) FROM Categoria p")
+    Long countAllCategoria();
 }
