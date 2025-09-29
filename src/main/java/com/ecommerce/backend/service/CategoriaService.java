@@ -2,9 +2,12 @@ package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.dto.categoria.AllAndQuantityResponseDTO;
 import com.ecommerce.backend.dto.categoria.CategoriaDashboardResponseDTO;
+import com.ecommerce.backend.dto.producto.ProductoFullResponseDTO;
 import com.ecommerce.backend.entity.Categoria;
+import com.ecommerce.backend.entity.Producto;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.CategoriaMapper;
+import com.ecommerce.backend.mapper.ProductoMapper;
 import com.ecommerce.backend.repository.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -52,5 +55,12 @@ public class CategoriaService {
     public Page<CategoriaDashboardResponseDTO> searchByNombreUsosNorma(String busqueda, Pageable pageable) {
         return categoriaRepository.searchByNombreUsosNorma(busqueda, pageable)
                 .map(CategoriaMapper::toDashboardDTO);
+    }
+
+    public CategoriaDashboardResponseDTO findByID(Long id) {
+        Categoria producto = categoriaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada con id: " + id));
+
+        return CategoriaMapper.toDashboardDTO(producto);
     }
 }
