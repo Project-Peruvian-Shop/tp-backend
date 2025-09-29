@@ -82,4 +82,18 @@ public class CategoriaService {
         Categoria nuevaCategoria = CategoriaMapper.toEntity(categoria, imagen);
         return CategoriaMapper.toDashboardDTO(categoriaRepository.save(nuevaCategoria));
     }
+
+    public CategoriaDashboardResponseDTO update(Long id, CategoriaRequestDTO categoria) {
+        Categoria categoriaExistente = categoriaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria not found with id: " + id));
+
+        Imagen imagen = imagenService.findById(categoria.getImagenId());
+
+        categoriaExistente.setNombre(categoria.getNombre());
+        categoriaExistente.setUsos(categoria.getUsos());
+        categoriaExistente.setNorma(categoria.getNorma());
+        categoriaExistente.setImagen(imagen);
+
+        return CategoriaMapper.toDashboardDTO(categoriaRepository.save(categoriaExistente));
+    }
 }

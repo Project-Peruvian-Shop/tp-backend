@@ -237,7 +237,7 @@ public class CategoriaController {
             description = "Ubicación: Dashboard - Categorias  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> createCategoria(@Valid @RequestBody CategoriaRequestDTO categoria) {
+    public ResponseEntity<GlobalResponse> save(@Valid @RequestBody CategoriaRequestDTO categoria) {
         HttpStatus status;
         Object data = null;
         String message;
@@ -250,6 +250,42 @@ public class CategoriaController {
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             message = "Error al crear categoria";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+
+    @PutMapping("/{id}")
+    @Operation(
+            summary = "Actualizar una categoria",
+            description = "Ubicación: Dashboard - Categorias  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> update(
+            @PathVariable Long id,
+            @Valid @RequestBody CategoriaRequestDTO categoria
+    ) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            data = categoriaService.update(id, categoria);
+            message = "Categoria actualizada";
+            status = HttpStatus.CREATED;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "Error al actualizar categoria";
             details = e.getMessage();
         }
 
