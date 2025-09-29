@@ -177,11 +177,11 @@ public class ProductoController {
 
         try {
             data = productoService.countAllProductos();
-            message = "Paginated Productos para dashboard";
+            message = "Cantidad de Productos para dashboard";
             status = HttpStatus.OK;
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "An error occurred while retrieving paginated productos";
+            message = "Error al traer cantidad de productos";
             details = e.getMessage();
         }
 
