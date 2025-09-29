@@ -5,6 +5,7 @@ import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.categoria.CategoriaRequestDTO;
 import com.ecommerce.backend.service.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -236,7 +237,7 @@ public class CategoriaController {
             description = "Ubicación: Dashboard - Categorias  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> createCategoria(@RequestBody CategoriaRequestDTO categoria) {
+    public ResponseEntity<GlobalResponse> createCategoria(@Valid @RequestBody CategoriaRequestDTO categoria) {
         HttpStatus status;
         Object data = null;
         String message;
