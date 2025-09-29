@@ -3,6 +3,7 @@ package com.ecommerce.backend.mapper;
 import com.ecommerce.backend.dto.usuario.UsuarioPerfilDTO;
 import com.ecommerce.backend.dto.usuario.UsuarioRequestDTO;
 import com.ecommerce.backend.dto.usuario.UsuarioResponseDTO;
+import com.ecommerce.backend.dto.usuario.UsuarioSimpleResponseDTO;
 import com.ecommerce.backend.entity.Usuario;
 import com.ecommerce.backend.role.UserRole;
 import org.springframework.stereotype.Component;
@@ -56,6 +57,18 @@ public class UsuarioMapper {
                 .rol(usuario.getRol().name())
                 .email(usuario.getEmail())
                 .telefono(usuario.getTelefono())
+                .build();
+    }
+
+    public static UsuarioSimpleResponseDTO toSimpleDTO(Usuario usuario) {
+        if (usuario == null) {
+            return null;
+        }
+
+        return UsuarioSimpleResponseDTO.builder()
+                .id(usuario.getId())
+                .nombreCompleto(usuario.getNombre() + " " + usuario.getApellidos())
+                .role(usuario.getRol().name())
                 .build();
     }
 }
