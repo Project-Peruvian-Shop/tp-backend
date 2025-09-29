@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Builder
 public class MensajeDashboardResponseDTO {
     private Long id;
+    private String tipo;
     private String mensaje;
     private LocalDateTime creacion;
     private Integer estado;

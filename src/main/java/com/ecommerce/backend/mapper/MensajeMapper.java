@@ -53,6 +53,7 @@ public class MensajeMapper {
 
         return MensajeDashboardResponseDTO.builder()
                 .id(mensaje.getId())
+                .tipo(mensaje.getTipo().toString())
                 .mensaje(mensaje.getContenido())
                 .creacion(mensaje.getCreacion())
                 .estado(mensaje.getEstado())
