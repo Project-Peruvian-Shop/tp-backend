@@ -116,6 +116,11 @@ public class MensajeController {
 
 
     @GetMapping("/{id}")
+    @Operation(
+            summary = "Obtener mensajes por ID",
+            description = "Ubicación: Dashboard  \n" +
+                    "Seguridad: Admin, Manager"
+    )
     public ResponseEntity<GlobalResponse> get_mensaje_by_id(@PathVariable Long id) {
         HttpStatus status;
         Object data;
