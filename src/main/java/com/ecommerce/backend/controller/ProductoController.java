@@ -95,7 +95,7 @@ public class ProductoController {
     public ResponseEntity<GlobalResponse> getProductosByID(
             @RequestParam(defaultValue = "1") Long producto,
             @RequestParam(defaultValue = "1") Long categoria
-    ){
+    ) {
         HttpStatus status;
         Object data = null;
         String message;
@@ -139,6 +139,38 @@ public class ProductoController {
         try {
             Pageable pageable = PageRequest.of(page, size);
             data = productoService.findAllPaginatedDashboard(pageable);
+            message = "Paginated Productos para dashboard";
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "An error occurred while retrieving paginated productos";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+    @GetMapping("/dashboard-quantity")
+    @Operation(
+            summary = "Traer cantidad de productos",
+            description = "Ubicación: Dashboard - Productos  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> countAllProductos() {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            data = productoService.countAllProductos();
             message = "Paginated Productos para dashboard";
             status = HttpStatus.OK;
         } catch (Exception e) {

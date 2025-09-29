@@ -16,4 +16,8 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
             @Param("excludeId") Long excludeId,
             @Param("categoriaId") Long categoriaId
     );
+
+    @Query("SELECT COUNT(p) FROM Producto p")
+    Long countAllProductos();
+
 }

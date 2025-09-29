@@ -48,5 +48,9 @@ public class ProductoService {
         return productoRepository.findAll(pageable)
                 .map(ProductoMapper::toDashboardDTO);
     }
+
+    public Long countAllProductos() {
+        return productoRepository.countAllProductos();
+    }
 }
 
