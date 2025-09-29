@@ -1,6 +1,7 @@
 package com.ecommerce.backend.dto.producto;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Data;
@@ -8,14 +9,14 @@ import lombok.Data;
 @Data
 @Builder
 public class ProductoRequestDTO {
-    @NotNull(message = "nombre field cannot be null")
+    @NotBlank(message = "nombre field cannot be null")
     private String nombre;
 
     @NotNull(message = "categoriaID field cannot be null")
     @Min(value = 1, message = "categoriaID must be at least 1")
     private Long categoriaID;
 
-    @NotNull(message = "descripcion field cannot be null")
+    @NotBlank(message = "descripcion field cannot be null")
     private String descripcion;
 
     @NotNull(message = "imagenID field cannot be null")
