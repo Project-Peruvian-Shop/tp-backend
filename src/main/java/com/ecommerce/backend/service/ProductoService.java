@@ -3,6 +3,9 @@ package com.ecommerce.backend.service;
 import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
 import com.ecommerce.backend.dto.producto.ProductoDashboardResponseDTO;
 import com.ecommerce.backend.dto.producto.ProductoFullResponseDTO;
+import com.ecommerce.backend.dto.producto.ProductoRequestDTO;
+import com.ecommerce.backend.entity.Categoria;
+import com.ecommerce.backend.entity.Imagen;
 import com.ecommerce.backend.entity.Producto;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.ProductoMapper;
@@ -20,6 +23,7 @@ import java.util.List;
 public class ProductoService {
     private final ProductoRepository productoRepository;
     private final ImagenService imagenService;
+    private final CategoriaService categoriaService;
 
     public Page<PaginatedProductoResponseDTO> findAllPaginated(Pageable pageable) {
         return productoRepository.findAll(pageable)
@@ -56,6 +60,15 @@ public class ProductoService {
     public Page<ProductoDashboardResponseDTO> searchByNombreOrCategoria(String busqueda, Pageable pageable) {
         return productoRepository.searchByNombreOrCategoria(busqueda, pageable)
                 .map(ProductoMapper::toDashboardDTO);
+    }
+
+
+    public ProductoDashboardResponseDTO save(ProductoRequestDTO producto) {
+        Imagen imagen = imagenService.findById(producto.getImagenID());
+        Categoria categoria = categoriaService.findById(producto.getCategoriaID());
+        Producto nuevoProducto = ProductoMapper.toEntity(producto, imagen, categoria);
+
+        return ProductoMapper.toDashboardDTO(productoRepository.save(nuevoProducto));
     }
 }
 

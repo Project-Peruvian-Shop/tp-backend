@@ -2,8 +2,10 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
+import com.ecommerce.backend.dto.producto.ProductoRequestDTO;
 import com.ecommerce.backend.service.ProductoService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -213,6 +215,38 @@ public class ProductoController {
         try {
             Pageable pageable = PageRequest.of(page, size);
             data = productoService.searchByNombreOrCategoria(busqueda, pageable);
+            message = "Busqueda de Productos para dashboard";
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "An error occurred while retrieving search productos";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+    @PostMapping("/")
+    @Operation(
+            summary = "Crear productos",
+            description = "Ubicacion: Dashboard productos create  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> save(@Valid @RequestBody ProductoRequestDTO producto) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            data = productoService.save(producto);
             message = "Busqueda de Productos para dashboard";
             status = HttpStatus.OK;
         } catch (Exception e) {

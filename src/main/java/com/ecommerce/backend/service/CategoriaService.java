@@ -1,6 +1,8 @@
 package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.dto.categoria.AllAndQuantityResponseDTO;
+import com.ecommerce.backend.entity.Categoria;
+import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.repository.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,5 +25,10 @@ public class CategoriaService {
                         ((Number) obj[2]).longValue()
                 ))
                 .toList();
+    }
+
+    public Categoria findById(Long id) {
+        return categoriaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria not found with id: " + id));
     }
 }
