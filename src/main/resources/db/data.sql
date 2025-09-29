@@ -28,3 +28,28 @@ INSERT INTO producto (nombre, descripcion, imagen_id, categoria_id) VALUES
 ('Codo PVC 90° 90mm', 'Conexión en ángulo para tuberías de menor diámetro', 5, 5),
 ('Tee de Agua PVC 110mm', 'Permite dividir el flujo en redes domiciliarias', 3, 3),
 ('Tee de Agua PVC 90mm', 'Accesorio para derivaciones en instalaciones de agua', 3, 4);
+
+-- Mensajes
+INSERT INTO mensaje
+(nombre, tipo_documento, documento, telefono, email, contenido, tipo, estado, usuario_id)
+VALUES
+('Juan Pérez', 1, '12345678', '+987654321', 'juanperez@gmail.com',
+ 'Hola, estoy interesado en sus productos de tuberías. ¿Podrían enviarme una cotización?',
+ 0, 0, 1),
+
+('María Gómez', 2, '87654321', '+912345678', 'maria.gomez@yahoo.com',
+ 'Quiero hacer seguimiento a mi pedido con número #4587. Gracias.',
+ 1, 1, 1),
+
+('Carla', 1, '111222333', '+12345678', 'cliente.anonimo@test.com',
+ 'Por favor, envíenme información sobre la garantía de sus productos.',
+ 0, 0, NULL),
+
+('Carlos López', 1, '11223344', '+999888777', 'carlos.lopez@hotmail.com',
+ 'El producto que recibí tiene un defecto, ¿cómo puedo solicitar cambio?',
+ 2, 2, 2),
+
+-- mensaje tipo reclamo sin datos de documento
+('Ana Torres', 3, '94810122', '+955666444', 'ana.torres@gmail.com',
+ 'Estoy inconforme con la atención que recibí, por favor contacten conmigo.',
+ 2, 0, NULL);
