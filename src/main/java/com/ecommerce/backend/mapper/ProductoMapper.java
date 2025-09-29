@@ -3,6 +3,8 @@ package com.ecommerce.backend.mapper;
 import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
 import com.ecommerce.backend.dto.producto.ProductoDashboardResponseDTO;
 import com.ecommerce.backend.dto.producto.ProductoFullResponseDTO;
+import com.ecommerce.backend.dto.producto.ProductoRequestDTO;
+import com.ecommerce.backend.entity.Categoria;
 import com.ecommerce.backend.entity.Imagen;
 import com.ecommerce.backend.entity.Producto;
 import org.springframework.stereotype.Component;
@@ -28,6 +30,7 @@ public class ProductoMapper {
                 .imagenAlt(producto.getImagen().getAlt())
                 .build();
     }
+
 
     public static ProductoFullResponseDTO toDTOGetByID(Producto producto) {
         if (producto == null) {
@@ -56,6 +59,7 @@ public class ProductoMapper {
                 .build();
     }
 
+
     public static ProductoDashboardResponseDTO toDashboardDTO(Producto producto) {
         if (producto == null) {
             return null;
@@ -69,5 +73,16 @@ public class ProductoMapper {
                 .categoriaNombre(producto.getCategoria().getNombre())
                 .descripcion(producto.getDescripcion())
                 .build();
+    }
+
+
+    public static Producto toEntity(ProductoRequestDTO productoRequestDTO, Imagen imagen, Categoria categoria) {
+        Producto producto = new Producto();
+        producto.setNombre(productoRequestDTO.getNombre());
+        producto.setDescripcion(productoRequestDTO.getDescripcion());
+        producto.setImagen(imagen);
+        producto.setCategoria(categoria);
+
+        return producto;
     }
 }
