@@ -7,6 +7,8 @@ import com.ecommerce.backend.role.UserRole;
 import com.ecommerce.backend.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -192,6 +194,43 @@ public class UsuarioController {
             details = e.getMessage();
         }
 
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+    @GetMapping("/{id}/workers")
+    @Operation(
+            summary = "Traer todos los usuarios con rol de trabajador excluyendo el mismo usuario",
+            description = "Ubicación: Usuario  \n" +
+                    "Seguridad: Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse> getAllWorkers(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            data = usuarioService.findAllWorkers(id, pageable);
+            status = HttpStatus.OK;
+            message = "Workers retrieved successfully";
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            data = null;
+            message = "Error retrieving workers";
+            details = e.getMessage();
+        }
         return ResponseEntity.status(status).body(
                 GlobalResponse.builder()
                         .ok(data != null)

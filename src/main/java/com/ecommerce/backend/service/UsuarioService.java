@@ -3,6 +3,7 @@ package com.ecommerce.backend.service;
 import com.ecommerce.backend.dto.usuario.UsuarioPerfilDTO;
 import com.ecommerce.backend.dto.usuario.UsuarioRequestDTO;
 import com.ecommerce.backend.dto.usuario.UsuarioResponseDTO;
+import com.ecommerce.backend.dto.usuario.UsuarioSimpleResponseDTO;
 import com.ecommerce.backend.entity.Usuario;
 import com.ecommerce.backend.exceptions.InvalidCredentialsException;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
@@ -10,6 +11,8 @@ import com.ecommerce.backend.mapper.UsuarioMapper;
 import com.ecommerce.backend.repository.UsuarioRepository;
 import com.ecommerce.backend.role.UserRole;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +31,7 @@ public class UsuarioService {
                 .toList();
     }
 
+
     public UsuarioPerfilDTO findById(Long id) {
         Usuario usuario =
                 usuarioRepository.findById(id)
@@ -35,6 +39,7 @@ public class UsuarioService {
 
         return UsuarioMapper.toFindById(usuario);
     }
+
 
     public UsuarioResponseDTO save(UsuarioRequestDTO usuarioRequestDTO) {
         if (usuarioRepository.existsByEmail(usuarioRequestDTO.getEmail())) {
@@ -44,6 +49,7 @@ public class UsuarioService {
         Usuario savedUsuario = usuarioRepository.save(usuario);
         return UsuarioMapper.toDTO(savedUsuario);
     }
+
 
     public UsuarioResponseDTO update(Long id, UsuarioRequestDTO usuarioRequestDTO) {
         Usuario existingUser = usuarioRepository.findById(id)
@@ -58,6 +64,7 @@ public class UsuarioService {
         return UsuarioMapper.toDTO(updatedUser);
     }
 
+
     public void deleteById(Long id) {
         if (!usuarioRepository.existsById(id)) {
             throw new ResourceNotFoundException("Usuario not found - id: " + id);
@@ -65,16 +72,19 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
+
     public Usuario findByEmail(String email) {
         return usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - email: " + email));
     }
+
 
     public UsuarioResponseDTO findByNombreCompleto(String nombre, String apellidos) {
         Usuario usuario = usuarioRepository.findByNombreAndApellidos(nombre, apellidos)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - nombre: " + nombre));
         return UsuarioMapper.toDTO(usuario);
     }
+
 
     public List<UsuarioResponseDTO> findByRol(UserRole rol) {
         return usuarioRepository.findByRol(rol)
@@ -95,6 +105,7 @@ public class UsuarioService {
         return UsuarioMapper.toDTO(savedUsuario);
     }
 
+
     public UsuarioResponseDTO login(String email, String passwordd) {
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - email: " + email));
@@ -103,5 +114,16 @@ public class UsuarioService {
         }
         return UsuarioMapper.toDTO(usuario);
 
+    }
+
+
+    public Page<UsuarioSimpleResponseDTO> findAllWorkers(Long id, Pageable pageable) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - id: " + id));
+
+        List<UserRole> roles = List.of(UserRole.ROLE_ADMIN, UserRole.ROLE_MANAGER);
+
+        return usuarioRepository.findByRolesExcludingId(roles, id, pageable)
+                .map(UsuarioMapper::toSimpleDTO);
     }
 }
