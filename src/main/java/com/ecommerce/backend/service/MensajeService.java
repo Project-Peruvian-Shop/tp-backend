@@ -5,6 +5,8 @@ import com.ecommerce.backend.entity.Mensaje;
 import com.ecommerce.backend.mapper.MensajeMapper;
 import com.ecommerce.backend.repository.MensajeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,5 +63,8 @@ public class MensajeService {
         return new MensajeDashboardDTO(respondidos, pendientes);
     }
 
+    public Page<MensajeDashboardResponseDTO> findDashboardPaginated(Pageable pageable) {
+        return mensajeRepository.findAll(pageable).map(MensajeMapper::toDashboardDTO);
+    }
 }
 

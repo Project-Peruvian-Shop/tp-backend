@@ -9,6 +9,8 @@ import com.ecommerce.backend.service.MensajeService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +54,7 @@ public class MensajeController {
         );
     }
 
+
     @PostMapping("/reclamaciones")
     @Operation(
             summary = "Crear mensaje de libro de reclamaciones",
@@ -84,6 +87,7 @@ public class MensajeController {
         );
     }
 
+
     @GetMapping("/dashboard/{mes}")
     public ResponseEntity<GlobalResponse> get_dashboard_message(@PathVariable Long mes) {
         HttpStatus status;
@@ -109,6 +113,7 @@ public class MensajeController {
                         .build()
         );
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<GlobalResponse> get_mensaje_by_id(@PathVariable Long id) {
@@ -136,6 +141,7 @@ public class MensajeController {
         );
     }
 
+
     @PutMapping("/change_state/{id}")
     public ResponseEntity<GlobalResponse> change_state(@PathVariable Long id, @RequestBody ChangeStateMensajeRequestDTO changeStateMensajeRequestDTO) {
         HttpStatus status;
@@ -150,6 +156,43 @@ public class MensajeController {
             status = HttpStatus.NOT_FOUND;
             data = null;
             message = "Error changing message state";
+            details = e.getMessage();
+        }
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+
+    @GetMapping("/dashboard-paginated")
+    @Operation(
+            summary = "Obtener mensajes paginados para el dashboard",
+            description = "Ubicación: Dashboard  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> findDashboardPaginated(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            data = mensajeService.findDashboardPaginated(pageable);
+            status = HttpStatus.OK;
+            message = "Messages retrieved successfully";
+        } catch (Exception e) {
+            status = HttpStatus.BAD_REQUEST;
+            data = null;
+            message = "Error retrieving messages";
             details = e.getMessage();
         }
         return ResponseEntity.status(status).body(
