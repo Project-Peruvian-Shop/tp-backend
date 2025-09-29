@@ -122,4 +122,42 @@ public class CategoriaController {
                         .build()
         );
     }
+
+
+    @GetMapping("/dashboard-search")
+    @Operation(
+            summary = "Traer categorias por busqueda",
+            description = "Ubicación: Dashboard - Categorias  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> searchByNombreUsosNorma(
+            @RequestParam(defaultValue = "") String busqueda,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            data = categoriaService.searchByNombreUsosNorma(busqueda, pageable);
+            message = "Busqueda de Categorias para dashboard";
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "An error occurred while retrieving search categorias";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
 }
