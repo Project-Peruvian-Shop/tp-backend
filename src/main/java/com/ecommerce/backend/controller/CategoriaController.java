@@ -5,10 +5,13 @@ import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.service.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -50,6 +53,7 @@ public class CategoriaController {
         );
     }
 
+
     @GetMapping("/dashboard-quantity")
     @Operation(
             summary = "Traer cantidad de categorias/lineas",
@@ -69,6 +73,43 @@ public class CategoriaController {
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             message = "Error al traer cantidad de categorias";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+
+    @GetMapping("/dashboard-paginated")
+    @Operation(
+            summary = "Traer categorias paginados",
+            description = "Ubicación: Dashboard - Categorias  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> getAllPaginatedDashboard(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            data = categoriaService.findAllPaginatedDashboard(pageable);
+            message = "Paginated Categorias para dashboard";
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "An error occurred while retrieving paginated categorias";
             details = e.getMessage();
         }
 
