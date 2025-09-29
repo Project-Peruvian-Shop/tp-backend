@@ -57,7 +57,7 @@ public class ProductoController {
     @GetMapping("/{id}")
     @Operation(
             summary = "Traer al producto por id",
-            description = "Ubicación: Producto en Tienda  \n" +
+            description = "Ubicación: Producto en Tienda, Dashboard producto one  \n" +
                     "Seguridad: Pública"
     )
     public ResponseEntity<GlobalResponse> getByID(@PathVariable Long id) {
