@@ -52,5 +52,10 @@ public class ProductoService {
     public Long countAllProductos() {
         return productoRepository.countAllProductos();
     }
+
+    public Page<ProductoDashboardResponseDTO> searchByNombreOrCategoria(String busqueda, Pageable pageable) {
+        return productoRepository.searchByNombreOrCategoria(busqueda, pageable)
+                .map(ProductoMapper::toDashboardDTO);
+    }
 }
 

@@ -53,6 +53,7 @@ public class ProductoController {
         );
     }
 
+
     @GetMapping("/{id}")
     @Operation(
             summary = "Traer al producto por id",
@@ -85,6 +86,7 @@ public class ProductoController {
                         .build()
         );
     }
+
 
     @GetMapping("/sugeridos")
     @Operation(
@@ -120,6 +122,7 @@ public class ProductoController {
                         .build()
         );
     }
+
 
     @GetMapping("/dashboard-paginated")
     @Operation(
@@ -157,6 +160,7 @@ public class ProductoController {
         );
     }
 
+
     @GetMapping("/dashboard-quantity")
     @Operation(
             summary = "Traer cantidad de productos",
@@ -176,6 +180,44 @@ public class ProductoController {
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;
             message = "An error occurred while retrieving paginated productos";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+
+    @GetMapping("/dashboard-search")
+    @Operation(
+            summary = "Traer productos por busqueda",
+            description = "Ubicación: Dashboard - Productos  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> searchByNombreOrCategoria(
+            @RequestParam(defaultValue = "") String busqueda,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            data = productoService.searchByNombreOrCategoria(busqueda, pageable);
+            message = "Busqueda de Productos para dashboard";
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "An error occurred while retrieving search productos";
             details = e.getMessage();
         }
 

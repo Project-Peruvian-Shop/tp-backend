@@ -1,6 +1,8 @@
 package com.ecommerce.backend.repository;
 
 import com.ecommerce.backend.entity.Producto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,4 +22,14 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
     @Query("SELECT COUNT(p) FROM Producto p")
     Long countAllProductos();
 
+    @Query("""
+            SELECT p 
+            FROM Producto p 
+            WHERE LOWER(p.nombre) LIKE LOWER(CONCAT('%', :filtro, '%'))
+               OR LOWER(p.categoria.nombre) LIKE LOWER(CONCAT('%', :filtro, '%'))
+            """)
+    Page<Producto> searchByNombreOrCategoria(
+            @Param("filtro") String filtro,
+            Pageable pageable
+    );
 }
