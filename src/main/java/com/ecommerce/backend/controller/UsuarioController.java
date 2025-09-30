@@ -90,7 +90,15 @@ public class UsuarioController {
 
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<GlobalResponse> updateUsuario(@PathVariable Long id, @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+    @Operation(
+            summary = "Actualizar un usuario",
+            description = "Ubicación: Mi perfil, Dashboard - Usuarios  \n" +
+                    "Seguridad: Cliente, Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse> updateUsuario(
+            @PathVariable Long id,
+            @Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO
+    ) {
         HttpStatus status;
         Object data;
         String message;
