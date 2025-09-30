@@ -196,8 +196,8 @@ public class CategoriaController {
     @GetMapping("/productos/{id}")
     @Operation(
             summary = "Traer los productos por categoria",
-            description = "Ubicación: Dashboard categoria one  \n" +
-                    "Seguridad: Admin, Manager"
+            description = "Ubicación: Dashboard categoria one & landing  \n" +
+                    "Seguridad: Admin, Manager, public"
     )
     public ResponseEntity<GlobalResponse> getProductosByID(
             @PathVariable Long id,
