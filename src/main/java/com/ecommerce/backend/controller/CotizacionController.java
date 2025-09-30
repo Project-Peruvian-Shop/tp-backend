@@ -329,7 +329,7 @@ public class CotizacionController {
     @GetMapping("/{id}")
     @Operation(
             summary = "Traer cotizaciones por ID",
-            description = "Ubicación: cotizacion particular  \n" +
+            description = "Ubicación: cotizacion particular & Dashboard cotizacion one \n" +
                     "Seguridad: Usuario, Manager, Admin"
     )
     public ResponseEntity<GlobalResponse> getCotizacionesById(@PathVariable Long id) {
