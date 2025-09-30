@@ -209,4 +209,75 @@ public class MensajeController {
                         .build()
         );
     }
+
+
+    @GetMapping("/dashboard-quantity")
+    @Operation(
+            summary = "Traer cantidad de mensajes",
+            description = "Ubicación: Dashboard - Mensajes  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> countAllMensajes() {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            data = mensajeService.countAllMensajes();
+            message = "Cantidad de mensajes para dashboard";
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "Error al traer cantidad de mensajes";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+
+    @GetMapping("/dashboard-search")
+    @Operation(
+            summary = "Traer productos por mensajes",
+            description = "Ubicación: Dashboard - mensajes  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> searchByParams(
+            @RequestParam(defaultValue = "") String busqueda,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            data = mensajeService.searchByParams(busqueda, pageable);
+            message = "Busqueda de mensajes para dashboard";
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "An error occurred while retrieving search mensajes";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
 }
