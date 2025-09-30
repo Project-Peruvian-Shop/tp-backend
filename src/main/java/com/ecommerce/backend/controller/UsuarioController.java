@@ -20,14 +20,19 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    @GetMapping
-    public ResponseEntity<GlobalResponse> getAllUsuarios() {
+    @GetMapping("/paginated")
+    public ResponseEntity<GlobalResponse> getAllUsuarios(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
         HttpStatus status;
         Object data;
         String message;
         String details = null;
+
         try {
-            data = usuarioService.findAll();
+            Pageable pageable = PageRequest.of(page, size);
+            data = usuarioService.findAll(pageable);
             status = HttpStatus.OK;
             message = "Usuarios retrieved successfully";
         } catch (Exception e) {

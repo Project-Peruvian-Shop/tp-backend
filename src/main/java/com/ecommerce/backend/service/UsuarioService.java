@@ -24,11 +24,9 @@ import static com.ecommerce.backend.mapper.UsuarioMapper.toEntity;
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
-    public List<UsuarioResponseDTO> findAll() {
-        return usuarioRepository.findAll()
-                .stream()
-                .map(UsuarioMapper::toDTO)
-                .toList();
+    public Page<UsuarioResponseDTO> findAll(Pageable pageable) {
+        return usuarioRepository.findAll(pageable)
+                .map(UsuarioMapper::toDTO);
     }
 
 
