@@ -43,6 +43,7 @@ public class UsuarioService {
         if (usuarioRepository.existsByEmail(usuarioRequestDTO.getEmail())) {
             throw new RuntimeException("El email " + usuarioRequestDTO.getEmail() + " ya está en uso.");
         }
+
         Usuario usuario = toEntity(usuarioRequestDTO);
         Usuario savedUsuario = usuarioRepository.save(usuario);
         return UsuarioMapper.toDTO(savedUsuario);

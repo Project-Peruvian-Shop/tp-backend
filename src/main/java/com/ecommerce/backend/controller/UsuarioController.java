@@ -3,9 +3,9 @@ package com.ecommerce.backend.controller;
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.usuario.UsuarioRequestDTO;
-import com.ecommerce.backend.role.UserRole;
 import com.ecommerce.backend.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -56,7 +56,12 @@ public class UsuarioController {
 
 
     @PostMapping("/save")
-    public ResponseEntity<GlobalResponse> saveUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+    @Operation(
+            summary = "Crear un nuevo usuario",
+            description = "Ubicación: Dashboard - Registro  \n" +
+                    "Seguridad: Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse> saveUsuario(@Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
         HttpStatus status;
         Object data;
         String message;
