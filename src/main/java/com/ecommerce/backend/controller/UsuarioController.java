@@ -21,6 +21,11 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @GetMapping("/paginated")
+    @Operation(
+            summary = "Traer todos los usuarios paginados",
+            description = "Ubicación: Usuarios  \n" +
+                    "Seguridad: Manager, Admin"
+    )
     public ResponseEntity<GlobalResponse> getAllUsuarios(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
