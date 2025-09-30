@@ -7,6 +7,8 @@ import com.ecommerce.backend.service.CotizacionService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -182,15 +184,24 @@ public class CotizacionController {
         );
     }
 
-    @GetMapping("/paginated")
-    public ResponseEntity<GlobalResponse> get_cotizaciones_dashboard(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+    @GetMapping("/dashboard-paginated")
+    @Operation(
+            summary = "Traer cotizaciones del dashboard paginadas",
+            description = "Ubicación: cotizaciones del dashboard  \n" +
+                    "Seguridad: Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse> get_cotizaciones_dashboard(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
         HttpStatus status;
         Object data;
         String message;
         String details = null;
-        try {
 
-            data = cotizacionService.get_cotizaciones_dashboard(page, size);
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            data = cotizacionService.get_cotizaciones_dashboard(pageable);
             status = HttpStatus.OK;
             message = "Cotizaciones del dashboard retrieved successfully";
         } catch (Exception e) {

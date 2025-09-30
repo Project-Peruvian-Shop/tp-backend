@@ -7,6 +7,7 @@ import com.ecommerce.backend.dto.cotizacion.UsuarioCotizacionMesDTO;
 import com.ecommerce.backend.entity.*;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.CotizacionMapper;
+import com.ecommerce.backend.mapper.ProductoMapper;
 import com.ecommerce.backend.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -140,9 +141,9 @@ public class CotizacionService {
                 .toList();
     }
 
-    public Page<CotizacionDashboardDTO> get_cotizaciones_dashboard(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        return cotizacionRepository.findAllCotizacionesDashboard(pageable);
+    public Page<CotizacionDashboardDTO> get_cotizaciones_dashboard(Pageable pageable) {
+        return cotizacionRepository.findAll(pageable)
+                .map(CotizacionMapper::toDashboardDTO);
     }
 
     public List<CotizacionByUsuarioResponseDTO> getByUser(Long id) {

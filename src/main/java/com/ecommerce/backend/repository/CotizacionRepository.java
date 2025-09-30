@@ -37,15 +37,6 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
             "ORDER BY FUNCTION('MONTH', c.creacion)")
     List<Object[]> cotizacionesForYear(@Param("year") int year);
 
-    @Query(
-            value = "SELECT new com.ecommerce.backend.dto.cotizacion.CotizacionDashboardDTO(" +
-                    "c.id, c.creacion, c.nombre, c.email, c.telefono, c.comentario, c.estado) " +
-                    "FROM Cotizacion c " +
-                    "ORDER BY c.creacion DESC",
-            countQuery = "SELECT COUNT(c) FROM Cotizacion c"
-    )
-    Page<CotizacionDashboardDTO> findAllCotizacionesDashboard(Pageable pageable);
-
     Optional<Cotizacion> findTopByOrderByIdDesc();
 
     List<Cotizacion> findByUsuarioId(Long id);
