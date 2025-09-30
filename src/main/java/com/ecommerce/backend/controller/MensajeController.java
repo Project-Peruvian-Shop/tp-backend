@@ -88,7 +88,12 @@ public class MensajeController {
     }
 
 
-    @GetMapping("/dashboard/{mes}")
+    @GetMapping("/dashboard-quantity/{mes}")
+    @Operation(
+            summary = "Traer cantidad de mensajes por mes",
+            description = "Ubicación: Dashboard - Mensajes  \n" +
+                    "Seguridad: Admin, Manager"
+    )
     public ResponseEntity<GlobalResponse> get_dashboard_message(@PathVariable Long mes) {
         HttpStatus status;
         Object data;
@@ -211,37 +216,31 @@ public class MensajeController {
     }
 
 
-    @GetMapping("/dashboard-quantity")
-    @Operation(
-            summary = "Traer cantidad de mensajes",
-            description = "Ubicación: Dashboard - Mensajes  \n" +
-                    "Seguridad: Admin, Manager"
-    )
-    public ResponseEntity<GlobalResponse> countAllMensajes() {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
-
-        try {
-            data = mensajeService.countAllMensajes();
-            message = "Cantidad de mensajes para dashboard";
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "Error al traer cantidad de mensajes";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
-    }
+//    public ResponseEntity<GlobalResponse> countAllMensajes() {
+//        HttpStatus status;
+//        Object data = null;
+//        String message;
+//        String details = null;
+//
+//        try {
+//            data = mensajeService.countAllMensajes();
+//            message = "Cantidad de mensajes para dashboard";
+//            status = HttpStatus.OK;
+//        } catch (Exception e) {
+//            status = HttpStatus.INTERNAL_SERVER_ERROR;
+//            message = "Error al traer cantidad de mensajes";
+//            details = e.getMessage();
+//        }
+//
+//        return ResponseEntity.status(status).body(
+//                GlobalResponse.builder()
+//                        .ok(data != null)
+//                        .message(message)
+//                        .data(data)
+//                        .details(details)
+//                        .build()
+//        );
+//    }
 
 
     @GetMapping("/dashboard-search")
