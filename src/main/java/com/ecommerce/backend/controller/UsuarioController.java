@@ -20,7 +20,7 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    @GetMapping("/paginated")
+    @GetMapping("/dashboard-paginated")
     @Operation(
             summary = "Traer todos los usuarios paginados",
             description = "Ubicación: Dashboard - Usuarios  \n" +
