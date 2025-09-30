@@ -44,4 +44,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
             Pageable pageable
     );
 
+    @Query("SELECT COUNT(u) FROM Usuario u")
+    Long countAllUsuarios();
 }

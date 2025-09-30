@@ -130,4 +130,8 @@ public class UsuarioService {
         return usuarioRepository.searchByNombreApellidosEmailTelefonoRol(busqueda, pageable)
                 .map(UsuarioMapper::toDTO);
     }
+
+    public Long countAllUsuarios() {
+        return usuarioRepository.countAllUsuarios();
+    }
 }

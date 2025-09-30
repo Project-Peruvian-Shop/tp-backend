@@ -23,7 +23,7 @@ public class UsuarioController {
     @GetMapping("/paginated")
     @Operation(
             summary = "Traer todos los usuarios paginados",
-            description = "Ubicación: Usuarios  \n" +
+            description = "Ubicación: Dashboard - Usuarios  \n" +
                     "Seguridad: Manager, Admin"
     )
     public ResponseEntity<GlobalResponse> getAllUsuarios(
@@ -180,7 +180,7 @@ public class UsuarioController {
     @GetMapping("/dashboard-search")
     @Operation(
             summary = "Buscar usuarios por nombre, apellidos, email, teléfono o rol",
-            description = "Ubicación: Usuarios  \n" +
+            description = "Ubicación: Dashboard - Usuarios  \n" +
                     "Seguridad: Manager, Admin"
     )
     public ResponseEntity<GlobalResponse> findUsers(
@@ -215,11 +215,43 @@ public class UsuarioController {
         );
     }
 
+    @GetMapping("/dashboard-quantity")
+    @Operation(
+            summary = "Traer cantidad de usuarios",
+            description = "Ubicación: Dashboard - Usuarios  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse> countAllProductos() {
+        HttpStatus status;
+        Object data = null;
+        String message;
+        String details = null;
+
+        try {
+            data = usuarioService.countAllUsuarios();
+            message = "Cantidad de Usuarios para dashboard";
+            status = HttpStatus.OK;
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            message = "Error al traer cantidad de usuarios";
+            details = e.getMessage();
+        }
+
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
 
     @GetMapping("/{id}/workers")
     @Operation(
             summary = "Traer todos los usuarios con rol de trabajador excluyendo el mismo usuario",
-            description = "Ubicación: Usuario  \n" +
+            description = "Ubicación: Mi perfil  \n" +
                     "Seguridad: Manager, Admin"
     )
     public ResponseEntity<GlobalResponse> getAllWorkers(
