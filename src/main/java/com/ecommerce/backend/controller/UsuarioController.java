@@ -56,6 +56,7 @@ public class UsuarioController {
         );
     }
 
+
     @GetMapping("/{id}")
     @Operation(
             summary = "Traer datos de un usuario",
@@ -89,6 +90,7 @@ public class UsuarioController {
         );
     }
 
+
     @PostMapping("/save")
     public ResponseEntity<GlobalResponse> saveUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
         HttpStatus status;
@@ -116,6 +118,7 @@ public class UsuarioController {
                         .build()
         );
     }
+
 
     @PutMapping("/update/{id}")
     public ResponseEntity<GlobalResponse> updateUsuario(@PathVariable Long id, @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
@@ -145,6 +148,7 @@ public class UsuarioController {
         );
     }
 
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<GlobalResponse> deleteUsuario(@PathVariable Long id) {
         HttpStatus status;
@@ -172,10 +176,17 @@ public class UsuarioController {
         );
     }
 
-    @GetMapping("/buscar")
+
+    @GetMapping("/dashboard-search")
+    @Operation(
+            summary = "Buscar usuarios por nombre, apellidos, email, teléfono o rol",
+            description = "Ubicación: Usuarios  \n" +
+                    "Seguridad: Manager, Admin"
+    )
     public ResponseEntity<GlobalResponse> findUsers(
-            @RequestParam(required = false) String nombre, @RequestParam(required = false) String apellidos,
-            @RequestParam(required = false) String email, @RequestParam(required = false) String rol
+            @RequestParam(defaultValue = "") String busqueda,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
     ) {
         HttpStatus status;
         Object data;
@@ -183,24 +194,14 @@ public class UsuarioController {
         String details = null;
 
         try {
-            if (email != null) {
-                data = usuarioService.findByEmail(email);
-                message = "Usuario encontrado por email: " + email;
-            } else if (nombre != null && apellidos != null) {
-                data = usuarioService.findByNombreCompleto(nombre, apellidos);
-                message = "Usuario encontrado por nombre completo: " + nombre + " " + apellidos;
-            } else if (rol != null) {
-                UserRole roleEnum = UserRole.fromString(rol);
-                data = usuarioService.findByRol(roleEnum);
-                message = "Usuarios encontrado por rol: " + rol;
-            } else {
-                throw new IllegalArgumentException("Debe proporcionar al menos un criterio de búsqueda (email, nombre+apellidos o rol).");
-            }
+            Pageable pageable = PageRequest.of(page, size);
+            data = usuarioService.searchByParam(busqueda, pageable);
+            message = "Busqueda de Productos para dashboard";
             status = HttpStatus.OK;
         } catch (Exception e) {
             status = HttpStatus.NOT_FOUND;
             data = null;
-            message = "Error retrieving usuario with nombre: " + nombre + " " + apellidos;
+            message = "Error retrieving usuario with param";
             details = e.getMessage();
         }
 
@@ -213,6 +214,7 @@ public class UsuarioController {
                         .build()
         );
     }
+
 
     @GetMapping("/{id}/workers")
     @Operation(

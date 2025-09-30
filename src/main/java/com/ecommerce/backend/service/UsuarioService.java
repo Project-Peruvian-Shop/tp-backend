@@ -124,4 +124,10 @@ public class UsuarioService {
         return usuarioRepository.findByRolesExcludingId(roles, id, pageable)
                 .map(UsuarioMapper::toSimpleDTO);
     }
+
+
+    public Page<UsuarioResponseDTO> searchByParam(String busqueda, Pageable pageable) {
+        return usuarioRepository.searchByNombreApellidosEmailTelefonoRol(busqueda, pageable)
+                .map(UsuarioMapper::toDTO);
+    }
 }

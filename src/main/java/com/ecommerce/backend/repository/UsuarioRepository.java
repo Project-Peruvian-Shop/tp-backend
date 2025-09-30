@@ -29,4 +29,19 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
             @Param("excludedId") Long excludedId,
             Pageable pageable
     );
+
+    @Query("""
+            SELECT u
+            FROM Usuario u
+            WHERE LOWER(u.nombre) LIKE LOWER(CONCAT('%', :filtro, '%'))
+               OR LOWER(u.apellidos) LIKE LOWER(CONCAT('%', :filtro, '%'))
+               OR LOWER(u.email) LIKE LOWER(CONCAT('%', :filtro, '%'))
+               OR LOWER(u.telefono) LIKE LOWER(CONCAT('%', :filtro, '%'))
+               OR LOWER(u.rol) LIKE LOWER(CONCAT('%', :filtro, '%'))
+            """)
+    Page<Usuario> searchByNombreApellidosEmailTelefonoRol(
+            @Param("filtro") String filtro,
+            Pageable pageable
+    );
+
 }
