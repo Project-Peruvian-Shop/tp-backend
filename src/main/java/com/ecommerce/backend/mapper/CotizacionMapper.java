@@ -1,6 +1,7 @@
 package com.ecommerce.backend.mapper;
 
 import com.ecommerce.backend.dto.cotizacion.CotizacionByUsuarioResponseDTO;
+import com.ecommerce.backend.dto.cotizacion.CotizacionDashboardDTO;
 import com.ecommerce.backend.dto.cotizacion.CotizacionFullResponseDTO;
 import com.ecommerce.backend.dto.cotizacion.ProductoFullResponseDTO;
 import com.ecommerce.backend.entity.Cotizacion;
@@ -52,5 +53,28 @@ public class CotizacionMapper {
                 .observaciones(cotizacion.getObservaciones())
                 .cotizacionEnlace(cotizacion.getPdf() != null ? cotizacion.getPdf().getEnlace() : null)
                 .build();
+    }
+
+    public static CotizacionDashboardDTO toDashboardDTO(Cotizacion cotizacion) {
+        if (cotizacion == null) {
+            return null;
+        }
+
+        String estadoStr;
+        switch (cotizacion.getEstado()) {
+            case 1 -> estadoStr = "Enviada";
+            case 2 -> estadoStr = "Cerrada";
+            default -> estadoStr = "Sin Atender";
+        }
+
+        return new CotizacionDashboardDTO(
+                cotizacion.getId(),
+                cotizacion.getNumero(),
+                cotizacion.getNombre(),
+                cotizacion.getDocumento(),
+                cotizacion.getCreacion(),
+                estadoStr,
+                cotizacion.getComentario()
+        );
     }
 }
