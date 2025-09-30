@@ -20,42 +20,6 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    @GetMapping("/dashboard-paginated")
-    @Operation(
-            summary = "Traer todos los usuarios paginados",
-            description = "Ubicación: Dashboard - Usuarios  \n" +
-                    "Seguridad: Manager, Admin"
-    )
-    public ResponseEntity<GlobalResponse> getAllUsuarios(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
-    ) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
-
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            data = usuarioService.findAll(pageable);
-            status = HttpStatus.OK;
-            message = "Usuarios retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            data = null;
-            message = "Error retrieving usuarios";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
-    }
-
 
     @GetMapping("/{id}")
     @Operation(
@@ -169,6 +133,43 @@ public class UsuarioController {
         return ResponseEntity.status(status).body(
                 GlobalResponse.builder()
                         .ok(status == HttpStatus.OK)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+
+    @GetMapping("/dashboard-paginated")
+    @Operation(
+            summary = "Traer todos los usuarios paginados",
+            description = "Ubicación: Dashboard - Usuarios  \n" +
+                    "Seguridad: Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse> getAllUsuarios(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+            data = usuarioService.findAll(pageable);
+            status = HttpStatus.OK;
+            message = "Usuarios retrieved successfully";
+        } catch (Exception e) {
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            data = null;
+            message = "Error retrieving usuarios";
+            details = e.getMessage();
+        }
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
                         .message(message)
                         .data(data)
                         .details(details)
