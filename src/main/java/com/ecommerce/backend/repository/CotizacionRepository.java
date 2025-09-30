@@ -1,6 +1,5 @@
 package com.ecommerce.backend.repository;
 
-import com.ecommerce.backend.dto.cotizacion.CotizacionDashboardDTO;
 import com.ecommerce.backend.entity.Cotizacion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,4 +39,20 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
     Optional<Cotizacion> findTopByOrderByIdDesc();
 
     List<Cotizacion> findByUsuarioId(Long id);
+
+    @Query("SELECT COUNT(c) FROM Cotizacion c")
+    Long countAllCotizaciones();
+
+    @Query("""
+            SELECT c
+            FROM Cotizacion c
+            WHERE LOWER(c.numero) LIKE LOWER(CONCAT('%', :filtro, '%'))
+               OR LOWER(c.nombre) LIKE LOWER(CONCAT('%', :filtro, '%'))
+               OR LOWER(c.observaciones) LIKE LOWER(CONCAT('%', :filtro, '%'))
+            """)
+    Page<Cotizacion> searchByNumeroClienteObservaciones(
+            @Param("filtro") String filtro,
+            Pageable pageable
+    );
+
 }

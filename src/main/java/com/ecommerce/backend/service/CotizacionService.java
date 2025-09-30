@@ -7,12 +7,10 @@ import com.ecommerce.backend.dto.cotizacion.UsuarioCotizacionMesDTO;
 import com.ecommerce.backend.entity.*;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.CotizacionMapper;
-import com.ecommerce.backend.mapper.ProductoMapper;
 import com.ecommerce.backend.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -172,5 +170,14 @@ public class CotizacionService {
         }
 
         return "COT-" + year + "-1";
+    }
+
+    public Long countAllCotizaciones() {
+        return cotizacionRepository.countAllCotizaciones();
+    }
+
+    public Page<CotizacionDashboardDTO> searchByParams(String busqueda, Pageable pageable) {
+        return cotizacionRepository.searchByNumeroClienteObservaciones(busqueda, pageable)
+                .map(CotizacionMapper::toDashboardDTO);
     }
 }

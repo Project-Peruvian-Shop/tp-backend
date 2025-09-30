@@ -265,6 +265,7 @@ public class ProductoController {
         );
     }
 
+
     @PutMapping("/{id}")
     @Operation(
             summary = "Actualizar productos",
