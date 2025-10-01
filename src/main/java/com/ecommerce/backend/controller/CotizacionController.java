@@ -142,6 +142,11 @@ public class CotizacionController {
     }
 
     @GetMapping("/lineas_mes")
+    @Operation(
+            summary = "Traer lineas cotizadas del mes",
+            description = "Ubicación: cotizaciones del dashboard  \n" +
+                    "Seguridad: Manager, Admin"
+    )
     public ResponseEntity<GlobalResponse> get_lineas_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year) {
         HttpStatus status;
         Object data;

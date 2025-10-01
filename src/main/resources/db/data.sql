@@ -11,12 +11,12 @@ insert into imagen (enlace, nombre, alt) values
 ('https://tuberiasperuanito.com/img/tee-agua.jpg', 'Tee de agua PVC', 'tee-pvc-agua');
 
 insert into categoria (nombre, usos, norma, imagen_id) values
-('Tuberías PVC 110mm', 'Conducción de agua fría y desagüe domiciliario', 'ISO 1452', 1),
-('Tuberías PVC 90mm', 'Instalaciones sanitarias y redes de agua potable', 'ISO 1452', 2),
-('Tuberías HDPE 63mm', 'Transporte de agua a presión en riego agrícola y domicilios', 'ISO 4427', 3),
-('Tuberías HDPE 160mm', 'Redes de distribución de agua potable y alcantarillado', 'ISO 4427', 4),
-('Codo PVC 90°', 'Conexión de tuberías en ángulo recto para redes de agua', 'ASTM D2466', 5),
-('Tee de Agua PVC', 'Distribución de flujo en redes de agua potable', 'ASTM D2466', 6);
+('Linea 1', 'Conducción de agua fría y desagüe domiciliario', 'ISO 1452', 1),
+('Linea 2', 'Instalaciones sanitarias y redes de agua potable', 'ISO 1452', 2),
+('Linea 3', 'Transporte de agua a presión en riego agrícola y domicilios', 'ISO 4427', 3),
+('Linea 4', 'Redes de distribución de agua potable y alcantarillado', 'ISO 4427', 4),
+('Linea 5', 'Conexión de tuberías en ángulo recto para redes de agua', 'ASTM D2466', 5),
+('Linea 6', 'Distribución de flujo en redes de agua potable', 'ASTM D2466', 6);
 
 -- Productos relacionados con las categorías existentes
 INSERT INTO producto (nombre, descripcion, imagen_id, categoria_id) VALUES

@@ -31,6 +31,7 @@ public interface CotizacionDetalleRepository extends JpaRepository<CotizacionDet
             "JOIN d.cotizacion c " +
             "WHERE MONTH(c.creacion) = :mes " +
             "AND YEAR(c.creacion) = :year " +
-            "GROUP BY cat.id, cat.nombre")
+            "GROUP BY cat.id, cat.nombre " +
+            "ORDER BY SUM(d.cantidad) DESC")
     List<CategoriaMesDTO> lineasCotizadasMes(@Param("mes") int mes, @Param("year") int year);
 }
