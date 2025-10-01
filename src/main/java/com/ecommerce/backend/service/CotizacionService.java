@@ -109,15 +109,6 @@ public class CotizacionService {
         return detalleRepository.productos_cotizados_mes(m, y);
     }
 
-    public UsuarioCotizacionMesDTO get_usuarios_mes(Integer mes, Integer year) {
-        LocalDate now = LocalDate.now();
-        int m = (mes != null) ? mes : now.getMonthValue();
-        int y = (year != null) ? year : now.getYear();
-        Long nuevos = cotizacionRepository.count_usuarios_nuevos_mes(m, y);
-        Long cotizadores = cotizacionRepository.count_usuarios_cotizadores_mes(m, y);
-        return new UsuarioCotizacionMesDTO(nuevos, cotizadores);
-    }
-
     public List<CategoriaMesDTO> get_lineas_cotizadas_mes(Integer mes, Integer year) {
         LocalDate now = LocalDate.now();
         int m = (mes != null) ? mes : now.getMonthValue();

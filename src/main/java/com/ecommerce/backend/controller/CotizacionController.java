@@ -117,32 +117,6 @@ public class CotizacionController {
     }
 
 
-    @GetMapping("/usuarios_mes")
-    public ResponseEntity<GlobalResponse> get_usuarios_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
-        try {
-            data = cotizacionService.get_usuarios_mes(mes, year);
-            status = HttpStatus.OK;
-            message = "Usuarios del mes retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error retrieving usuarios del mes";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
-    }
-
     @GetMapping("/lineas_mes")
     @Operation(
             summary = "Traer lineas cotizadas del mes",
