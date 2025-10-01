@@ -130,6 +130,10 @@ public class CotizacionService {
                 .toList();
     }
 
+    public List<CotizacionResumenDTO> get_last_cotizaciones() {
+        return cotizacionRepository.obtenerUltimas5Cotizaciones();
+    }
+
     public Page<CotizacionDashboardDTO> get_cotizaciones_dashboard(Pageable pageable) {
         return cotizacionRepository.findAll(pageable)
                 .map(CotizacionMapper::toDashboardDTO);

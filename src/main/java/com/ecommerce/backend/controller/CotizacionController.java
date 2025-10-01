@@ -149,7 +149,7 @@ public class CotizacionController {
     }
 
 
-    @GetMapping("cotizaciones_year")
+    @GetMapping("/cotizaciones_year")
     @Operation(
             summary = "Traer cotizaciones del año",
             description = "Ubicación: cotizaciones del dashboard  \n" +
@@ -168,6 +168,39 @@ public class CotizacionController {
             status = HttpStatus.NOT_FOUND;
             data = null;
             message = "Error retrieving cotizaciones del año";
+            details = e.getMessage();
+        }
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
+
+    @GetMapping("/last-cotizaciones")
+    @Operation(
+            summary = "Traer las últimas cotizaciones",
+            description = "Ubicación: cotizaciones del dashboard  \n" +
+                    "Seguridad: Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse> get_last_cotizaciones() {
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+
+        try {
+            data = cotizacionService.get_last_cotizaciones();
+            status = HttpStatus.OK;
+            message = "Last cotizaciones retrieved successfully";
+        } catch (Exception e) {
+            status = HttpStatus.NOT_FOUND;
+            data = null;
+            message = "Error retrieving last cotizaciones";
             details = e.getMessage();
         }
         return ResponseEntity.status(status).body(

@@ -1,5 +1,6 @@
 package com.ecommerce.backend.repository;
 
+import com.ecommerce.backend.dto.cotizacion.CotizacionResumenDTO;
 import com.ecommerce.backend.entity.Cotizacion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -54,5 +55,19 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
             @Param("filtro") String filtro,
             Pageable pageable
     );
+
+    @Query("""
+            SELECT new com.ecommerce.backend.dto.cotizacion.CotizacionResumenDTO(
+                c.id,
+                c.numero,
+                SUM(cd.cantidad),
+                c.estado
+            )
+            FROM CotizacionDetalle cd
+            JOIN cd.cotizacion c
+            GROUP BY c.id, c.numero, c.estado
+            ORDER BY c.creacion DESC
+            """)
+    List<CotizacionResumenDTO> obtenerUltimas5Cotizaciones();
 
 }
