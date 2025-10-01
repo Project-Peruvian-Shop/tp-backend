@@ -20,14 +20,14 @@ insert into categoria (nombre, usos, norma, imagen_id) values
 
 -- Productos relacionados con las categorías existentes
 INSERT INTO producto (nombre, descripcion, imagen_id, categoria_id) VALUES
-('Tubería PVC 110mm x 6m', 'Ideal para desagüe y agua fría, resistente y duradera', 1, 1),
-('Tubería PVC 90mm x 6m', 'Ligera y fácil de instalar, utilizada en redes domiciliarias', 1, 2),
-('Tubería HDPE 63mm PN10', 'Alta resistencia a la presión, especial para riego agrícola', 2, 3),
-('Tubería HDPE 160mm PN12.5', 'Gran diámetro para redes principales de agua potable', 3, 4),
-('Codo PVC 90° 110mm', 'Accesorio para desvío de tuberías en ángulo recto', 4, 5),
-('Codo PVC 90° 90mm', 'Conexión en ángulo para tuberías de menor diámetro', 5, 5),
-('Tee de Agua PVC 110mm', 'Permite dividir el flujo en redes domiciliarias', 3, 3),
-('Tee de Agua PVC 90mm', 'Accesorio para derivaciones en instalaciones de agua', 3, 4);
+('Tubería 1 PVC 110mm x 6m', 'Ideal para desagüe y agua fría, resistente y duradera', 1, 1),
+('Tubería 2 PVC 90mm x 6m', 'Ligera y fácil de instalar, utilizada en redes domiciliarias', 1, 2),
+('Tubería 3 HDPE 63mm PN10', 'Alta resistencia a la presión, especial para riego agrícola', 2, 3),
+('Tubería 4 HDPE 160mm PN12.5', 'Gran diámetro para redes principales de agua potable', 3, 4),
+('Codo 5 PVC 90° 110mm', 'Accesorio para desvío de tuberías en ángulo recto', 4, 5),
+('Codo 6 PVC 90° 90mm', 'Conexión en ángulo para tuberías de menor diámetro', 5, 5),
+('Tee 7 de Agua PVC 110mm', 'Permite dividir el flujo en redes domiciliarias', 3, 3),
+('Tee 7 de Agua PVC 90mm', 'Accesorio para derivaciones en instalaciones de agua', 3, 4);
 
 -- Mensajes
 INSERT INTO mensaje
@@ -53,3 +53,19 @@ VALUES
 ('Ana Torres', 3, '94810122', '+955666444', 'ana.torres@gmail.com',
  'Estoy inconforme con la atención que recibí, por favor contacten conmigo.',
  2, 0, NULL);
+
+-- cotizaciones
+INSERT INTO cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id) VALUES
+(1, 'COT-2025-2', 0, 'Necesito entrega rápida', 'Juan Pérez', 1, '12345678', '987654321', 'juan@example.com', 1),
+(2, 'COT-2025-3', 1, 'Revisar stock', 'María López', 1, '87654321', '987123456', 'maria@example.com', 2),
+(3, 'COT-2025-4', 0, 'Cliente urgente', 'Pedro Gómez', 2, '11223344', '986543210', 'pedro@example.com', 1),
+(4, 'COT-2025-5', 1, 'Entrega programada', 'Laura Martínez', 1, '99887766', '985678901', 'laura@example.com', 1);
+
+
+INSERT INTO cotizacion_detalle (producto_id, cotizacion_id, cantidad) VALUES
+(1, 1, 20),
+(2, 1, 20),
+(3, 2, 12),
+(1, 2, 5),
+(2, 3, 55),
+(1, 4, 32);
