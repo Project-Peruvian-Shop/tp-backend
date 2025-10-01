@@ -81,11 +81,20 @@ public class CotizacionController {
     }
 
     @GetMapping("/productos_mes")
-    public ResponseEntity<GlobalResponse> productos_cotizados_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year) {
+    @Operation(
+            summary = "Traer productos cotizados del mes",
+            description = "Ubicación: cotizaciones del dashboard  \n" +
+                    "Seguridad: Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse> productos_cotizados_mes(
+            @RequestParam(required = false) Integer mes,
+            @RequestParam(required = false) Integer year
+    ) {
         HttpStatus status;
         Object data;
         String message;
         String details = null;
+
         try {
             data = cotizacionService.get_productos_cotizados_mes(mes, year);
             status = HttpStatus.OK;

@@ -20,7 +20,8 @@ public interface CotizacionDetalleRepository extends JpaRepository<CotizacionDet
             "JOIN d.cotizacion c " +
             "WHERE MONTH(c.creacion) = :mes " +
             "AND YEAR(c.creacion) = :year " +
-            "GROUP BY p.nombre")
+            "GROUP BY p.nombre " +
+            "ORDER BY SUM(d.cantidad) DESC")
     List<ProductoCotizadoMesDTO> productos_cotizados_mes(@Param("mes") int mes, @Param("year") int year);
 
     @Query("SELECT new com.ecommerce.backend.dto.cotizacion.CategoriaMesDTO(cat.id, cat.nombre, SUM(d.cantidad)) " +
