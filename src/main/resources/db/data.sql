@@ -3,12 +3,12 @@ insert into usuario (nombre, apellidos, email, passwordd, telefono) values
 ('user', 'User', 'user@mail.com', 'user123', '0987654321');
 
 insert into imagen (enlace, nombre, alt) values
-('https://tuberiasperuanito.com/img/tuberia-pvc-110.jpg', 'Tubería PVC 110mm', 'tuberia-pvc-110mm'),
-('https://tuberiasperuanito.com/img/tuberia-pvc-90.jpg', 'Tubería PVC 90mm', 'tuberia-pvc-90mm'),
-('https://tuberiasperuanito.com/img/tuberia-hdpe-63.jpg', 'Tubería HDPE 63mm', 'tuberia-hdpe-63mm'),
-('https://tuberiasperuanito.com/img/tuberia-hdpe-160.jpg', 'Tubería HDPE 160mm', 'tuberia-hdpe-160mm'),
-('https://tuberiasperuanito.com/img/codo-90.jpg', 'Codo PVC 90°', 'codo-pvc-90-grados'),
-('https://tuberiasperuanito.com/img/tee-agua.jpg', 'Tee de agua PVC', 'tee-pvc-agua');
+('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Tubería PVC 110mm', 'tuberia-pvc-110mm'),
+('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Tubería PVC 90mm', 'tuberia-pvc-90mm'),
+('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Tubería HDPE 63mm', 'tuberia-hdpe-63mm'),
+('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Tubería HDPE 160mm', 'tuberia-hdpe-160mm'),
+('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Codo PVC 90°', 'codo-pvc-90-grados'),
+('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Tee de agua PVC', 'tee-pvc-agua');
 
 insert into categoria (nombre, usos, norma, imagen_id) values
 ('Linea 1', 'Conducción de agua fría y desagüe domiciliario', 'ISO 1452', 1),
@@ -19,7 +19,7 @@ insert into categoria (nombre, usos, norma, imagen_id) values
 ('Linea 6', 'Distribución de flujo en redes de agua potable', 'ASTM D2466', 6);
 
 -- Productos relacionados con las categorías existentes
-INSERT INTO producto (nombre, descripcion, imagen_id, categoria_id) VALUES
+insert into producto (nombre, descripcion, imagen_id, categoria_id) values
 ('Tubería 1 PVC 110mm x 6m', 'Ideal para desagüe y agua fría, resistente y duradera', 1, 1),
 ('Tubería 2 PVC 90mm x 6m', 'Ligera y fácil de instalar, utilizada en redes domiciliarias', 1, 2),
 ('Tubería 3 HDPE 63mm PN10', 'Alta resistencia a la presión, especial para riego agrícola', 2, 3),
@@ -30,9 +30,9 @@ INSERT INTO producto (nombre, descripcion, imagen_id, categoria_id) VALUES
 ('Tee 7 de Agua PVC 90mm', 'Accesorio para derivaciones en instalaciones de agua', 3, 4);
 
 -- Mensajes
-INSERT INTO mensaje
+insert into mensaje
 (nombre, tipo_documento, documento, telefono, email, contenido, tipo, estado, usuario_id)
-VALUES
+values
 ('Juan Pérez', 1, '12345678', '+987654321', 'juanperez@gmail.com',
  'Hola, estoy interesado en sus productos de tuberías. ¿Podrían enviarme una cotización?',
  0, 0, 1),
@@ -55,14 +55,14 @@ VALUES
  2, 0, NULL);
 
 -- cotizaciones
-INSERT INTO cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id) VALUES
+insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id) values
 (1, 'COT-2025-1', 0, 'Necesito entrega rápida', 'Juan Pérez', 1, '12345678', '987654321', 'juan@example.com', 1),
 (2, 'COT-2025-2', 1, 'Revisar stock', 'María López', 1, '87654321', '987123456', 'maria@example.com', 2),
 (3, 'COT-2025-3', 0, 'Cliente urgente', 'Pedro Gómez', 2, '11223344', '986543210', 'pedro@example.com', 1),
 (4, 'COT-2025-4', 1, 'Entrega programada', 'Laura Martínez', 1, '99887766', '985678901', 'laura@example.com', 1);
 
 
-INSERT INTO cotizacion_detalle (producto_id, cotizacion_id, cantidad) VALUES
+insert into cotizacion_detalle (producto_id, cotizacion_id, cantidad) values
 (1, 1, 20),
 (2, 1, 20),
 (3, 2, 12),
