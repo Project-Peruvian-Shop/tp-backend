@@ -52,6 +52,7 @@ public class CotizacionController {
         );
     }
 
+
     @PostMapping("/create_pdf/{id}")
     public ResponseEntity<GlobalResponse> createPdf(@PathVariable Long id, @RequestParam("archivo") MultipartFile archivo) {
         HttpStatus status;
@@ -115,6 +116,7 @@ public class CotizacionController {
         );
     }
 
+
     @GetMapping("/usuarios_mes")
     public ResponseEntity<GlobalResponse> get_usuarios_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year) {
         HttpStatus status;
@@ -172,7 +174,13 @@ public class CotizacionController {
         );
     }
 
+
     @GetMapping("cotizaciones_year")
+    @Operation(
+            summary = "Traer cotizaciones del año",
+            description = "Ubicación: cotizaciones del dashboard  \n" +
+                    "Seguridad: Manager, Admin"
+    )
     public ResponseEntity<GlobalResponse> get_cotizaciones_year(@RequestParam(required = false) Integer year) {
         HttpStatus status;
         Object data;
