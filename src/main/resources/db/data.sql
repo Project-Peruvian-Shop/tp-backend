@@ -56,10 +56,10 @@ VALUES
 
 -- cotizaciones
 INSERT INTO cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id) VALUES
-(1, 'COT-2025-2', 0, 'Necesito entrega rápida', 'Juan Pérez', 1, '12345678', '987654321', 'juan@example.com', 1),
-(2, 'COT-2025-3', 1, 'Revisar stock', 'María López', 1, '87654321', '987123456', 'maria@example.com', 2),
-(3, 'COT-2025-4', 0, 'Cliente urgente', 'Pedro Gómez', 2, '11223344', '986543210', 'pedro@example.com', 1),
-(4, 'COT-2025-5', 1, 'Entrega programada', 'Laura Martínez', 1, '99887766', '985678901', 'laura@example.com', 1);
+(1, 'COT-2025-1', 0, 'Necesito entrega rápida', 'Juan Pérez', 1, '12345678', '987654321', 'juan@example.com', 1),
+(2, 'COT-2025-2', 1, 'Revisar stock', 'María López', 1, '87654321', '987123456', 'maria@example.com', 2),
+(3, 'COT-2025-3', 0, 'Cliente urgente', 'Pedro Gómez', 2, '11223344', '986543210', 'pedro@example.com', 1),
+(4, 'COT-2025-4', 1, 'Entrega programada', 'Laura Martínez', 1, '99887766', '985678901', 'laura@example.com', 1);
 
 
 INSERT INTO cotizacion_detalle (producto_id, cotizacion_id, cantidad) VALUES
