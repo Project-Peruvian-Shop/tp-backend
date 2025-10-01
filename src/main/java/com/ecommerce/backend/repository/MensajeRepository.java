@@ -42,7 +42,7 @@ public interface MensajeRepository extends JpaRepository<Mensaje, Long> {
             SELECT new com.ecommerce.backend.dto.cotizacion.MensajeDashboardDTO(
                 m.id,
                 m.contenido,
-                m.estado
+                m.tipo
             )
             FROM Mensaje m
             WHERE m.estado = 0
