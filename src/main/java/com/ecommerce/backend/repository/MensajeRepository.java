@@ -1,5 +1,6 @@
 package com.ecommerce.backend.repository;
 
+import com.ecommerce.backend.dto.cotizacion.MensajeDashboardDTO;
 import com.ecommerce.backend.entity.Mensaje;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Repository
 public interface MensajeRepository extends JpaRepository<Mensaje, Long> {
@@ -32,6 +35,24 @@ public interface MensajeRepository extends JpaRepository<Mensaje, Long> {
     Page<Mensaje> searchByNombreDocumentoTelefonoEmailContenido(
             @Param("filtro") String filtro,
             Pageable pageable
+    );
+
+
+    @Query("""
+            SELECT new com.ecommerce.backend.dto.cotizacion.MensajeDashboardDTO(
+                m.id,
+                m.contenido,
+                m.estado
+            )
+            FROM Mensaje m
+            WHERE m.estado = 0
+              AND FUNCTION('MONTH', m.creacion) = :mes
+              AND FUNCTION('YEAR', m.creacion) = :year
+            ORDER BY m.creacion DESC
+            """)
+    List<MensajeDashboardDTO> mensajesPendientesMes(
+            @Param("mes") int mes,
+            @Param("year") int year
     );
 
 }

@@ -214,6 +214,38 @@ public class CotizacionController {
     }
 
 
+    @GetMapping("/mensajes-mes")
+    @Operation(
+            summary = "Traer mensajes pendientes",
+            description = "Ubicación: cotizaciones del dashboard  \n" +
+                    "Seguridad: Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse> get_mensajes_pendientes_mes() {
+        HttpStatus status;
+        Object data;
+        String message;
+        String details = null;
+
+        try {
+            data = cotizacionService.get_mensajes_pendientes_mes();
+            status = HttpStatus.OK;
+            message = "Mensajes pendientes retrieved successfully";
+        } catch (Exception e) {
+            status = HttpStatus.NOT_FOUND;
+            data = null;
+            message = "Error retrieving mensajes pendientes";
+            details = e.getMessage();
+        }
+        return ResponseEntity.status(status).body(
+                GlobalResponse.builder()
+                        .ok(data != null)
+                        .message(message)
+                        .data(data)
+                        .details(details)
+                        .build()
+        );
+    }
+
     @GetMapping("/dashboard-paginated")
     @Operation(
             summary = "Traer cotizaciones del dashboard paginadas",

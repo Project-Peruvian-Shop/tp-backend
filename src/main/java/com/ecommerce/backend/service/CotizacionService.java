@@ -35,6 +35,7 @@ public class CotizacionService {
     private final CotizacionDetalleRepository detalleRepository;
     private final CotizacionPdfRepository pdfRepository;
     private final FileUploadService fileUploadService;
+    private final MensajeRepository mensajeRepository;
 
     @Transactional
     public CotizacionResponseDTO save_cotizacion(CotizacionRequestDTO request) {
@@ -132,6 +133,13 @@ public class CotizacionService {
 
     public List<CotizacionResumenDTO> get_last_cotizaciones() {
         return cotizacionRepository.obtenerUltimas5Cotizaciones();
+    }
+
+    public List<MensajeDashboardDTO> get_mensajes_pendientes_mes() {
+        LocalDate now = LocalDate.now();
+        int mes = now.getMonthValue();
+        int year = now.getYear();
+        return mensajeRepository.mensajesPendientesMes(mes, year);
     }
 
     public Page<CotizacionDashboardDTO> get_cotizaciones_dashboard(Pageable pageable) {
