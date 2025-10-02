@@ -1,6 +1,7 @@
-insert into usuario (nombre, apellidos, email, passwordd, telefono) values
-('admin', 'admin', 'admin@mail.com', 'admin123', '1234567890'),
-('user', 'User', 'user@mail.com', 'user123', '0987654321');
+insert into usuario (nombre, apellidos, email, passwordd, telefono, rol) values
+('admin', 'admin', 'admin@mail.com', 'admin123', '1234567890', 'ROLE_ADMIN'),
+('user', 'User', 'user@mail.com', 'user123', '0987654321', 'ROLE_USER');
+('Carlos', 'López', '
 
 insert into imagen (enlace, nombre, alt) values
 ('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Tubería PVC 110mm', 'tuberia-pvc-110mm'),
