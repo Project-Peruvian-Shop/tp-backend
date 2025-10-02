@@ -68,8 +68,8 @@ public class ProductoMapper {
 
         return ProductoDashboardResponseDTO.builder()
                 .id(producto.getId())
-                .categoriaImagen(producto.getCategoria().getImagen().getEnlace())
-                .categoriaAlt(producto.getCategoria().getImagen().getAlt())
+                .imagenEnlace(producto.getImagen().getEnlace())
+                .imagenAlt(producto.getImagen().getAlt())
                 .nombre(producto.getNombre())
                 .categoriaNombre(producto.getCategoria().getNombre())
                 .descripcion(producto.getDescripcion())

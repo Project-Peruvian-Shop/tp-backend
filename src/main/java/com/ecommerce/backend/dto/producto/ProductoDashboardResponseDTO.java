@@ -8,8 +8,8 @@ import lombok.Data;
 public class ProductoDashboardResponseDTO {
     private Long id;
 
-    private String categoriaImagen;
-    private String categoriaAlt;
+    private String imagenEnlace;
+    private String imagenAlt;
 
     private String nombre;
     private String categoriaNombre;
