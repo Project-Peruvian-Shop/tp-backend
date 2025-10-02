@@ -8,15 +8,16 @@ insert into imagen (enlace, nombre, alt) values
 ('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Tubería HDPE 63mm', 'tuberia-hdpe-63mm'),
 ('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Tubería HDPE 160mm', 'tuberia-hdpe-160mm'),
 ('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Codo PVC 90°', 'codo-pvc-90-grados'),
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Tee de agua PVC', 'tee-pvc-agua');
+('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Tee de agua PVC', 'tee-pvc-agua'),
+('https://tuberiasperuanito.com/wp-content/uploads/2025/04/NTP-399.003.png', 'Catálogo de Tuberías', 'catalogo-tuberias');
 
 insert into categoria (nombre, usos, norma, imagen_id) values
-('Linea 1', 'Conducción de agua fría y desagüe domiciliario', 'ISO 1452', 1),
-('Linea 2', 'Instalaciones sanitarias y redes de agua potable', 'ISO 1452', 2),
-('Linea 3', 'Transporte de agua a presión en riego agrícola y domicilios', 'ISO 4427', 3),
-('Linea 4', 'Redes de distribución de agua potable y alcantarillado', 'ISO 4427', 4),
-('Linea 5', 'Conexión de tuberías en ángulo recto para redes de agua', 'ASTM D2466', 5),
-('Linea 6', 'Distribución de flujo en redes de agua potable', 'ASTM D2466', 6);
+('Linea 1', 'Conducción de agua fría y desagüe domiciliario', 'ISO 1452', 7),
+('Linea 2', 'Instalaciones sanitarias y redes de agua potable', 'ISO 1452', 7),
+('Linea 3', 'Transporte de agua a presión en riego agrícola y domicilios', 'ISO 4427', 7),
+('Linea 4', 'Redes de distribución de agua potable y alcantarillado', 'ISO 4427', 7),
+('Linea 5', 'Conexión de tuberías en ángulo recto para redes de agua', 'ASTM D2466', 7),
+('Linea 6', 'Distribución de flujo en redes de agua potable', 'ASTM D2466', 7);
 
 -- Productos relacionados con las categorías existentes
 insert into producto (nombre, descripcion, imagen_id, categoria_id) values
