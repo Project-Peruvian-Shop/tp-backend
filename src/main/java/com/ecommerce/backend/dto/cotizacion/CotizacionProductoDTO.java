@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CotizacionProductoDTO {
     @NotNull(message = "productoID field cannot be null")
-    private Long productoID;
+    private Long id;
 
     @NotBlank(message = "cantidad field is required")
     @Min(value = 1, message = "cantidad must be at least 1")

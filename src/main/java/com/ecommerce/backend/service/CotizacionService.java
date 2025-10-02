@@ -57,7 +57,7 @@ public class CotizacionService {
         Cotizacion cotizacionGuardada = cotizacionRepository.save(cotizacion);
 
         for (CotizacionProductoDTO p : request.getProductos()) {
-            Producto producto = productoRepository.findById(p.getProductoID())
+            Producto producto = productoRepository.findById(p.getId())
                     .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
             CotizacionDetalle detalle = new CotizacionDetalle();
