@@ -70,3 +70,6 @@ insert into cotizacion_detalle (producto_id, cotizacion_id, cantidad) values
 (1, 2, 5),
 (2, 3, 55),
 (1, 4, 32);
+
+insert into cotizacion_pdf (enlace, cotizacion_id) values
+('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 4);
