@@ -14,4 +14,5 @@ public class PaginatedProductoResponseDTO {
     private String nombre;
     private String imagenUrl;
     private String imagenAlt;
+    private String categoriaNombre;
 }

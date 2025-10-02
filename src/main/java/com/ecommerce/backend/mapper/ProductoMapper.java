@@ -28,6 +28,7 @@ public class ProductoMapper {
                 .nombre(producto.getNombre())
                 .imagenUrl(producto.getImagen().getEnlace())
                 .imagenAlt(producto.getImagen().getAlt())
+                .categoriaNombre(producto.getCategoria().getNombre())
                 .build();
     }
 
