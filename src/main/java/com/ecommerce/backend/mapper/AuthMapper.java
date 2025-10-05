@@ -24,7 +24,7 @@ public class AuthMapper {
         return usuario;
     }
 
-    public static RegisterResponseDTO toDTO(Usuario usuario) {
+    public static RegisterResponseDTO registerToDTO(Usuario usuario) {
         if (usuario == null) {
             return null;
         }
@@ -39,7 +39,7 @@ public class AuthMapper {
         return dto;
     }
 
-    public static LoginResponseDTO toDTO(Usuario usuario) {
+    public static LoginResponseDTO loginToDTO(Usuario usuario) {
         if (usuario == null) {
             return null;
         }
