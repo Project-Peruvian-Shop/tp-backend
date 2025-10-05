@@ -1,9 +1,6 @@
 package com.ecommerce.backend.mapper;
 
-import com.ecommerce.backend.dto.mensaje.MensajeDashboardResponseDTO;
-import com.ecommerce.backend.dto.mensaje.MensajeRequestDTO;
-import com.ecommerce.backend.dto.mensaje.MensajeResponseDTO;
-import com.ecommerce.backend.dto.mensaje.ReclamacionesRequestDTO;
+import com.ecommerce.backend.dto.mensaje.*;
 import com.ecommerce.backend.entity.Mensaje;
 import com.ecommerce.backend.enums.MensajeEstadoEnum;
 import org.springframework.stereotype.Component;
@@ -42,6 +39,26 @@ public class MensajeMapper {
                 .estado(mensaje.getEstado())
                 .creacion(mensaje.getCreacion())
                 .usuario(mensaje.getUsuario())
+                .build();
+    }
+
+    public static MensajeFullResponseDTO toFullDTO(Mensaje mensaje) {
+        if (mensaje == null) {
+            return null;
+        }
+
+        return MensajeFullResponseDTO.builder()
+                .id(mensaje.getId())
+                .tipo(mensaje.getTipo())
+                .estado(mensaje.getEstado())
+                .medioRespuesta(mensaje.getMedio_respuesta())
+                .creacion(mensaje.getCreacion())
+                .contenido(mensaje.getContenido())
+                .tipoDocumento(mensaje.getTipo_documento())
+                .documento(mensaje.getDocumento())
+                .nombre(mensaje.getNombre())
+                .telefono(mensaje.getTelefono())
+                .email(mensaje.getEmail())
                 .build();
     }
 
