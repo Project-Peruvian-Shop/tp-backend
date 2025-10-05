@@ -5,7 +5,6 @@ import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.mensaje.ChangeStateMensajeRequestDTO;
 import com.ecommerce.backend.dto.mensaje.MensajeRequestDTO;
 import com.ecommerce.backend.dto.mensaje.MensajeResponseDTO;
-import com.ecommerce.backend.dto.mensaje.ReclamacionesRequestDTO;
 import com.ecommerce.backend.service.MensajeService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
