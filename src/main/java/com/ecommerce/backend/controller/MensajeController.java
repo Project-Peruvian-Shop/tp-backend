@@ -4,6 +4,7 @@ import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.mensaje.ChangeStateMensajeRequestDTO;
 import com.ecommerce.backend.dto.mensaje.MensajeRequestDTO;
+import com.ecommerce.backend.dto.mensaje.MensajeResponseDTO;
 import com.ecommerce.backend.dto.mensaje.ReclamacionesRequestDTO;
 import com.ecommerce.backend.service.MensajeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,30 +29,11 @@ public class MensajeController {
             description = "Ubicación: Contactenos  \n" +
                     "Seguridad: Pública"
     )
-    public ResponseEntity<GlobalResponse> send_contactenos(@Valid @RequestBody MensajeRequestDTO mensajeRequestDTO) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<MensajeResponseDTO>> send_contactenos(@Valid @RequestBody MensajeRequestDTO mensajeRequestDTO) {
+        MensajeResponseDTO data = mensajeService.send_contactenos(mensajeRequestDTO);
 
-        try {
-            data = mensajeService.send_contactenos(mensajeRequestDTO);
-            status = HttpStatus.OK;
-            message = "Mensaje sent successfully";
-        } catch (Exception e) {
-            status = HttpStatus.BAD_REQUEST;
-            data = null;
-            message = "Error sending mensaje";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(GlobalResponse.success(data, "Mensaje enviado correctamente"));
     }
 
 
@@ -61,30 +43,10 @@ public class MensajeController {
             description = "Ubicación: Libro de reclamaciones  \n" +
                     "Seguridad: Pública"
     )
-    public ResponseEntity<GlobalResponse> send_reclamos(@Valid @RequestBody ReclamacionesRequestDTO mensajeRequestDTO) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
-
-        try {
-            data = mensajeService.send_reclamos(mensajeRequestDTO);
-            status = HttpStatus.OK;
-            message = "Claim sent successfully";
-        } catch (Exception e) {
-            status = HttpStatus.BAD_REQUEST;
-            data = null;
-            message = "Error sending mensaje";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+    public ResponseEntity<GlobalResponse<MensajeResponseDTO>> send_reclamos(@Valid @RequestBody MensajeRequestDTO mensajeRequestDTO) {
+        MensajeResponseDTO data = mensajeService.send_reclamos(mensajeRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(GlobalResponse.success(data, "Reclamo enviado correctamente"));
     }
 
 

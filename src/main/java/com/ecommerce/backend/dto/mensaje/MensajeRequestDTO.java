@@ -1,5 +1,6 @@
 package com.ecommerce.backend.dto.mensaje;
 
+import com.ecommerce.backend.enums.MensajeTipoEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -16,8 +17,7 @@ public class MensajeRequestDTO {
     private String nombre;
 
     @NotNull(message = "tipoDocumento field cannot be null")
-    @Min(value = 1, message = "tipoDocumento must be at least 1")
-    private Integer tipoDocumento;
+    private MensajeTipoEnum tipoDocumento;
 
     @NotBlank(message = "documento field cannot be null")
     private String documento;
@@ -31,4 +31,7 @@ public class MensajeRequestDTO {
 
     @NotBlank(message = "contenido field cannot be null")
     private String contenido;
+
+    @NotNull(message = "tipo field cannot be null")
+    private MensajeTipoEnum tipo;
 }
