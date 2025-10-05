@@ -1,5 +1,9 @@
 package com.ecommerce.backend.entity;
 
+import com.ecommerce.backend.enums.MensajeEstadoEnum;
+import com.ecommerce.backend.enums.MensajeMedioRespuestaEnum;
+import com.ecommerce.backend.enums.MensajeTipoDocumentoEnum;
+import com.ecommerce.backend.enums.MensajeTipoEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,8 +24,9 @@ public class Mensaje {
     @Column(name = "nombre", length = 200)
     private String nombre;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo_documento")
-    private Integer tipo_documento;
+    private MensajeTipoDocumentoEnum tipo_documento;
 
     @Column(name = "documento", length = 30)
     private String documento;
@@ -32,20 +37,25 @@ public class Mensaje {
     @Column(name = "email", length = 150)
     private String email;
 
-    @Column(name = "contenido",nullable = false)
+    @Column(name = "contenido", nullable = false)
     private String contenido;
 
-    @Column(name = "tipo",nullable = false)
-    private Integer tipo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo", nullable = false)
+    private MensajeTipoEnum tipo;
 
-    @Column(name = "estado",nullable = false)
-    private Integer estado;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado", nullable = false, length = 20)
+    private MensajeEstadoEnum estado;
 
-    @Column(name = "creacion",nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "medio_respuesta", length = 20)
+    private MensajeMedioRespuestaEnum medio_respuesta;
+
+    @Column(name = "creacion", nullable = false)
     private LocalDateTime creacion;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
 }
