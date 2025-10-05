@@ -2,16 +2,22 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
+import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
+import com.ecommerce.backend.dto.producto.ProductoDashboardResponseDTO;
+import com.ecommerce.backend.dto.producto.ProductoFullResponseDTO;
 import com.ecommerce.backend.dto.producto.ProductoRequestDTO;
 import com.ecommerce.backend.service.ProductoService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(Constant.API_VERSION + "/" + Constant.TABLE_PRODUCTOS)
@@ -25,34 +31,15 @@ public class ProductoController {
             description = "Ubicación: Tienda  \n" +
                     "Seguridad: Pública"
     )
-    public ResponseEntity<GlobalResponse> getAllPaginated(
+    public ResponseEntity<GlobalResponse<Page<PaginatedProductoResponseDTO>>> getAllPaginated(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<PaginatedProductoResponseDTO> data = productoService.findAllPaginated(pageable);
 
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            data = productoService.findAllPaginated(pageable);
-            message = "Paginated Productos retrieved successfully";
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "An error occurred while retrieving paginated productos";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Productos paginados"));
     }
 
 
@@ -62,31 +49,11 @@ public class ProductoController {
             description = "Ubicación: Producto en Tienda, Dashboard producto one  \n" +
                     "Seguridad: Pública"
     )
-    public ResponseEntity<GlobalResponse> getByID(@PathVariable Long id) {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<ProductoFullResponseDTO>> getByID(@PathVariable Long id) {
+        ProductoFullResponseDTO data = productoService.findByID(id);
 
-
-        try {
-            data = productoService.findByID(id);
-            message = "Producto con id " + id;
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "Error al traer el producto";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Producto con id: " + id));
     }
 
 
@@ -96,33 +63,14 @@ public class ProductoController {
             description = "Ubicación: Producto en Tienda  \n" +
                     "Seguridad: Pública"
     )
-    public ResponseEntity<GlobalResponse> getProductosByID(
+    public ResponseEntity<GlobalResponse<List<PaginatedProductoResponseDTO>>> getProductosByID(
             @RequestParam(defaultValue = "1") Long producto,
             @RequestParam(defaultValue = "1") Long categoria
     ) {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+        List<PaginatedProductoResponseDTO> data = productoService.findSugeridosByID(producto, categoria);
 
-        try {
-            data = productoService.findSugeridosByID(producto, categoria);
-            message = "Producto sugeridos " + producto;
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "Error al traer productos sugeridos";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Productos sugeridos"));
     }
 
 
@@ -132,34 +80,15 @@ public class ProductoController {
             description = "Ubicación: Dashboard - Productos  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> getAllPaginatedDashboard(
+    public ResponseEntity<GlobalResponse<Page<ProductoDashboardResponseDTO>>> getAllPaginatedDashboard(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ProductoDashboardResponseDTO> data = productoService.findAllPaginatedDashboard(pageable);
 
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            data = productoService.findAllPaginatedDashboard(pageable);
-            message = "Paginated Productos para dashboard";
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "An error occurred while retrieving paginated productos";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Productos paginados para dashboard"));
     }
 
 
@@ -169,30 +98,11 @@ public class ProductoController {
             description = "Ubicación: Dashboard - Productos  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> countAllProductos() {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<Long>> countAllProductos() {
+        Long data = productoService.countAllProductos();
 
-        try {
-            data = productoService.countAllProductos();
-            message = "Cantidad de Productos para dashboard";
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "Error al traer cantidad de productos";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Cantidad de productos en el sistema"));
     }
 
 
@@ -202,36 +112,18 @@ public class ProductoController {
             description = "Ubicación: Dashboard - Productos  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> searchByNombreOrCategoria(
+    public ResponseEntity<GlobalResponse<Page<ProductoDashboardResponseDTO>>> searchByNombreOrCategoria(
             @RequestParam(defaultValue = "") String busqueda,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ProductoDashboardResponseDTO> data = productoService.searchByNombreOrCategoria(busqueda, pageable);
 
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            data = productoService.searchByNombreOrCategoria(busqueda, pageable);
-            message = "Busqueda de Productos para dashboard";
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "An error occurred while retrieving search productos";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Productos encontrados para: " + busqueda));
     }
+
 
     @PostMapping("/")
     @Operation(
@@ -239,30 +131,11 @@ public class ProductoController {
             description = "Ubicacion: Dashboard productos create  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> save(@Valid @RequestBody ProductoRequestDTO producto) {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<ProductoDashboardResponseDTO>> save(@Valid @RequestBody ProductoRequestDTO producto) {
+        ProductoDashboardResponseDTO data = productoService.save(producto);
 
-        try {
-            data = productoService.save(producto);
-            message = "Producto creado";
-            status = HttpStatus.CREATED;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "Error al crear producto";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(GlobalResponse.success(data, "Producto creado"));
     }
 
 
@@ -272,32 +145,13 @@ public class ProductoController {
             description = "Ubicacion: Dashboard productos update  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> update(
+    public ResponseEntity<GlobalResponse<ProductoDashboardResponseDTO>> update(
             @PathVariable Long id,
             @Valid @RequestBody ProductoRequestDTO producto
     ) {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+        ProductoDashboardResponseDTO data = productoService.update(id, producto);
 
-        try {
-            data = productoService.update(id, producto);
-            message = "Producto actualizado";
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "Error al actualizar producto";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Producto actualizado con id: " + id));
     }
 }
