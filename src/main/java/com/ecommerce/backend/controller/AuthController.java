@@ -6,8 +6,6 @@ import com.ecommerce.backend.dto.auth.LoginRequestDTO;
 import com.ecommerce.backend.dto.auth.LoginResponseDTO;
 import com.ecommerce.backend.dto.auth.RegisterRequestDTO;
 import com.ecommerce.backend.dto.auth.RegisterResponseDTO;
-import com.ecommerce.backend.exceptions.InvalidCredentialsException;
-import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
