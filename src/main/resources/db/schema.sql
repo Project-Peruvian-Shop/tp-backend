@@ -84,15 +84,15 @@ create TABLE IF NOT EXISTS mensaje (
     id INT AUTO_INCREMENT PRIMARY KEY,
     -- datos del remitente
     nombre VARCHAR(200) NULL,
-    tipo_documento TINYINT NULL DEFAULT 0,
+    tipo_documento VARCHAR(20) NOT NULL DEFAULT 'DNI' CHECK (tipo_documento IN ('DNI', 'RUC', 'PASAPORTE', 'OTRO')),
     documento VARCHAR(30) NULL,
     telefono VARCHAR(25) NULL,
     email VARCHAR(150) NULL,
     -- contenido del mensaje
     contenido TEXT NOT NULL,
-    tipo String(20) NOT NULL DEFAULT 'CONTACTENOS' CHECK (tipo IN ('CONTACTENOS', 'QUEJA', 'RECLAMO')),
-    estado String(20) NOT NULL DEFAULT 'PENDIENTE' CHECK (estado IN ('PENDIENTE', 'EN_PROCESO', 'RESUELTO', 'CERRADO')),
-    medio_respuesta String(20) NULL CHECK (medioRespuesta IN ('EMAIL', 'TELEFONO', 'WHATSAPP', 'PRESENCIAL')),
+    tipo VARCHAR(20) NOT NULL DEFAULT 'CONTACTENOS' CHECK (tipo IN ('CONTACTENOS', 'QUEJA', 'RECLAMO')),
+    estado VARCHAR(20) NOT NULL DEFAULT 'PENDIENTE' CHECK (estado IN ('PENDIENTE', 'EN_PROCESO', 'RESUELTO', 'CERRADO')),
+    medio_respuesta VARCHAR(20) NULL CHECK (medioRespuesta IN ('EMAIL', 'TELEFONO', 'WHATSAPP', 'PRESENCIAL')),
     -- metadata
     creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     -- usuario relacionado
