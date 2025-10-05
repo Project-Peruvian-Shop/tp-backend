@@ -5,6 +5,7 @@ import com.ecommerce.backend.dto.usuario.UsuarioRequestDTO;
 import com.ecommerce.backend.dto.usuario.UsuarioResponseDTO;
 import com.ecommerce.backend.dto.usuario.UsuarioSimpleResponseDTO;
 import com.ecommerce.backend.entity.Usuario;
+import com.ecommerce.backend.exceptions.EntityAlreadyExistsException;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.UsuarioMapper;
 import com.ecommerce.backend.repository.UsuarioRepository;
@@ -40,7 +41,7 @@ public class UsuarioService {
 
     public UsuarioResponseDTO save(UsuarioRequestDTO usuarioRequestDTO) {
         if (usuarioRepository.existsByEmail(usuarioRequestDTO.getEmail())) {
-            throw new RuntimeException("El email " + usuarioRequestDTO.getEmail() + " ya está en uso.");
+            throw new EntityAlreadyExistsException("El email " + usuarioRequestDTO.getEmail() + " ya está en uso.");
         }
 
         Usuario usuario = toEntity(usuarioRequestDTO);
