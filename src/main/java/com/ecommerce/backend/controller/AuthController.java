@@ -6,7 +6,8 @@ import com.ecommerce.backend.dto.auth.LoginRequestDTO;
 import com.ecommerce.backend.dto.auth.LoginResponseDTO;
 import com.ecommerce.backend.dto.auth.RegisterRequestDTO;
 import com.ecommerce.backend.dto.auth.RegisterResponseDTO;
-import com.ecommerce.backend.dto.usuario.UsuarioResponseDTO;
+import com.ecommerce.backend.exceptions.InvalidCredentialsException;
+import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -31,14 +32,9 @@ public class AuthController {
                     "Seguridad: Pública"
     )
     public ResponseEntity<GlobalResponse<RegisterResponseDTO>> register(@Valid @RequestBody RegisterRequestDTO registerRequestDTO) {
-        try {
-            RegisterResponseDTO data = authService.register(registerRequestDTO);
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(GlobalResponse.success(data, "Usuario creado exitosamente"));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(GlobalResponse.failure("Error al crear el usuario", e.getMessage()));
-        }
+        RegisterResponseDTO data = authService.register(registerRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(GlobalResponse.success(data, "Usuario creado exitosamente"));
     }
 
     @PostMapping("/login")
@@ -47,14 +43,9 @@ public class AuthController {
             description = "Ubicación: Login  \n" +
                     "Seguridad: Pública"
     )
-    public ResponseEntity<GlobalResponse<LoginResponseDTO>> login(@RequestBody LoginRequestDTO loginRequestDTO) {
-        try {
-            LoginResponseDTO data = authService.login(loginRequestDTO);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(GlobalResponse.success(data, "Login exitoso"));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(GlobalResponse.failure("Error al iniciar sesión", e.getMessage()));
-        }
+    public ResponseEntity<GlobalResponse<LoginResponseDTO>> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
+        LoginResponseDTO data = authService.login(loginRequestDTO);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Login exitoso"));
     }
 }
