@@ -1,6 +1,6 @@
 package com.ecommerce.backend.entity;
 
-import com.ecommerce.backend.role.UserRole;
+import com.ecommerce.backend.enums.UsuarioRolEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,5 +34,5 @@ public class Usuario {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "rol", nullable = false, length = 20)
-    private UserRole rol;
+    private UsuarioRolEnum rol;
 }

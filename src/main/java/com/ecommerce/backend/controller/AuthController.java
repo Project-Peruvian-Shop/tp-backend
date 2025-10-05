@@ -2,11 +2,14 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
-import com.ecommerce.backend.dto.usuario.LoginRequestDTO;
-import com.ecommerce.backend.dto.usuario.UsuarioRequestDTO;
+import com.ecommerce.backend.dto.auth.LoginRequestDTO;
+import com.ecommerce.backend.dto.auth.LoginResponseDTO;
+import com.ecommerce.backend.dto.auth.RegisterRequestDTO;
+import com.ecommerce.backend.dto.auth.RegisterResponseDTO;
 import com.ecommerce.backend.dto.usuario.UsuarioResponseDTO;
-import com.ecommerce.backend.service.UsuarioService;
+import com.ecommerce.backend.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping(Constant.API_VERSION + "/" + Constant.AUTH)
 public class AuthController {
-    private final UsuarioService usuarioService;
+    private final AuthService authService;
 
     @PostMapping("/register")
     @Operation(
@@ -27,31 +30,15 @@ public class AuthController {
             description = "Ubicación: Registrar  \n" +
                     "Seguridad: Pública"
     )
-    public ResponseEntity<GlobalResponse> addUser(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
-
+    public ResponseEntity<GlobalResponse<RegisterResponseDTO>> register(@Valid @RequestBody RegisterRequestDTO registerRequestDTO) {
         try {
-            data = usuarioService.register(usuarioRequestDTO);
-            status = HttpStatus.CREATED;
-            message = "Usuario created successfully";
+            RegisterResponseDTO data = authService.register(registerRequestDTO);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(GlobalResponse.success(data, "Usuario creado exitosamente"));
         } catch (Exception e) {
-            status = HttpStatus.BAD_REQUEST;
-            data = null;
-            message = "Error creating usuario";
-            details = e.getMessage();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(GlobalResponse.failure("Error al crear el usuario", e.getMessage()));
         }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
     }
 
     @PostMapping("/login")
@@ -60,16 +47,14 @@ public class AuthController {
             description = "Ubicación: Login  \n" +
                     "Seguridad: Pública"
     )
-    public ResponseEntity<GlobalResponse> login(@RequestBody LoginRequestDTO loginRequestDTO) {
-        UsuarioResponseDTO data = usuarioService.login(loginRequestDTO.getEmail(), loginRequestDTO.getPasswordd());
-
-        return ResponseEntity.ok(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message("Login successful")
-                        .data(data)
-                        .details(null)
-                        .build()
-        );
+    public ResponseEntity<GlobalResponse<LoginResponseDTO>> login(@RequestBody LoginRequestDTO loginRequestDTO) {
+        try {
+            LoginResponseDTO data = authService.login(loginRequestDTO);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(GlobalResponse.success(data, "Login exitoso"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(GlobalResponse.failure("Error al iniciar sesión", e.getMessage()));
+        }
     }
 }
