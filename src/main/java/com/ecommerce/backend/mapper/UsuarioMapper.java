@@ -5,7 +5,7 @@ import com.ecommerce.backend.dto.usuario.UsuarioRequestDTO;
 import com.ecommerce.backend.dto.usuario.UsuarioResponseDTO;
 import com.ecommerce.backend.dto.usuario.UsuarioSimpleResponseDTO;
 import com.ecommerce.backend.entity.Usuario;
-import com.ecommerce.backend.role.UserRole;
+import com.ecommerce.backend.enums.UsuarioRolEnum;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -38,9 +38,9 @@ public class UsuarioMapper {
         usuario.setPasswordd(dto.getPasswordd());
         usuario.setTelefono(dto.getTelefono());
         if (dto.getRol() != null) {
-            usuario.setRol(UserRole.valueOf(dto.getRol().toUpperCase()));
+            usuario.setRol(UsuarioRolEnum.valueOf(dto.getRol()));
         } else {
-            usuario.setRol(UserRole.ROLE_USER);
+            usuario.setRol(UsuarioRolEnum.ROLE_USER);
         }
 
         return usuario;
