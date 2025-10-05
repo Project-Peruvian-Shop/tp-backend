@@ -1,7 +1,9 @@
 package com.ecommerce.backend.dto.usuario;
 
+import com.ecommerce.backend.enums.UsuarioRolEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,6 @@ public class UsuarioRequestDTO {
     @NotBlank(message = "passwordd field cannot be null")
     private String passwordd;
 
-    @NotBlank(message = "rol field cannot be null")
-    private String rol;
+    @NotNull(message = "rol field cannot be null")
+    private UsuarioRolEnum rol;
 }

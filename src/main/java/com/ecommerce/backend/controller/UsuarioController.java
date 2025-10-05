@@ -2,11 +2,16 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
+import com.ecommerce.backend.dto.usuario.UsuarioPerfilDTO;
 import com.ecommerce.backend.dto.usuario.UsuarioRequestDTO;
+import com.ecommerce.backend.dto.usuario.UsuarioResponseDTO;
+import com.ecommerce.backend.dto.usuario.UsuarioSimpleResponseDTO;
+import com.ecommerce.backend.enums.UsuarioRolEnum;
 import com.ecommerce.backend.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -27,31 +32,11 @@ public class UsuarioController {
             description = "Ubicación: Mi perfil  \n" +
                     "Seguridad: Cliente, Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> findById(@PathVariable Long id) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<UsuarioPerfilDTO>> findById(@PathVariable Long id) {
+        UsuarioPerfilDTO data = usuarioService.findById(id);
 
-        try {
-            status = HttpStatus.OK;
-            data = usuarioService.findById(id);
-            message = "Usuario retrieved - id: " + id;
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error retrieving usuario with id: " + id;
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Usuario retrieved successfully - id: " + id));
     }
 
 
@@ -61,31 +46,12 @@ public class UsuarioController {
             description = "Ubicación: Dashboard - Registro  \n" +
                     "Seguridad: Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> saveUsuario(@Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<UsuarioResponseDTO>> saveUsuario(@Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+        System.out.println("usuarioRequestDTO = " + usuarioRequestDTO);
+        UsuarioResponseDTO data = usuarioService.save(usuarioRequestDTO);
 
-        try {
-            data = usuarioService.save(usuarioRequestDTO);
-            status = HttpStatus.CREATED;
-            message = "Usuario created successfully";
-        } catch (Exception e) {
-            status = HttpStatus.BAD_REQUEST;
-            data = null;
-            message = "Error creating usuario";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(GlobalResponse.success(data, "Usuario created successfully - id: " + data.getId()));
     }
 
 
@@ -95,62 +61,23 @@ public class UsuarioController {
             description = "Ubicación: Mi perfil, Dashboard - Usuarios  \n" +
                     "Seguridad: Cliente, Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> updateUsuario(
+    public ResponseEntity<GlobalResponse<UsuarioResponseDTO>> updateUsuario(
             @PathVariable Long id,
             @Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO
     ) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+        UsuarioResponseDTO data = usuarioService.update(id, usuarioRequestDTO);
 
-        try {
-            data = usuarioService.update(id, usuarioRequestDTO);
-            status = HttpStatus.OK;
-            message = "Usuario updated successfully - id: " + id;
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error updating usuario with id: " + id;
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Usuario updated successfully - id: " + id));
     }
 
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<GlobalResponse> deleteUsuario(@PathVariable Long id) {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<Object>> deleteUsuario(@PathVariable Long id) {
+        usuarioService.deleteById(id);
 
-        try {
-            usuarioService.deleteById(id);
-            status = HttpStatus.OK;
-            message = "Usuario deleted successfully - id: " + id;
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            message = "Error deleting usuario with id: " + id;
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(status == HttpStatus.OK)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(null, "Usuario deleted successfully - id: " + id));
     }
 
 
@@ -160,34 +87,15 @@ public class UsuarioController {
             description = "Ubicación: Dashboard - Usuarios  \n" +
                     "Seguridad: Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> getAllUsuarios(
+    public ResponseEntity<GlobalResponse<Page<UsuarioResponseDTO>>> getAllUsuarios(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<UsuarioResponseDTO> data = usuarioService.findAll(pageable);
 
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            data = usuarioService.findAll(pageable);
-            status = HttpStatus.OK;
-            message = "Usuarios retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            data = null;
-            message = "Error retrieving usuarios";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Usuarios retrieved successfully"));
     }
 
 
@@ -197,37 +105,18 @@ public class UsuarioController {
             description = "Ubicación: Dashboard - Usuarios  \n" +
                     "Seguridad: Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> findUsers(
+    public ResponseEntity<GlobalResponse<Page<UsuarioResponseDTO>>> findUsers(
             @RequestParam(defaultValue = "") String busqueda,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<UsuarioResponseDTO> data = usuarioService.searchByParam(busqueda, pageable);
 
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            data = usuarioService.searchByParam(busqueda, pageable);
-            message = "Busqueda de Productos para dashboard";
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error retrieving usuario with param";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Search results for: " + busqueda));
     }
+
 
     @GetMapping("/dashboard-quantity")
     @Operation(
@@ -235,30 +124,11 @@ public class UsuarioController {
             description = "Ubicación: Dashboard - Usuarios  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> countAllProductos() {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<Long>> countAllProductos() {
+        Long data = usuarioService.countAllUsuarios();
 
-        try {
-            data = usuarioService.countAllUsuarios();
-            message = "Cantidad de Usuarios para dashboard";
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "Error al traer cantidad de usuarios";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Cantidad de usuarios"));
     }
 
 
@@ -268,34 +138,15 @@ public class UsuarioController {
             description = "Ubicación: Mi perfil  \n" +
                     "Seguridad: Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> getAllWorkers(
+    public ResponseEntity<GlobalResponse<Page<UsuarioSimpleResponseDTO>>> getAllWorkers(
             @PathVariable Long id,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<UsuarioSimpleResponseDTO> data = usuarioService.findAllWorkers(id, pageable);
 
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            data = usuarioService.findAllWorkers(id, pageable);
-            status = HttpStatus.OK;
-            message = "Workers retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            data = null;
-            message = "Error retrieving workers";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Workers retrieved successfully"));
     }
 }
