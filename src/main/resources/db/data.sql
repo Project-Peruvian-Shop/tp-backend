@@ -32,28 +32,27 @@ insert into producto (nombre, descripcion, imagen_id, categoria_id) values
 
 -- Mensajes
 insert into mensaje
-(nombre, tipo_documento, documento, telefono, email, contenido, tipo, estado, usuario_id)
+(nombre, tipo_documento, documento, telefono, email, contenido, tipo, estado, medio_respuesta, usuario_id)
 values
 ('Juan Pérez', 1, '12345678', '+987654321', 'juanperez@gmail.com',
- 'Hola, estoy interesado en sus productos de tuberías. ¿Podrían enviarme una cotización?',
- 0, 0, 1),
+ 'Estoy interesado en sus productos, por favor envíenme un catálogo.',
+ "CONTACTENOS", "PENDIENTE", null, 1),
 
 ('María Gómez', 2, '87654321', '+912345678', 'maria.gomez@yahoo.com',
- 'Quiero hacer seguimiento a mi pedido con número #4587. Gracias.',
- 1, 1, 1),
+ 'Esta es una queja sobre el servicio recibido en su tienda.',
+ "QUEJA", "EN_PROCESO", "EMAIL", 1),
 
 ('Carla', 1, '111222333', '+12345678', 'cliente.anonimo@test.com',
  'Por favor, envíenme información sobre la garantía de sus productos.',
- 0, 0, NULL),
+ "CONTACTENOS", "CERRADO", "WHATSAPP", NULL),
 
 ('Carlos López', 1, '11223344', '+999888777', 'carlos.lopez@hotmail.com',
- 'El producto que recibí tiene un defecto, ¿cómo puedo solicitar cambio?',
- 2, 2, 2),
+ 'Quiero presentar un reclamo formal sobre un producto defectuoso que compré.',
+ "RECLAMO", "CERRADO", "PRESENCIAL", 2),
 
--- mensaje tipo reclamo sin datos de documento
 ('Ana Torres', 3, '94810122', '+955666444', 'ana.torres@gmail.com',
  'Estoy inconforme con la atención que recibí, por favor contacten conmigo.',
- 2, 0, NULL);
+ "CONTACTO", "RESUELTO", "PRESENCIAL", NULL);
 
 -- cotizaciones
 insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id) values
