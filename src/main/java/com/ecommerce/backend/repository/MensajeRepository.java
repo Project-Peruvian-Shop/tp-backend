@@ -8,23 +8,27 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
 @Repository
 public interface MensajeRepository extends JpaRepository<Mensaje, Long> {
-    @Query("SELECT COUNT(m) FROM Mensaje m WHERE m.estado=1 AND MONTH(m.creacion) = :mes")
+    @Query("SELECT COUNT(m) FROM Mensaje m WHERE FUNCTION('MONTH', m.creacion) = :mes")
     Long count_response_mes(@Param("mes") Long mes);
 
-    @Query("SELECT COUNT(m) FROM Mensaje m WHERE m.estado=0 AND MONTH(m.creacion) = :mes")
+    @Query("""
+            SELECT COUNT(m)
+            FROM Mensaje m
+            WHERE m.estado = com.ecommerce.backend.enums.MensajeEstadoEnum.PENDIENTE
+              AND FUNCTION('MONTH', m.creacion) = :mes
+            """)
     Long count_pending_mes(@Param("mes") Long mes);
 
     @Query("SELECT COUNT(m) FROM Mensaje m")
     Long countAllMensajes();
 
     @Query("""
-            SELECT m
+            SELECT DISTINCT m
             FROM Mensaje m
             WHERE LOWER(m.nombre) LIKE LOWER(CONCAT('%', :filtro, '%'))
                OR LOWER(m.documento) LIKE LOWER(CONCAT('%', :filtro, '%'))
@@ -45,7 +49,7 @@ public interface MensajeRepository extends JpaRepository<Mensaje, Long> {
                 m.tipo
             )
             FROM Mensaje m
-            WHERE m.estado = 0
+            WHERE m.estado = com.ecommerce.backend.enums.MensajeEstadoEnum.PENDIENTE
               AND FUNCTION('MONTH', m.creacion) = :mes
               AND FUNCTION('YEAR', m.creacion) = :year
             ORDER BY m.creacion DESC
@@ -54,5 +58,4 @@ public interface MensajeRepository extends JpaRepository<Mensaje, Long> {
             @Param("mes") int mes,
             @Param("year") int year
     );
-
 }

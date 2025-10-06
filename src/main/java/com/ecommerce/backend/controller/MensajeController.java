@@ -2,9 +2,7 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
-import com.ecommerce.backend.dto.mensaje.ChangeStateMensajeRequestDTO;
-import com.ecommerce.backend.dto.mensaje.MensajeRequestDTO;
-import com.ecommerce.backend.dto.mensaje.MensajeResponseDTO;
+import com.ecommerce.backend.dto.mensaje.*;
 import com.ecommerce.backend.service.MensajeService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -55,29 +53,11 @@ public class MensajeController {
             description = "Ubicación: Dashboard - Mensajes  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> get_dashboard_message(@PathVariable Long mes) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
-        try {
-            data = mensajeService.get_dashboard_menssage(mes);
-            status = HttpStatus.OK;
-            message = "Claim sent successfully";
-        } catch (Exception e) {
-            status = HttpStatus.BAD_REQUEST;
-            data = null;
-            message = "Error sending mensaje";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+    public ResponseEntity<GlobalResponse<MensajeDashboardDTO>> get_dashboard_message(@PathVariable Long mes) {
+        MensajeDashboardDTO data = mensajeService.get_dashboard_menssage(mes);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Cantidad de mensajes obtenida correctamente"));
     }
 
 
@@ -87,56 +67,19 @@ public class MensajeController {
             description = "Ubicación: Dashboard  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> get_mensaje_by_id(@PathVariable Long id) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
-        try {
-            data = mensajeService.get_mensaje_by_id(id);
-            status = HttpStatus.OK;
-            message = "Message retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error retrieving message";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+    public ResponseEntity<GlobalResponse<MensajeFullResponseDTO>> get_mensaje_by_id(@PathVariable Long id) {
+        MensajeFullResponseDTO data = mensajeService.get_mensaje_by_id(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Mensaje obtenido correctamente"));
     }
 
 
     @PutMapping("/change_state/{id}")
-    public ResponseEntity<GlobalResponse> change_state(@PathVariable Long id, @RequestBody ChangeStateMensajeRequestDTO changeStateMensajeRequestDTO) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
-        try {
-            data = mensajeService.change_state(id, changeStateMensajeRequestDTO.getNew_state());
-            status = HttpStatus.OK;
-            message = "Message state changed successfully";
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error changing message state";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+    public ResponseEntity<GlobalResponse<MensajeResponseDTO>> change_state(@PathVariable Long id, @RequestBody EstadoMensajeRequestDTO estadoMensajeRequestDTO) {
+        MensajeResponseDTO data = mensajeService.change_state(id, estadoMensajeRequestDTO);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Estado del mensaje actualizado correctamente"));
     }
 
 

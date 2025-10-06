@@ -2,58 +2,68 @@ package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.dto.mensaje.*;
 import com.ecommerce.backend.entity.Mensaje;
+import com.ecommerce.backend.entity.Usuario;
+import com.ecommerce.backend.enums.MensajeTipoEnum;
+import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.MensajeMapper;
 import com.ecommerce.backend.repository.MensajeRepository;
+import com.ecommerce.backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MensajeService {
 
     private final MensajeRepository mensajeRepository;
+    private final UsuarioRepository usuarioRepository;
 
     @Transactional
     public MensajeResponseDTO send_contactenos(MensajeRequestDTO mensajeRequestDTO) {
-        Mensaje mensaje = MensajeMapper.toEntity(mensajeRequestDTO, 2);
-        Mensaje saved_mensaje = mensajeRepository.save(mensaje);
+        mensajeRequestDTO.setTipo(MensajeTipoEnum.CONTACTENOS);
 
-        return new MensajeResponseDTO(saved_mensaje.getId());
+        Mensaje mensaje = MensajeMapper.toEntity(mensajeRequestDTO);
+        if (mensajeRequestDTO.getUsuario_id() != null) {
+            Optional<Usuario> usuario = usuarioRepository.findById(mensajeRequestDTO.getUsuario_id());
+            usuario.ifPresent(mensaje::setUsuario);
+        }
+
+        return MensajeMapper.toDTO(mensajeRepository.save(mensaje));
     }
 
     @Transactional
-    public MensajeResponseDTO send_reclamos(ReclamacionesRequestDTO mensajeRequestDTO) {
-        Mensaje mensaje = MensajeMapper.toReclamacionesEntity(mensajeRequestDTO);
-        Mensaje saved_mensaje = mensajeRepository.save(mensaje);
+    public MensajeResponseDTO send_reclamos(MensajeRequestDTO mensajeRequestDTO) {
+        Mensaje mensaje = MensajeMapper.toEntity(mensajeRequestDTO);
+        if (mensajeRequestDTO.getUsuario_id() != null) {
+            usuarioRepository.findById(mensajeRequestDTO.getUsuario_id())
+                    .ifPresent(mensaje::setUsuario);
+        }
 
-        return new MensajeResponseDTO(saved_mensaje.getId());
+        Mensaje saved = mensajeRepository.save(mensaje);
+        return MensajeMapper.toDTO(mensajeRepository.save(mensaje));
     }
 
     @Transactional(readOnly = true)
-    public MensajeDetalleResponseDTO get_mensaje_by_id(Long id) {
-        Mensaje mensaje = mensajeRepository.findById(id).orElseThrow(() -> new RuntimeException("Mensaje no encontrado - ID: " + id));
-        return new MensajeDetalleResponseDTO(
-                mensaje.getId(),
-                mensaje.getTipo(),
-                mensaje.getEstado(),
-                mensaje.getContenido(),
-                mensaje.getTipo_documento(),
-                mensaje.getDocumento(),
-                mensaje.getNombre(),
-                mensaje.getTelefono(),
-                mensaje.getEmail()
-        );
+    public MensajeFullResponseDTO get_mensaje_by_id(Long id) {
+        Mensaje mensaje = mensajeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Mensaje no encontrado - ID: " + id));
+
+        return MensajeMapper.toFullDTO(mensaje);
     }
 
-    public MensajeResponseDTO change_state(Long id, Integer new_state) {
-        Mensaje mensaje = mensajeRepository.findById(id).orElseThrow(() -> new RuntimeException("Mensaje no encontrado - ID: " + id));
-        mensaje.setEstado(new_state);
-        Mensaje updated_mensaje = mensajeRepository.save(mensaje);
+    public MensajeResponseDTO change_state(Long id, EstadoMensajeRequestDTO nuevoEstado) {
+        Mensaje mensaje = mensajeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Mensaje no encontrado - ID: " + id));
 
-        return new MensajeResponseDTO(updated_mensaje.getId());
+        mensaje.setEstado(nuevoEstado.getNuevoEstado());
+        Mensaje mensajeEstadoActualizado = mensajeRepository.save(mensaje);
+
+        return MensajeMapper.toDTO(mensajeEstadoActualizado);
     }
 
     public MensajeDashboardDTO get_dashboard_menssage(Long mes) {
