@@ -75,6 +75,11 @@ public class MensajeController {
 
 
     @PutMapping("/change_state/{id}")
+    @Operation(
+            summary = "Cambiar estado del mensaje",
+            description = "Ubicación: Dashboard  \n" +
+                    "Seguridad: Admin, Manager"
+    )
     public ResponseEntity<GlobalResponse<MensajeResponseDTO>> change_state(@PathVariable Long id, @RequestBody EstadoMensajeRequestDTO estadoMensajeRequestDTO) {
         MensajeResponseDTO data = mensajeService.change_state(id, estadoMensajeRequestDTO);
 
