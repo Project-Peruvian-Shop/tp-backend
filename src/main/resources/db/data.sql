@@ -64,33 +64,33 @@ insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, 
 
 insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id, creacion) values
 -- Octubre 2024
-(5, 'COT-2024-10-1', 0, 'Entrega urgente', 'Ana Torres', 1, '11111111', '987111111', 'ana@example.com', 1, '2024-10-05 10:30:00'),
-(6, 'COT-2024-10-2', 1, 'Revisar stock', 'Luis Ramírez', 1, '22222222', '987222222', 'luis@example.com', 2, '2024-10-15 14:20:00'),
+(5, 'COT-2024-10-1', 'PENDIENTE', 'Entrega urgente', 'Ana Torres', 'DNI', '11111111', '987111111', 'ana@example.com', 1, '2024-10-05 10:30:00'),
+(6, 'COT-2024-10-2', 'EN_PROCESO', 'Revisar stock', 'Luis Ramírez', 'DNI', '22222222', '987222222', 'luis@example.com', 2, '2024-10-15 14:20:00'),
 -- Noviembre 2024
-(7, 'COT-2024-11-1', 0, 'Cliente urgente', 'Carla Díaz', 2, '33333333', '987333333', 'carla@example.com', 1, '2024-11-08 09:10:00'),
+(7, 'COT-2024-11-1', 'PENDIENTE', 'Cliente urgente', 'Carla Díaz', 'RUC', '33333333', '987333333', 'carla@example.com', 1, '2024-11-08 09:10:00'),
 -- Diciembre 2024
-(8, 'COT-2024-12-1', 1, 'Entrega programada', 'Jorge Medina', 1, '44444444', '987444444', 'jorge@example.com', 1, '2024-12-20 16:45:00'),
+(8, 'COT-2024-12-1', 'EN_PROCESO', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 1, '2024-12-20 16:45:00'),
 -- Enero 2025
-(9, 'COT-2025-5', 0, 'Necesito entrega rápida', 'Juan Pérez', 1, '12345678', '987654321', 'juan@example.com', 1, '2025-01-10 11:00:00'),
-(10, 'COT-2025-6', 1, 'Revisar stock', 'María López', 1, '87654321', '987123456', 'maria@example.com', 2, '2025-01-25 15:30:00'),
+(9, 'COT-2025-5', 'PENDIENTE', 'Necesito entrega rápida', 'Juan Pérez', 'DNI', '12345678', '987654321', 'juan@example.com', 1, '2025-01-10 11:00:00'),
+(10, 'COT-2025-6', 'EN_PROCESO', 'Revisar stock', 'María López', 'DNI', '87654321', '987123456', 'maria@example.com', 2, '2025-01-25 15:30:00'),
 -- Febrero 2025
-(11, 'COT-2025-7', 0, 'Cliente urgente', 'Pedro Gómez', 2, '11223344', '986543210', 'pedro@example.com', 1, '2025-02-14 12:00:00'),
+(11, 'COT-2025-7', 'PENDIENTE', 'Cliente urgente', 'Pedro Gómez', 'RUC', '11223344', '986543210', 'pedro@example.com', 1, '2025-02-14 12:00:00'),
 -- Marzo 2025
-(12, 'COT-2025-8', 1, 'Entrega programada', 'Laura Martínez', 1, '99887766', '985678901', 'laura@example.com', 1, '2025-03-22 09:50:00'),
+(12, 'COT-2025-8', 'EN_PROCESO', 'Entrega programada', 'Laura Martínez', 'DNI', '99887766', '985678901', 'laura@example.com', 1, '2025-03-22 09:50:00'),
 -- Abril 2025
-(13, 'COT-2025-9', 0, 'Urgente', 'Mario Silva', 1, '55555555', '987555555', 'mario@example.com', 2, '2025-04-11 10:15:00'),
+(13, 'COT-2025-9', 'PENDIENTE', 'Urgente', 'Mario Silva', 'DNI', '55555555', '987555555', 'mario@example.com', 2, '2025-04-11 10:15:00'),
 -- Mayo 2025
-(14, 'COT-2025-10', 1, 'Revisar stock', 'Sofía Cruz', 2, '66666666', '987666666', 'sofia@example.com', 1, '2025-05-05 14:00:00'),
+(14, 'COT-2025-10', 'EN_PROCESO', 'Revisar stock', 'Sofía Cruz', 'RUC', '66666666', '987666666', 'sofia@example.com', 1, '2025-05-05 14:00:00'),
 -- Junio 2025
-(15, 'COT-2025-11', 0, 'Entrega rápida', 'Andrés Rojas', 1, '77777777', '987777777', 'andres@example.com', 1, '2025-06-18 16:30:00'),
+(15, 'COT-2025-11', 'PENDIENTE', 'Entrega rápida', 'Andrés Rojas', 'DNI', '77777777', '987777777', 'andres@example.com', 1, '2025-06-18 16:30:00'),
 -- Julio 2025
-(16, 'COT-2025-12', 1, 'Revisar stock', 'Carolina Paredes', 1, '88888888', '987888888', 'carolina@example.com', 2, '2025-07-07 12:45:00'),
+(16, 'COT-2025-12', 'EN_PROCESO', 'Revisar stock', 'Carolina Paredes', 'DNI', '88888888', '987888888', 'carolina@example.com', 2, '2025-07-07 12:45:00'),
 -- Agosto 2025
-(17, 'COT-2025-13', 0, 'Cliente urgente', 'Diego Vargas', 2, '99999999', '987999999', 'diego@example.com', 1, '2025-08-21 09:20:00'),
+(17, 'COT-2025-13', 'PENDIENTE', 'Cliente urgente', 'Diego Vargas', 'RUC', '99999999', '987999999', 'diego@example.com', 1, '2025-08-21 09:20:00'),
 -- Septiembre 2025
-(18, 'COT-2025-14', 1, 'Entrega programada', 'Natalia Ramos', 1, '10101010', '987101010', 'natalia@example.com', 1, '2025-09-12 11:35:00'),
+(18, 'COT-2025-14', 'EN_PROCESO', 'Entrega programada', 'Natalia Ramos', 'DNI', '10101010', '987101010', 'natalia@example.com', 1, '2025-09-12 11:35:00'),
 -- Octubre 2025
-(19, 'COT-2025-15', 0, 'Necesito entrega rápida', 'Juan Pérez', 1, '12345678', '987654321', 'juan@example.com', 1, '2025-10-02 08:00:00');
+(19, 'COT-2025-15', 'PENDIENTE', 'Necesito entrega rápida', 'Juan Pérez', 'DNI', '12345678', '987654321', 'juan@example.com', 1, '2025-10-02 08:00:00');
 
 insert into cotizacion_detalle (producto_id, cotizacion_id, cantidad) values
 (1, 1, 20),

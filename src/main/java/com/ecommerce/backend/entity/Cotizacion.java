@@ -1,5 +1,7 @@
 package com.ecommerce.backend.entity;
 
+import com.ecommerce.backend.enums.CotizacionEstadoEnum;
+import com.ecommerce.backend.enums.CotizacionTipoDocumentoEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,8 +24,9 @@ public class Cotizacion {
     @Column(nullable = false, unique = true, length = 50)
     private String numero;
 
-    @Column(nullable = false)
-    private Integer estado = 0;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private CotizacionEstadoEnum estado = CotizacionEstadoEnum.PENDIENTE;
 
     @Column(nullable = false)
     private LocalDateTime creacion = LocalDateTime.now();
@@ -35,8 +38,9 @@ public class Cotizacion {
     @Column(nullable = false, length = 200)
     private String nombre;
 
-    @Column(name = "tipo_documento", nullable = false)
-    private Integer tipoDocumento = 0;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_documento")
+    private CotizacionTipoDocumentoEnum tipo_documento = CotizacionTipoDocumentoEnum.DNI;
 
     @Column(nullable = false, length = 30)
     private String documento;

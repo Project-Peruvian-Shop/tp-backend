@@ -45,12 +45,12 @@ create TABLE IF NOT EXISTS cotizacion (
     id INT AUTO_INCREMENT PRIMARY KEY,
     -- datos de la cotizacion
     numero VARCHAR(50) NOT NULL UNIQUE,
-    estado TINYINT NOT NULL DEFAULT 0,
+    estado VARCHAR(20) NOT NULL DEFAULT 'PENDIENTE' CHECK (estado IN ('PENDIENTE', 'EN_PROCESO', 'RESPONDIDA', 'CERRADA')),
     creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     comentario TEXT,
     -- datos del cliente
     nombre VARCHAR(200) NOT NULL,
-    tipo_documento TINYINT NOT NULL DEFAULT 0,
+    tipo_documento VARCHAR(20) NOT NULL DEFAULT 'DNI' CHECK (tipo_documento IN ('DNI', 'RUC', 'PASAPORTE', 'OTRO')),
     documento VARCHAR(30) NOT NULL,
     telefono VARCHAR(25) NOT NULL,
     email VARCHAR(150) NOT NULL,
