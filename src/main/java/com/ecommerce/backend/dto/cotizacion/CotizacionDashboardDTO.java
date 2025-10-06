@@ -1,5 +1,6 @@
 package com.ecommerce.backend.dto.cotizacion;
 
+import com.ecommerce.backend.enums.CotizacionEstadoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +18,6 @@ public class CotizacionDashboardDTO {
     private String clienteNombre;
     private String clienteDocumento;
     private LocalDateTime creacion;
-    private String estado;
+    private CotizacionEstadoEnum estado;
     private String observaciones;
 }

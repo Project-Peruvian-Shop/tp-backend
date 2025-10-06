@@ -20,7 +20,7 @@ public class CotizacionMapper {
                 .id(cotizacion.getId())
                 .numero(cotizacion.getNumero())
                 .creacion(cotizacion.getCreacion())
-                .status(cotizacion.getEstado().toString())
+                .estado(cotizacion.getEstado())
                 .build();
     }
 
@@ -41,11 +41,11 @@ public class CotizacionMapper {
         return CotizacionFullResponseDTO.builder()
                 .id(cotizacion.getId())
                 .numero(cotizacion.getNumero())
-                .estado(cotizacion.getEstado().toString())
+                .estado(cotizacion.getEstado())
                 .creacion(cotizacion.getCreacion())
                 .comentario(cotizacion.getComentario())
                 .productos(productos)
-                .tipoDocumento(cotizacion.getTipoDocumento().toString())
+                .tipoDocumento(cotizacion.getTipo_documento())
                 .documento(cotizacion.getDocumento())
                 .cliente(cotizacion.getUsuario().getNombre())
                 .email(cotizacion.getEmail())
@@ -60,20 +60,13 @@ public class CotizacionMapper {
             return null;
         }
 
-        String estadoStr;
-        switch (cotizacion.getEstado()) {
-            case 1 -> estadoStr = "Enviada";
-            case 2 -> estadoStr = "Cerrada";
-            default -> estadoStr = "Sin Atender";
-        }
-
         return new CotizacionDashboardDTO(
                 cotizacion.getId(),
                 cotizacion.getNumero(),
                 cotizacion.getNombre(),
                 cotizacion.getDocumento(),
                 cotizacion.getCreacion(),
-                estadoStr,
+                cotizacion.getEstado(),
                 cotizacion.getComentario()
         );
     }

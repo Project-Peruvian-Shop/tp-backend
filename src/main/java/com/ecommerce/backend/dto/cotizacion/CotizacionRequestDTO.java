@@ -1,5 +1,6 @@
 package com.ecommerce.backend.dto.cotizacion;
 
+import com.ecommerce.backend.enums.CotizacionTipoDocumentoEnum;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,8 +22,7 @@ public class CotizacionRequestDTO {
     private String nombre;
 
     @NotNull(message = "tipoDocumento field cannot be null")
-    @Min(value = 1, message = "tipoDocumento must be at least 1")
-    private Integer tipoDocumento;
+    private CotizacionTipoDocumentoEnum tipoDocumento;
 
     @NotBlank(message = "documento field is required")
     private String documento;
