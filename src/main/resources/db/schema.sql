@@ -92,7 +92,7 @@ create TABLE IF NOT EXISTS mensaje (
     contenido TEXT NOT NULL,
     tipo VARCHAR(20) NOT NULL DEFAULT 'CONTACTENOS' CHECK (tipo IN ('CONTACTENOS', 'QUEJA', 'RECLAMO')),
     estado VARCHAR(20) NOT NULL DEFAULT 'PENDIENTE' CHECK (estado IN ('PENDIENTE', 'EN_PROCESO', 'RESUELTO', 'CERRADO')),
-    medio_respuesta VARCHAR(20) NULL CHECK (medioRespuesta IN ('EMAIL', 'TELEFONO', 'WHATSAPP', 'PRESENCIAL')),
+    medio_respuesta VARCHAR(20) NULL CHECK (medio_respuesta IN ('EMAIL', 'TELEFONO', 'WHATSAPP', 'PRESENCIAL')),
     -- metadata
     creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     -- usuario relacionado
