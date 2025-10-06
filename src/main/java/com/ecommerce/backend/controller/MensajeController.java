@@ -7,6 +7,7 @@ import com.ecommerce.backend.service.MensajeService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -94,62 +95,16 @@ public class MensajeController {
             description = "Ubicación: Dashboard  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> findDashboardPaginated(
+    public ResponseEntity<GlobalResponse<Page<MensajeDashboardResponseDTO>>> findDashboardPaginated(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<MensajeDashboardResponseDTO> data = mensajeService.findDashboardPaginated(pageable);
 
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            data = mensajeService.findDashboardPaginated(pageable);
-            status = HttpStatus.OK;
-            message = "Messages retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.BAD_REQUEST;
-            data = null;
-            message = "Error retrieving messages";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Mensajes obtenidos correctamente"));
     }
-
-
-//    public ResponseEntity<GlobalResponse> countAllMensajes() {
-//        HttpStatus status;
-//        Object data = null;
-//        String message;
-//        String details = null;
-//
-//        try {
-//            data = mensajeService.countAllMensajes();
-//            message = "Cantidad de mensajes para dashboard";
-//            status = HttpStatus.OK;
-//        } catch (Exception e) {
-//            status = HttpStatus.INTERNAL_SERVER_ERROR;
-//            message = "Error al traer cantidad de mensajes";
-//            details = e.getMessage();
-//        }
-//
-//        return ResponseEntity.status(status).body(
-//                GlobalResponse.builder()
-//                        .ok(data != null)
-//                        .message(message)
-//                        .data(data)
-//                        .details(details)
-//                        .build()
-//        );
-//    }
 
 
     @GetMapping("/dashboard-search")
@@ -158,34 +113,15 @@ public class MensajeController {
             description = "Ubicación: Dashboard - mensajes  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> searchByParams(
+    public ResponseEntity<GlobalResponse<Page<MensajeDashboardResponseDTO>>> searchByParams(
             @RequestParam(defaultValue = "") String busqueda,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<MensajeDashboardResponseDTO> data = mensajeService.searchByParams(busqueda, pageable);
 
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            data = mensajeService.searchByParams(busqueda, pageable);
-            message = "Busqueda de mensajes para dashboard";
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "An error occurred while retrieving search mensajes";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Mensajes obtenidos correctamente"));
     }
 }
