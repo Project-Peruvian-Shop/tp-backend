@@ -3,8 +3,8 @@ package com.ecommerce.backend.service;
 import com.ecommerce.backend.dto.cotizacion.CategoriaMesDTO;
 import com.ecommerce.backend.dto.cotizacion.*;
 import com.ecommerce.backend.dto.cotizacion.ProductoCotizadoMesDTO;
-import com.ecommerce.backend.dto.cotizacion.UsuarioCotizacionMesDTO;
 import com.ecommerce.backend.entity.*;
+import com.ecommerce.backend.enums.CotizacionEstadoEnum;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.CotizacionMapper;
 import com.ecommerce.backend.repository.*;
@@ -40,15 +40,15 @@ public class CotizacionService {
     @Transactional
     public CotizacionResponseDTO save_cotizacion(CotizacionRequestDTO request) {
         Usuario usuario = usuarioRepository.findById(request.getUsuarioID())
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
         Cotizacion cotizacion = new Cotizacion();
         cotizacion.setNumero(this.getNumberFromDB());
-        cotizacion.setEstado(0);
+        cotizacion.setEstado(CotizacionEstadoEnum.PENDIENTE);
         cotizacion.setCreacion(LocalDateTime.now());
         cotizacion.setComentario(request.getComentario());
         cotizacion.setNombre(request.getNombre());
-        cotizacion.setTipoDocumento(request.getTipoDocumento());
+        cotizacion.setTipo_documento(request.getTipoDocumento());
         cotizacion.setDocumento(request.getDocumento());
         cotizacion.setTelefono(request.getTelefono());
         cotizacion.setEmail(request.getEmail());
@@ -58,7 +58,7 @@ public class CotizacionService {
 
         for (CotizacionProductoDTO p : request.getProductos()) {
             Producto producto = productoRepository.findById(p.getId())
-                    .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado"));
 
             CotizacionDetalle detalle = new CotizacionDetalle();
             detalle.setId(new CotizacionDetalleId(producto.getId(), cotizacionGuardada.getId()));
@@ -72,7 +72,7 @@ public class CotizacionService {
         return new CotizacionResponseDTO(
                 cotizacionGuardada.getId(),
                 cotizacionGuardada.getNumero(),
-                cotizacionGuardada.getTipoDocumento(),
+                cotizacionGuardada.getTipo_documento(),
                 cotizacionGuardada.getDocumento(),
                 cotizacionGuardada.getEmail(),
                 cotizacionGuardada.getTelefono()
@@ -82,7 +82,7 @@ public class CotizacionService {
     public CotizacionPdfDTO savePdf(Long cotizacionId, MultipartFile archivo) throws IOException {
 
         Cotizacion cotizacion = cotizacionRepository.findById(cotizacionId)
-                .orElseThrow(() -> new RuntimeException("Cotización no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cotización no encontrada"));
 
         String fileName = UUID.randomUUID().toString().substring(0, 6) + ".pdf";
 
@@ -161,6 +161,15 @@ public class CotizacionService {
         return CotizacionMapper.toDTOGetByID(cotizacion);
     }
 
+    public Long countAllCotizaciones() {
+        return cotizacionRepository.countAllCotizaciones();
+    }
+
+    public Page<CotizacionDashboardDTO> searchByParams(String busqueda, Pageable pageable) {
+        return cotizacionRepository.searchByNumeroClienteObservaciones(busqueda, pageable)
+                .map(CotizacionMapper::toDashboardDTO);
+    }
+
     private String getNumberFromDB() {
         int year = java.time.Year.now().getValue();
         Optional<Cotizacion> ultimaCotizacion = cotizacionRepository.findTopByOrderByIdDesc();
@@ -173,14 +182,5 @@ public class CotizacionService {
         }
 
         return "COT-" + year + "-1";
-    }
-
-    public Long countAllCotizaciones() {
-        return cotizacionRepository.countAllCotizaciones();
-    }
-
-    public Page<CotizacionDashboardDTO> searchByParams(String busqueda, Pageable pageable) {
-        return cotizacionRepository.searchByNumeroClienteObservaciones(busqueda, pageable)
-                .map(CotizacionMapper::toDashboardDTO);
     }
 }

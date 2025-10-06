@@ -2,17 +2,20 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
-import com.ecommerce.backend.dto.cotizacion.CotizacionRequestDTO;
+import com.ecommerce.backend.dto.cotizacion.*;
 import com.ecommerce.backend.service.CotizacionService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(Constant.API_VERSION + "/" + Constant.TABLE_COTIZACION)
@@ -27,29 +30,13 @@ public class CotizacionController {
             description = "Ubicación: Solicitud de Cotizacion  \n" +
                     "Seguridad: Usuario, Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> createCotizacion(@Valid @RequestBody CotizacionRequestDTO cotizacionRequestDTO) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
-        try {
-            data = cotizacionService.save_cotizacion(cotizacionRequestDTO);
-            status = HttpStatus.CREATED;
-            message = "Cotizacion created successfully";
-        } catch (Exception e) {
-            status = HttpStatus.BAD_REQUEST;
-            data = null;
-            message = "Error creating cotizacion";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+    public ResponseEntity<GlobalResponse<CotizacionResponseDTO>> createCotizacion(
+            @Valid @RequestBody CotizacionRequestDTO cotizacionRequestDTO
+    ) {
+        CotizacionResponseDTO data = cotizacionService.save_cotizacion(cotizacionRequestDTO);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(GlobalResponse.success(data, "Cotizacion creada exitosamente"));
     }
 
 
@@ -81,39 +68,21 @@ public class CotizacionController {
         );
     }
 
+
     @GetMapping("/productos_mes")
     @Operation(
             summary = "Traer productos cotizados del mes",
             description = "Ubicación: cotizaciones del dashboard  \n" +
                     "Seguridad: Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> productos_cotizados_mes(
+    public ResponseEntity<GlobalResponse<List<ProductoCotizadoMesDTO>>> productos_cotizados_mes(
             @RequestParam(required = false) Integer mes,
             @RequestParam(required = false) Integer year
     ) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+        List<ProductoCotizadoMesDTO> data = cotizacionService.get_productos_cotizados_mes(mes, year);
 
-        try {
-            data = cotizacionService.get_productos_cotizados_mes(mes, year);
-            status = HttpStatus.OK;
-            message = "Productos cotizados del mes retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error retrieving productos cotizados del mes";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Productos cotizados del mes obtenidos exitosamente"));
     }
 
 
@@ -123,29 +92,14 @@ public class CotizacionController {
             description = "Ubicación: cotizaciones del dashboard  \n" +
                     "Seguridad: Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> get_lineas_mes(@RequestParam(required = false) Integer mes, @RequestParam(required = false) Integer year) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
-        try {
-            data = cotizacionService.get_lineas_cotizadas_mes(mes, year);
-            status = HttpStatus.OK;
-            message = "Lineas del mes retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error retrieving lineas del mes";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+    public ResponseEntity<GlobalResponse<List<CategoriaMesDTO>>> get_lineas_mes(
+            @RequestParam(required = false) Integer mes,
+            @RequestParam(required = false) Integer year
+    ) {
+        List<CategoriaMesDTO> data = cotizacionService.get_lineas_cotizadas_mes(mes, year);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Lineas cotizadas del mes obtenidas exitosamente"));
     }
 
 
@@ -155,29 +109,13 @@ public class CotizacionController {
             description = "Ubicación: cotizaciones del dashboard  \n" +
                     "Seguridad: Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> get_cotizaciones_year(@RequestParam(required = false) Integer year) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
-        try {
-            data = cotizacionService.get_cotizacion_year(year);
-            status = HttpStatus.OK;
-            message = "Cotizaciones del año retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error retrieving cotizaciones del año";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+    public ResponseEntity<GlobalResponse<List<CotizacionYearDTO>>> get_cotizaciones_year(
+            @RequestParam(required = false) Integer year
+    ) {
+        List<CotizacionYearDTO> data = cotizacionService.get_cotizacion_year(year);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Cotizaciones del año obtenidas exitosamente"));
     }
 
 
@@ -187,30 +125,11 @@ public class CotizacionController {
             description = "Ubicación: cotizaciones del dashboard  \n" +
                     "Seguridad: Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> get_last_cotizaciones() {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<List<CotizacionResumenDTO>>> get_last_cotizaciones() {
+        List<CotizacionResumenDTO> data = cotizacionService.get_last_cotizaciones();
 
-        try {
-            data = cotizacionService.get_last_cotizaciones();
-            status = HttpStatus.OK;
-            message = "Last cotizaciones retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error retrieving last cotizaciones";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Últimas cotizaciones obtenidas exitosamente"));
     }
 
 
@@ -220,31 +139,13 @@ public class CotizacionController {
             description = "Ubicación: cotizaciones del dashboard  \n" +
                     "Seguridad: Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> get_mensajes_pendientes_mes() {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<List<MensajeDashboardDTO>>> get_mensajes_pendientes_mes() {
+        List<MensajeDashboardDTO> data = cotizacionService.get_mensajes_pendientes_mes();
 
-        try {
-            data = cotizacionService.get_mensajes_pendientes_mes();
-            status = HttpStatus.OK;
-            message = "Mensajes pendientes retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error retrieving mensajes pendientes";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Mensajes pendientes del mes obtenidos exitosamente"));
     }
+
 
     @GetMapping("/dashboard-paginated")
     @Operation(
@@ -252,34 +153,15 @@ public class CotizacionController {
             description = "Ubicación: cotizaciones del dashboard  \n" +
                     "Seguridad: Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> get_cotizaciones_dashboard(
+    public ResponseEntity<GlobalResponse<Page<CotizacionDashboardDTO>>> get_cotizaciones_dashboard(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CotizacionDashboardDTO> data = cotizacionService.get_cotizaciones_dashboard(pageable);
 
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            data = cotizacionService.get_cotizaciones_dashboard(pageable);
-            status = HttpStatus.OK;
-            message = "Cotizaciones del dashboard retrieved successfully";
-        } catch (Exception e) {
-            status = HttpStatus.NOT_FOUND;
-            data = null;
-            message = "Error retrieving cotizaciones del dashboard";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Cotizaciones del dashboard obtenidas exitosamente"));
     }
 
 
@@ -289,30 +171,11 @@ public class CotizacionController {
             description = "Ubicación: Dashboard - cotizaciones  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> countAllCotizaciones() {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<Long>> countAllCotizaciones() {
+        Long data = cotizacionService.countAllCotizaciones();
 
-        try {
-            data = cotizacionService.countAllCotizaciones();
-            message = "Cantidad de cotizaciones para dashboard";
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "Error al traer cantidad de cotizaciones";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Cantidad de cotizaciones obtenidas exitosamente"));
     }
 
 
@@ -322,35 +185,16 @@ public class CotizacionController {
             description = "Ubicación: Dashboard - Productos  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse> searchByNombreOrCategoria(
+    public ResponseEntity<GlobalResponse<Page<CotizacionDashboardDTO>>> searchByNombreOrCategoria(
             @RequestParam(defaultValue = "") String busqueda,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
-        HttpStatus status;
-        Object data = null;
-        String message;
-        String details = null;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CotizacionDashboardDTO> data = cotizacionService.searchByParams(busqueda, pageable);
 
-        try {
-            Pageable pageable = PageRequest.of(page, size);
-            data = cotizacionService.searchByParams(busqueda, pageable);
-            message = "Busqueda de Productos para dashboard";
-            status = HttpStatus.OK;
-        } catch (Exception e) {
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
-            message = "An error occurred while retrieving search productos";
-            details = e.getMessage();
-        }
-
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Búsqueda de cotizaciones realizada exitosamente"));
     }
 
 
@@ -360,30 +204,11 @@ public class CotizacionController {
             description = "Ubicación: cotizaciones del mismo usuario  \n" +
                     "Seguridad: Usuario, Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> getCotizacionesByUsuario(@PathVariable Long id) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<List<CotizacionByUsuarioResponseDTO>>> getCotizacionesByUsuario(@PathVariable Long id) {
+        List<CotizacionByUsuarioResponseDTO> data = cotizacionService.getByUser(id);
 
-        try {
-            data = cotizacionService.getByUser(id);
-            status = HttpStatus.OK;
-            message = "Cotizaciones del usuario";
-        } catch (Exception e) {
-            status = HttpStatus.BAD_REQUEST;
-            data = null;
-            message = "Error al traer cotizaciones del usuario";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Cotizaciones del usuario obtenidas exitosamente"));
     }
 
 
@@ -393,29 +218,10 @@ public class CotizacionController {
             description = "Ubicación: cotizacion particular & Dashboard cotizacion one \n" +
                     "Seguridad: Usuario, Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse> getCotizacionesById(@PathVariable Long id) {
-        HttpStatus status;
-        Object data;
-        String message;
-        String details = null;
+    public ResponseEntity<GlobalResponse<CotizacionFullResponseDTO>> getCotizacionesById(@PathVariable Long id) {
+        CotizacionFullResponseDTO data = cotizacionService.getByID(id);
 
-        try {
-            data = cotizacionService.getByID(id);
-            status = HttpStatus.OK;
-            message = "Cotizaciones por ID";
-        } catch (Exception e) {
-            status = HttpStatus.BAD_REQUEST;
-            data = null;
-            message = "Error al traer cotizaciones por ID";
-            details = e.getMessage();
-        }
-        return ResponseEntity.status(status).body(
-                GlobalResponse.builder()
-                        .ok(data != null)
-                        .message(message)
-                        .data(data)
-                        .details(details)
-                        .build()
-        );
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Cotización obtenida exitosamente"));
     }
 }

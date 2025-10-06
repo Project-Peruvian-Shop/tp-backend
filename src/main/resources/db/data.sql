@@ -56,10 +56,10 @@ values
 
 -- cotizaciones
 insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id) values
-(1, 'COT-2025-1', 0, 'Necesito entrega rápida', 'Juan Pérez', 1, '12345678', '987654321', 'juan@example.com', 1),
-(2, 'COT-2025-2', 1, 'Revisar stock', 'María López', 1, '87654321', '987123456', 'maria@example.com', 2),
-(3, 'COT-2025-3', 0, 'Cliente urgente', 'Pedro Gómez', 2, '11223344', '986543210', 'pedro@example.com', 1),
-(4, 'COT-2025-4', 1, 'Entrega programada', 'Laura Martínez', 1, '99887766', '985678901', 'laura@example.com', 1);
+(1, 'COT-2025-1', 'PENDIENTE', 'Necesito entrega rápida', 'Juan Pérez', 'DNI', '12345678', '987654321', 'juan@example.com', 1),
+(2, 'COT-2025-2', 'EN_PROCESO', 'Revisar stock', 'María López', 'DNI', '87654321', '987123456', 'maria@example.com', 2),
+(3, 'COT-2025-3', 'PENDIENTE', 'Cliente urgente', 'Pedro Gómez', 'RUC', '11223344', '986543210', 'pedro@example.com', 1),
+(4, 'COT-2025-4', 'EN_PROCESO', 'Entrega programada', 'Laura Martínez', 'PASAPORTE', '99887766', '985678901', 'laura@example.com', 1);
 
 
 insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id, creacion) values
