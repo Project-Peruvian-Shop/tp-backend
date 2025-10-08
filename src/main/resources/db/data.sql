@@ -1,6 +1,12 @@
 insert into usuario (nombre, apellidos, email, passwordd, telefono, rol) values
 ('admin', 'admin', 'admin@mail.com', 'admin123', '1234567890', 'ROLE_ADMIN'),
-('user', 'User', 'user@mail.com', 'user123', '0987654321', 'ROLE_USER');
+('Cliente', 'Cliente', 'cliente@mail.com', 'cliente123', '0987654321', 'ROLE_USER'),
+('Jorge', 'Luis', 'jorge@mail.com', 'user123', '0987654321', 'ROLE_MANAGER'),
+('Steve', 'Harrington', 'steve@mail.com', 'user123', '0987654321', 'ROLE_MANAGER'),
+('Felix', 'Ruiz', 'felix@mail.com', 'user123', '0987654321', 'ROLE_MANAGER'),
+('Sebastian', 'Perez', 'seb@mail.com', 'user123', '0987654321', 'ROLE_MANAGER'),
+('Charles', 'Leclerc', 'charles@mail.com', 'user123', '0987654321', 'ROLE_MANAGER');
+
 
 insert into imagen (enlace, nombre, alt) values
 ('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 'Tubería PVC 110mm', 'tuberia-pvc-110mm'),
