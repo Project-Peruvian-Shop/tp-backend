@@ -8,7 +8,7 @@ create TABLE IF NOT EXISTS usuario (
     email VARCHAR(150) UNIQUE NOT NULL,
     passwordd VARCHAR(255) NOT NULL,
     telefono VARCHAR(25) NOT NULL,
-    rol VARCHAR(20) NOT NULL DEFAULT 'ROLE_USER'
+    rol VARCHAR(20) NOT NULL DEFAULT 'ROLE_USER' CHECK (rol IN ('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MANAGER'))
 );
 
 --! Table imagen
