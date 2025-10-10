@@ -10,7 +10,7 @@ public class ProductoFullResponseDTO {
 
     private String nombre;
     private String descripcion;
-
+    private Long imagenId;
     private String productoEnlace;
     private String productoAlt;
 

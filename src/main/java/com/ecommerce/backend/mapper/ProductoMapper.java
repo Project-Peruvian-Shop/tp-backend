@@ -49,6 +49,7 @@ public class ProductoMapper {
                 .id(producto.getId())
                 .nombre(producto.getNombre())
                 .descripcion(producto.getDescripcion())
+                .imagenId(producto.getImagen().getId())
                 .productoEnlace(producto.getImagen().getEnlace())
                 .productoAlt(producto.getImagen().getAlt())
                 .categoriaId(producto.getCategoria().getId())
