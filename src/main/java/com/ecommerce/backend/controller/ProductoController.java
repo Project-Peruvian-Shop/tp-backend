@@ -33,10 +33,17 @@ public class ProductoController {
     )
     public ResponseEntity<GlobalResponse<Page<PaginatedProductoResponseDTO>>> getAllPaginated(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) Long categoria
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<PaginatedProductoResponseDTO> data = productoService.findAllPaginated(pageable);
+        Page<PaginatedProductoResponseDTO> data;
+
+        if (categoria != null) {
+            data = productoService.findAllByCategoriaPaginated(categoria, pageable);
+        } else {
+            data = productoService.findAllPaginated(pageable);
+        }
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Productos paginados"));

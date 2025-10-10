@@ -32,4 +32,6 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
             @Param("filtro") String filtro,
             Pageable pageable
     );
+
+    Page<Producto> findByCategoriaId(Long categoriaId, Pageable pageable);
 }

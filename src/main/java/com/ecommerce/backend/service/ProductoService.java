@@ -9,6 +9,7 @@ import com.ecommerce.backend.entity.Imagen;
 import com.ecommerce.backend.entity.Producto;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.ProductoMapper;
+import com.ecommerce.backend.repository.CategoriaRepository;
 import com.ecommerce.backend.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductoService {
     private final ProductoRepository productoRepository;
+    private final CategoriaRepository categoriaRepository;
     private final ImagenService imagenService;
     private final CategoriaService categoriaService;
 
@@ -30,6 +32,13 @@ public class ProductoService {
                 .map(ProductoMapper::toDTO);
     }
 
+    public Page<PaginatedProductoResponseDTO> findAllByCategoriaPaginated(Long categoriaId, Pageable pageable) {
+        Categoria categoria = categoriaRepository.findById(categoriaId)
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con id: " + categoriaId));
+
+        return productoRepository.findByCategoriaId(categoriaId, pageable)
+                .map(ProductoMapper::toDTO);
+    }
 
     public ProductoFullResponseDTO findByID(Long id) {
         Producto producto = productoRepository.findById(id)
