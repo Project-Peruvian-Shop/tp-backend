@@ -18,6 +18,7 @@ public class CategoriaMapper {
                 .nombre(categoria.getNombre())
                 .usos(categoria.getUsos())
                 .norma(categoria.getNorma())
+                .imagenId(categoria.getImagen().getId())
                 .imagenEnlace(categoria.getImagen().getEnlace())
                 .imagenAlt(categoria.getImagen().getAlt())
                 .build();

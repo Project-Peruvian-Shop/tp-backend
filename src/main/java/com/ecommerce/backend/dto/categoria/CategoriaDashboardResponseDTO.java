@@ -10,6 +10,7 @@ public class CategoriaDashboardResponseDTO {
     private String nombre;
     private String usos;
     private String norma;
+    private Long imagenId;
     private String imagenEnlace;
     private String imagenAlt;
 }
