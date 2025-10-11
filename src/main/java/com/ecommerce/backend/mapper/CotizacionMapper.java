@@ -67,7 +67,8 @@ public class CotizacionMapper {
                 cotizacion.getDocumento(),
                 cotizacion.getCreacion(),
                 cotizacion.getEstado(),
-                cotizacion.getComentario()
+                cotizacion.getComentario(),
+                cotizacion.getObservaciones()
         );
     }
 }

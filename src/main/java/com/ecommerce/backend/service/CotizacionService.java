@@ -183,4 +183,13 @@ public class CotizacionService {
 
         return "COT-" + year + "-1";
     }
+    public CotizacionFullResponseDTO updateObservaciones(Long id, String observaciones) {
+        Cotizacion cotizacion = cotizacionRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cotización no encontrada con id: " + id));
+
+        cotizacion.setObservaciones(observaciones);
+        Cotizacion updatedCotizacion = cotizacionRepository.save(cotizacion);
+
+        return CotizacionMapper.toDTOGetByID(updatedCotizacion);
+    }
 }

@@ -224,4 +224,19 @@ public class CotizacionController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Cotización obtenida exitosamente"));
     }
+    @PutMapping("/observaciones/{id}")
+    @Operation(
+            summary = " Agregar o Actualizar observaciones de una cotización",
+            description = "Ubicación: Panel administrativo - Actualizar observaciones de una cotización  \n" +
+                    "Seguridad: Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse<CotizacionFullResponseDTO>> updateObservaciones(
+            @PathVariable Long id,
+            @RequestBody CotizacionObservacionDTO observaciones
+    ) {
+        CotizacionFullResponseDTO data = cotizacionService.updateObservaciones(id, observaciones.getObservaciones()     );
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Observaciones de la cotización actualizadas exitosamente"));
+    }
 }

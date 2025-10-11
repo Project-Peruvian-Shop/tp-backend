@@ -19,5 +19,6 @@ public class CotizacionDashboardDTO {
     private String clienteDocumento;
     private LocalDateTime creacion;
     private CotizacionEstadoEnum estado;
+    private String comentario;
     private String observaciones;
 }
