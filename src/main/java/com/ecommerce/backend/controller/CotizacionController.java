@@ -234,9 +234,24 @@ public class CotizacionController {
             @PathVariable Long id,
             @RequestBody CotizacionObservacionDTO observaciones
     ) {
-        CotizacionFullResponseDTO data = cotizacionService.updateObservaciones(id, observaciones.getObservaciones()     );
+        CotizacionFullResponseDTO data = cotizacionService.updateObservaciones(id, observaciones.getObservaciones());
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Observaciones de la cotización actualizadas exitosamente"));
+    }
+    @PutMapping("change_state/{id}")
+    @Operation(
+            summary = "Cambiar estado de la cotización",
+            description = "Ubicación: Dashboard  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse<CotizacionFullResponseDTO>> change_state(
+            @PathVariable Long id,
+            @RequestBody EstadoCotizacionRequestDTO estadoCotizacionRequestDTO
+    ){
+        CotizacionFullResponseDTO data = cotizacionService.change_state(id,estadoCotizacionRequestDTO);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data,"Estado de la cotizacion actualizada exitosamente"));
     }
 }
