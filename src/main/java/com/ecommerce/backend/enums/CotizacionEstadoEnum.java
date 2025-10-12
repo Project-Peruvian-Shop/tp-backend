@@ -3,6 +3,8 @@ package com.ecommerce.backend.enums;
 public enum CotizacionEstadoEnum {
     PENDIENTE,
     EN_PROCESO,
-    RESPONDIDA,
+    ENVIADA,
+    ACEPTADA,
+    RECHAZADA,
     CERRADA
 }
