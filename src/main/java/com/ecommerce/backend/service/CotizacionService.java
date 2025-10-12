@@ -148,7 +148,7 @@ public class CotizacionService {
     }
 
     public List<CotizacionByUsuarioResponseDTO> getByUser(Long id) {
-        return cotizacionRepository.findByUsuarioId(id)
+        return cotizacionRepository.findByUsuarioIdOrderByCreacionDesc(id)
                 .stream()
                 .map(CotizacionMapper::toDTOGetByUser)
                 .toList();
@@ -183,6 +183,7 @@ public class CotizacionService {
 
         return "COT-" + year + "-1";
     }
+
     public CotizacionFullResponseDTO updateObservaciones(Long id, String observaciones) {
         Cotizacion cotizacion = cotizacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cotización no encontrada con id: " + id));
@@ -192,9 +193,10 @@ public class CotizacionService {
 
         return CotizacionMapper.toDTOGetByID(updatedCotizacion);
     }
-    public CotizacionFullResponseDTO change_state(Long id, EstadoCotizacionRequestDTO nuevoEstado){
+
+    public CotizacionFullResponseDTO change_state(Long id, EstadoCotizacionRequestDTO nuevoEstado) {
         Cotizacion cotizacion = cotizacionRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cotización no encontrada con id: " +id));
+                .orElseThrow(() -> new ResourceNotFoundException("Cotización no encontrada con id: " + id));
 
         cotizacion.setEstado(nuevoEstado.getNuevoEstado());
         Cotizacion updatedCotizacion = cotizacionRepository.save(cotizacion);
