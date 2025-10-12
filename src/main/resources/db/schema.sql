@@ -45,7 +45,7 @@ create TABLE IF NOT EXISTS cotizacion (
     id INT AUTO_INCREMENT PRIMARY KEY,
     -- datos de la cotizacion
     numero VARCHAR(50) NOT NULL UNIQUE,
-    estado VARCHAR(20) NOT NULL DEFAULT 'PENDIENTE' CHECK (estado IN ('PENDIENTE', 'EN_PROCESO', 'RESPONDIDA', 'CERRADA')),
+    estado VARCHAR(20) NOT NULL DEFAULT 'PENDIENTE' CHECK (estado IN ('PENDIENTE', 'EN_PROCESO', 'ENVIADA', 'ACEPTADA', 'RECHAZADA', 'CERRADA')),
     creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     comentario TEXT,
     -- datos del cliente
