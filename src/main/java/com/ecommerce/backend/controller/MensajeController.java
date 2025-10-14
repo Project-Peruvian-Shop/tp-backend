@@ -81,8 +81,8 @@ public class MensajeController {
             description = "Ubicación: Dashboard  \n" +
                     "Seguridad: Admin, Manager"
     )
-    public ResponseEntity<GlobalResponse<MensajeResponseDTO>> change_state(@PathVariable Long id, @RequestBody EstadoMensajeRequestDTO estadoMensajeRequestDTO) {
-        MensajeResponseDTO data = mensajeService.change_state(id, estadoMensajeRequestDTO);
+    public ResponseEntity<GlobalResponse<MensajeFullResponseDTO>> change_state(@PathVariable Long id, @RequestBody EstadoMensajeRequestDTO estadoMensajeRequestDTO) {
+        MensajeFullResponseDTO data = mensajeService.change_state(id, estadoMensajeRequestDTO);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Estado del mensaje actualizado correctamente"));

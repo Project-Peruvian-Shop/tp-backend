@@ -56,14 +56,14 @@ public class MensajeService {
         return MensajeMapper.toFullDTO(mensaje);
     }
 
-    public MensajeResponseDTO change_state(Long id, EstadoMensajeRequestDTO nuevoEstado) {
+    public MensajeFullResponseDTO change_state(Long id, EstadoMensajeRequestDTO nuevoEstado) {
         Mensaje mensaje = mensajeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Mensaje no encontrado - ID: " + id));
 
         mensaje.setEstado(nuevoEstado.getNuevoEstado());
         Mensaje mensajeEstadoActualizado = mensajeRepository.save(mensaje);
 
-        return MensajeMapper.toDTO(mensajeEstadoActualizado);
+        return MensajeMapper.toFullDTO(mensajeEstadoActualizado);
     }
 
     public MensajeDashboardDTO get_dashboard_menssage(Long mes) {
