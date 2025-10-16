@@ -71,7 +71,7 @@ public class ProductoService {
 
 
     public Page<ProductoDashboardResponseDTO> searchByNombreOrCategoria(String busqueda, Pageable pageable) {
-        return productoRepository.searchByNombreOrCategoria(busqueda, pageable)
+        return productoRepository.searchByNombreCategoriaDescripcion(busqueda, pageable)
                 .map(ProductoMapper::toDashboardDTO);
     }
 

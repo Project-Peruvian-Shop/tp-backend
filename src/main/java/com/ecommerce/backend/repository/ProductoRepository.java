@@ -27,18 +27,21 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
             FROM Producto p 
             WHERE LOWER(p.nombre) LIKE LOWER(CONCAT('%', :filtro, '%'))
                OR LOWER(p.categoria.nombre) LIKE LOWER(CONCAT('%', :filtro, '%'))
+               OR LOWER(p.descripcion) LIKE LOWER(CONCAT('%', :filtro, '%'))
+            ORDER BY LOWER(p.nombre) ASC
             """)
-    Page<Producto> searchByNombreOrCategoria(
+    Page<Producto> searchByNombreCategoriaDescripcion(
             @Param("filtro") String filtro,
             Pageable pageable
     );
 
+
     Page<Producto> findByCategoriaId(Long categoriaId, Pageable pageable);
 
     @Query("""
-    SELECT p
-    FROM Producto p
-    ORDER BY LOWER(p.nombre) ASC
-    """)
+            SELECT p
+            FROM Producto p
+            ORDER BY LOWER(p.nombre) ASC
+            """)
     Page<Producto> findAllOrderByNombreIgnoreCase(Pageable pageable);
 }
