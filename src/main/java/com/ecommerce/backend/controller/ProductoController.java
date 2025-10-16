@@ -2,10 +2,7 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
-import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
-import com.ecommerce.backend.dto.producto.ProductoDashboardResponseDTO;
-import com.ecommerce.backend.dto.producto.ProductoFullResponseDTO;
-import com.ecommerce.backend.dto.producto.ProductoRequestDTO;
+import com.ecommerce.backend.dto.producto.*;
 import com.ecommerce.backend.service.ProductoService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -130,6 +127,16 @@ public class ProductoController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Productos encontrados para: " + busqueda));
     }
+
+//    @GetMapping("/search")
+//    public ResponseEntity<GlobalResponse<List<ProductoSearchResponseDTO>>> searchStore(
+//            @RequestParam(defaultValue = "") String busqueda
+//    ) {
+//        List<ProductoSearchResponseDTO> data = productoService.searchStore(busqueda);
+//
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(GlobalResponse.success(data, "Productos encontrados para: " + busqueda));
+//    }
 
 
     @PostMapping("/")

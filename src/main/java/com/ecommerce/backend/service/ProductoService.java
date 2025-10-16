@@ -1,9 +1,6 @@
 package com.ecommerce.backend.service;
 
-import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
-import com.ecommerce.backend.dto.producto.ProductoDashboardResponseDTO;
-import com.ecommerce.backend.dto.producto.ProductoFullResponseDTO;
-import com.ecommerce.backend.dto.producto.ProductoRequestDTO;
+import com.ecommerce.backend.dto.producto.*;
 import com.ecommerce.backend.entity.Categoria;
 import com.ecommerce.backend.entity.Imagen;
 import com.ecommerce.backend.entity.Producto;
@@ -32,6 +29,7 @@ public class ProductoService {
                 .map(ProductoMapper::toDTO);
     }
 
+
     public Page<PaginatedProductoResponseDTO> findAllByCategoriaPaginated(Long categoriaId, Pageable pageable) {
         Categoria categoria = categoriaRepository.findById(categoriaId)
                 .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con id: " + categoriaId));
@@ -39,6 +37,7 @@ public class ProductoService {
         return productoRepository.findByCategoriaId(categoriaId, pageable)
                 .map(ProductoMapper::toDTO);
     }
+
 
     public ProductoFullResponseDTO findByID(Long id) {
         Producto producto = productoRepository.findById(id)
@@ -75,6 +74,14 @@ public class ProductoService {
         return productoRepository.searchByNombreOrCategoria(busqueda, pageable)
                 .map(ProductoMapper::toDashboardDTO);
     }
+
+
+//    public List<ProductoSearchResponseDTO> searchStore(String busqueda) {
+//        return productoRepository.searchByNombreOrCategoria(busqueda)
+//                .stream()
+//                .map(ProductoMapper::toSearchDTO)
+//                .toList();
+//    }
 
 
     public ProductoDashboardResponseDTO save(ProductoRequestDTO producto) {
