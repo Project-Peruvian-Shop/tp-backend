@@ -88,27 +88,27 @@ insert into producto (nombre, descripcion, imagen_id, categoria_id) values
 
 -- Mensajes
 insert into mensaje
-(nombre, tipo_documento, documento, telefono, email, contenido, tipo, estado, medio_respuesta, usuario_id)
+(nombre, tipo_documento, documento, telefono, email, contenido, tipo, estado, medio_respuesta, usuario_id, creacion)
 values
 ('Juan Pérez', 'DNI', '12345678', '+987654321', 'juanperez@gmail.com',
  'Estoy interesado en sus productos, por favor envíenme un catálogo.',
- 'CONTACTENOS', 'PENDIENTE', null, 1),
+ 'CONTACTENOS', 'PENDIENTE', null, 1, '2024-12-05 11:30:30'),
 
 ('María Gómez', 'RUC', '87654321', '+912345678', 'maria.gomez@yahoo.com',
  'Esta es una queja sobre el servicio recibido en su tienda.',
- 'QUEJA', 'EN_PROCESO', 'EMAIL', 1),
+ 'QUEJA', 'EN_PROCESO', 'EMAIL', 1, '2023-08-30 11:30:30'),
 
 ('Carla', 'PASAPORTE', '111222333', '+12345678', 'cliente.anonimo@test.com',
  'Por favor, envíenme información sobre la garantía de sus productos.',
- 'CONTACTENOS', 'CERRADO', 'WHATSAPP', NULL),
+ 'CONTACTENOS', 'CERRADO', 'WHATSAPP', NULL, '2024-12-05 11:30:30'),
 
 ('Carlos López', 'DNI', '11223344', '+999888777', 'carlos.lopez@hotmail.com',
  'Quiero presentar un reclamo formal sobre un producto defectuoso que compré.',
- 'RECLAMO', 'CERRADO', 'PRESENCIAL', 2),
+ 'RECLAMO', 'CERRADO', 'PRESENCIAL', 2, '2025-01-25 11:30:30'),
 
 ('Ana Torres', 'OTRO', '94810122', '+955666444', 'ana.torres@gmail.com',
  'Estoy inconforme con la atención que recibí, por favor contacten conmigo.',
- 'CONTACTENOS', 'RESUELTO', 'PRESENCIAL', NULL);
+ 'CONTACTENOS', 'RESUELTO', 'PRESENCIAL', NULL, '2025-10-16 11:30:30');
 
 -- cotizaciones
 insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id, creacion) values
