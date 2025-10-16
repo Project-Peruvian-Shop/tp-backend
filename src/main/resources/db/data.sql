@@ -148,13 +148,79 @@ insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, 
 -- Octubre 2025
 (19, 'COT-2025-15', 'PENDIENTE', 'Necesito entrega rápida', 'Juan Pérez', 'DNI', '12345678', '987654321', 'juan@example.com', 1, '2025-10-02 08:00:00');
 
+-- Detalles de cotización (continuación y completado)
 insert into cotizacion_detalle (producto_id, cotizacion_id, cantidad) values
+-- Cotización 1
 (1, 1, 20),
 (2, 1, 20),
+-- Cotización 2
 (3, 2, 12),
 (1, 2, 5),
+-- Cotización 3
 (2, 3, 55),
-(1, 4, 32);
+-- Cotización 4
+(1, 4, 32),
+
+-- Cotización 5
+(4, 5, 10),
+(5, 5, 8),
+
+-- Cotización 6
+(6, 6, 12),
+(7, 6, 15),
+
+-- Cotización 7
+(10, 7, 25),
+(11, 7, 30),
+
+-- Cotización 8
+(13, 8, 20),
+(14, 8, 12),
+
+-- Cotización 9
+(15, 9, 10),
+(16, 9, 8),
+
+-- Cotización 10
+(18, 10, 5),
+(19, 10, 7),
+
+-- Cotización 11
+(20, 11, 20),
+(21, 11, 25),
+
+-- Cotización 12
+(23, 12, 15),
+(24, 12, 10),
+
+-- Cotización 13
+(25, 13, 18),
+(26, 13, 20),
+
+-- Cotización 14
+(27, 14, 12),
+(28, 14, 10),
+
+-- Cotización 15
+(29, 15, 25),
+(30, 15, 20),
+
+-- Cotización 16
+(32, 16, 10),
+(33, 16, 15),
+
+-- Cotización 17
+(35, 17, 8),
+(30, 17, 10),
+
+-- Cotización 18
+(28, 18, 12),
+(32, 18, 15),
+
+-- Cotización 19
+(12, 19, 20),
+(15, 19, 25);
+
 
 insert into cotizacion_pdf (enlace, cotizacion_id) values
 ('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 2),
