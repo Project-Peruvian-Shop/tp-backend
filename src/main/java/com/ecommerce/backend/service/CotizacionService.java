@@ -154,9 +154,9 @@ public class CotizacionService {
                 .toList();
     }
 
-    public Page<CotizacionByUsuarioResponseDTO> getByUserPaginated(Long id, Pageable pageable) {
+    public Page<CotizacionDashboardDTO> getByUserPaginated(Long id, Pageable pageable) {
         return cotizacionRepository.findByUsuarioIdOrderByCreacionDesc(id, pageable)
-                .map(CotizacionMapper::toDTOGetByUser);
+                .map(CotizacionMapper::toDashboardDTO);
     }
 
     public CotizacionFullResponseDTO getByID(Long id) {

@@ -217,12 +217,12 @@ public class CotizacionController {
             description = "Ubicación: cotizaciones del mismo usuario  \n" +
                     "Seguridad: Usuario, Manager, Admin"
     )
-    public ResponseEntity<GlobalResponse<Page<CotizacionByUsuarioResponseDTO>>> getCotizacionesByUsuarioPaginated(
+    public ResponseEntity<GlobalResponse<Page<CotizacionDashboardDTO>>> getCotizacionesByUsuarioPaginated(
             @PathVariable Long id,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<CotizacionByUsuarioResponseDTO> data = cotizacionService.getByUserPaginated(id, pageable);
+        Page<CotizacionDashboardDTO> data = cotizacionService.getByUserPaginated(id, pageable);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Cotizaciones del usuario obtenidas exitosamente"));
