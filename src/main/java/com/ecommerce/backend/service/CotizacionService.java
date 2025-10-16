@@ -154,6 +154,11 @@ public class CotizacionService {
                 .toList();
     }
 
+    public Page<CotizacionByUsuarioResponseDTO> getByUserPaginated(Long id, Pageable pageable) {
+        return cotizacionRepository.findByUsuarioIdOrderByCreacionDesc(id, pageable)
+                .map(CotizacionMapper::toDTOGetByUser);
+    }
+
     public CotizacionFullResponseDTO getByID(Long id) {
         Cotizacion cotizacion = cotizacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cotización no encontrada con id: " + id));

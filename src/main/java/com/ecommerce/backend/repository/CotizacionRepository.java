@@ -41,6 +41,8 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
 
     List<Cotizacion> findByUsuarioIdOrderByCreacionDesc(Long usuarioId);
 
+    Page<Cotizacion> findByUsuarioIdOrderByCreacionDesc(Long usuarioId, Pageable pageable);
+
     @Query("SELECT COUNT(c) FROM Cotizacion c")
     Long countAllCotizaciones();
 
