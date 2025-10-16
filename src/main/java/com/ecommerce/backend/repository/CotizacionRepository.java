@@ -72,4 +72,5 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
             """)
     List<CotizacionResumenDTO> obtenerUltimas5Cotizaciones();
 
+    Page<Cotizacion> findAllByOrderByCreacionDesc(Pageable pageable);
 }

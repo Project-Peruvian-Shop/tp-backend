@@ -24,7 +24,6 @@ import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -79,6 +78,7 @@ public class CotizacionService {
                 cotizacionGuardada.getTelefono()
         );
     }
+
     public CotizacionPdfDTO savePdf(Long cotizacionId, MultipartFile archivo) throws IOException {
 
         Cotizacion cotizacion = cotizacionRepository.findById(cotizacionId)
@@ -149,7 +149,7 @@ public class CotizacionService {
     }
 
     public Page<CotizacionDashboardDTO> get_cotizaciones_dashboard(Pageable pageable) {
-        return cotizacionRepository.findAll(pageable)
+        return cotizacionRepository.findAllByOrderByCreacionDesc(pageable)
                 .map(CotizacionMapper::toDashboardDTO);
     }
 
