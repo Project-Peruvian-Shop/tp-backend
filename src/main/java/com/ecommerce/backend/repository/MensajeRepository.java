@@ -62,4 +62,12 @@ public interface MensajeRepository extends JpaRepository<Mensaje, Long> {
             @Param("mes") int mes,
             @Param("year") int year
     );
+
+    @Query("""
+            SELECT m
+            FROM Mensaje m
+            ORDER BY m.creacion DESC
+            """)
+    Page<Mensaje> findAllOrderByCreacionDesc(Pageable pageable);
+
 }

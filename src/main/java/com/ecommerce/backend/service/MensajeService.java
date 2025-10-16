@@ -74,7 +74,7 @@ public class MensajeService {
     }
 
     public Page<MensajeDashboardResponseDTO> findDashboardPaginated(Pageable pageable) {
-        return mensajeRepository.findAll(pageable).map(MensajeMapper::toDashboardDTO);
+        return mensajeRepository.findAllOrderByCreacionDesc(pageable).map(MensajeMapper::toDashboardDTO);
     }
 
     public Long countAllMensajes() {
