@@ -22,7 +22,7 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
     public Page<UsuarioResponseDTO> findAll(Pageable pageable) {
-        return usuarioRepository.findAll(pageable)
+        return usuarioRepository.findAllOrderByRolAndApellidos(pageable)
                 .map(UsuarioMapper::toDTO);
     }
 

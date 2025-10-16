@@ -38,6 +38,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
                OR LOWER(u.email) LIKE LOWER(CONCAT('%', :filtro, '%'))
                OR LOWER(u.telefono) LIKE LOWER(CONCAT('%', :filtro, '%'))
                OR LOWER(u.rol) LIKE LOWER(CONCAT('%', :filtro, '%'))
+            ORDER BY u.rol ASC, u.apellidos ASC
             """)
     Page<Usuario> searchByNombreApellidosEmailTelefonoRol(
             @Param("filtro") String filtro,
@@ -46,4 +47,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     @Query("SELECT COUNT(u) FROM Usuario u")
     Long countAllUsuarios();
+
+    @Query("""
+            SELECT u
+            FROM Usuario u
+            ORDER BY u.rol ASC, u.apellidos ASC
+            """)
+    Page<Usuario> findAllOrderByRolAndApellidos(Pageable pageable);
 }
