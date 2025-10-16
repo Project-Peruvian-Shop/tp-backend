@@ -52,6 +52,7 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
             WHERE LOWER(c.numero) LIKE LOWER(CONCAT('%', :filtro, '%'))
                OR LOWER(c.nombre) LIKE LOWER(CONCAT('%', :filtro, '%'))
                OR LOWER(c.observaciones) LIKE LOWER(CONCAT('%', :filtro, '%'))
+            ORDER BY c.creacion DESC
             """)
     Page<Cotizacion> searchByNumeroClienteObservaciones(
             @Param("filtro") String filtro,
