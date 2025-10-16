@@ -183,7 +183,7 @@ public class CotizacionService {
 
     private String getNumberFromDB() {
         int year = java.time.Year.now().getValue();
-        Optional<Cotizacion> ultimaCotizacion = cotizacionRepository.findTopByOrderByIdDesc();
+        Optional<Cotizacion> ultimaCotizacion = cotizacionRepository.findTopByOrderByCreacionDesc();
 
         if (ultimaCotizacion.isPresent()) {
             String numero = ultimaCotizacion.get().getNumero();
