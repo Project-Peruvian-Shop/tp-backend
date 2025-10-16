@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -78,18 +79,23 @@ public class CotizacionService {
                 cotizacionGuardada.getTelefono()
         );
     }
-
     public CotizacionPdfDTO savePdf(Long cotizacionId, MultipartFile archivo) throws IOException {
 
         Cotizacion cotizacion = cotizacionRepository.findById(cotizacionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cotización no encontrada"));
 
-        String fileName = UUID.randomUUID().toString().substring(0, 6) + ".pdf";
+        String fileName = this.getNumberFromDB() + ".pdf";
 
         String filePath = fileUploadService.uploadFile(archivo, fileName, "uploads/cotizaciones");
 
+        // Generarción URL pública
+        String publicUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/uploads/cotizaciones/")
+                .path(fileName)
+                .toUriString();
+
         CotizacionPDF pdf = new CotizacionPDF();
-        pdf.setEnlace(filePath);
+        pdf.setEnlace(publicUrl);
         pdf.setCreacion(LocalDateTime.now());
         pdf.setCotizacion(cotizacion);
 

@@ -2,10 +2,7 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
-import com.ecommerce.backend.dto.usuario.UsuarioPerfilDTO;
-import com.ecommerce.backend.dto.usuario.UsuarioRequestDTO;
-import com.ecommerce.backend.dto.usuario.UsuarioResponseDTO;
-import com.ecommerce.backend.dto.usuario.UsuarioSimpleResponseDTO;
+import com.ecommerce.backend.dto.usuario.*;
 import com.ecommerce.backend.enums.UsuarioRolEnum;
 import com.ecommerce.backend.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -63,9 +60,9 @@ public class UsuarioController {
     )
     public ResponseEntity<GlobalResponse<UsuarioResponseDTO>> updateUsuario(
             @PathVariable Long id,
-            @Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO
+            @Valid @RequestBody UsuarioUpdateRequestDTO usuarioUpdateRequestDTO
     ) {
-        UsuarioResponseDTO data = usuarioService.update(id, usuarioRequestDTO);
+        UsuarioResponseDTO data = usuarioService.update(id, usuarioUpdateRequestDTO);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Usuario updated successfully - id: " + id));

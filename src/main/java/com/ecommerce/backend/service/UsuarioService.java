@@ -1,9 +1,6 @@
 package com.ecommerce.backend.service;
 
-import com.ecommerce.backend.dto.usuario.UsuarioPerfilDTO;
-import com.ecommerce.backend.dto.usuario.UsuarioRequestDTO;
-import com.ecommerce.backend.dto.usuario.UsuarioResponseDTO;
-import com.ecommerce.backend.dto.usuario.UsuarioSimpleResponseDTO;
+import com.ecommerce.backend.dto.usuario.*;
 import com.ecommerce.backend.entity.Usuario;
 import com.ecommerce.backend.exceptions.EntityAlreadyExistsException;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
@@ -50,14 +47,15 @@ public class UsuarioService {
     }
 
 
-    public UsuarioResponseDTO update(Long id, UsuarioRequestDTO usuarioRequestDTO) {
+    public UsuarioResponseDTO update(Long id, UsuarioUpdateRequestDTO usuarioUpdateRequestDTO) {
         Usuario existingUser = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - id: " + id));
 
-        existingUser.setNombre(usuarioRequestDTO.getNombre());
-        existingUser.setApellidos(usuarioRequestDTO.getApellidos());
-        existingUser.setTelefono(usuarioRequestDTO.getTelefono());
-        existingUser.setEmail(usuarioRequestDTO.getEmail());
+        existingUser.setNombre(usuarioUpdateRequestDTO.getNombre());
+        existingUser.setApellidos(usuarioUpdateRequestDTO.getApellidos());
+        existingUser.setTelefono(usuarioUpdateRequestDTO.getTelefono());
+        existingUser.setEmail(usuarioUpdateRequestDTO.getEmail());
+        existingUser.setRol(usuarioUpdateRequestDTO.getRol());
 
         Usuario updatedUser = usuarioRepository.save(existingUser);
         return UsuarioMapper.toDTO(updatedUser);
