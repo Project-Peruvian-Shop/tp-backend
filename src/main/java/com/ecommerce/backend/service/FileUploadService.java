@@ -20,7 +20,7 @@ public class FileUploadService {
     @Value("${file.upload.max-size:10485760}") // Default 10 MB
     private long maxFileSize;
 
-    @Value("${file.upload.allowed-extensions:pdf}")
+    @Value("${file.upload.allowed-extensions:pdf,jpg,png}")
     private String[] allowedExtensions;
 
     /**

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(Constant.API_VERSION + "/" + Constant.TABLE_IMAGEN)
@@ -49,7 +50,7 @@ public class ImagenController {
     }
 
     @PostMapping
-    public ResponseEntity<GlobalResponse> create(@Valid @RequestBody ImagenRequestDTO imagen) {
+    public ResponseEntity<GlobalResponse> create(@RequestParam("file") MultipartFile file) {
         HttpStatus status;
         Object data = null;
         String message;
@@ -57,7 +58,7 @@ public class ImagenController {
 
         try {
             status = HttpStatus.CREATED;
-            data = imagenService.create(imagen);
+            data = imagenService.create(file);
             message = "Imagen created successfully";
         } catch (Exception e) {
             status = HttpStatus.INTERNAL_SERVER_ERROR;

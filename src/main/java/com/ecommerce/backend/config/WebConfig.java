@@ -19,7 +19,7 @@ public class WebConfig {
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }
-            // Configuración para mostrar archivos estáticos desde el sistema de archi vos
+            // Configuración para mostrar archivos estáticos desde el sistema de archivos
             @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
                 // Sirve archivos desde la carpeta 'uploads' en el sistema de archivos
