@@ -46,10 +46,14 @@ public interface MensajeRepository extends JpaRepository<Mensaje, Long> {
             SELECT new com.ecommerce.backend.dto.cotizacion.MensajeDashboardDTO(
                 m.id,
                 m.contenido,
-                m.tipo
+                m.tipo,
+                m.creacion
             )
             FROM Mensaje m
-            WHERE m.estado = com.ecommerce.backend.enums.MensajeEstadoEnum.PENDIENTE
+            WHERE m.estado NOT IN (
+                com.ecommerce.backend.enums.MensajeEstadoEnum.RESUELTO,
+                com.ecommerce.backend.enums.MensajeEstadoEnum.CERRADO
+            )
               AND FUNCTION('MONTH', m.creacion) = :mes
               AND FUNCTION('YEAR', m.creacion) = :year
             ORDER BY m.creacion DESC
