@@ -120,12 +120,12 @@ insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, 
 
 insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id, creacion) values
 -- Octubre 2024
-(5, 'COT-2024-10-1', 'PENDIENTE', 'Entrega urgente', 'Ana Torres', 'DNI', '11111111', '987111111', 'ana@example.com', 1, '2024-10-05 10:30:00'),
-(6, 'COT-2024-10-2', 'EN_PROCESO', 'Revisar stock', 'Luis Ramírez', 'DNI', '22222222', '987222222', 'luis@example.com', 2, '2024-10-15 14:20:00'),
+(5, 'COT-2024-1', 'PENDIENTE', 'Entrega urgente', 'Ana Torres', 'DNI', '11111111', '987111111', 'ana@example.com', 1, '2024-10-05 10:30:00'),
+(6, 'COT-2024-2', 'EN_PROCESO', 'Revisar stock', 'Luis Ramírez', 'DNI', '22222222', '987222222', 'luis@example.com', 2, '2024-10-15 14:20:00'),
 -- Noviembre 2024
-(7, 'COT-2024-11-1', 'ENVIADA', 'Cliente urgente', 'Carla Díaz', 'RUC', '33333333', '987333333', 'carla@example.com', 1, '2024-11-08 09:10:00'),
+(7, 'COT-2024-3', 'ENVIADA', 'Cliente urgente', 'Carla Díaz', 'RUC', '33333333', '987333333', 'carla@example.com', 1, '2024-11-08 09:10:00'),
 -- Diciembre 2024
-(8, 'COT-2024-12-1', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 1, '2024-12-20 16:45:00'),
+(8, 'COT-2024-4', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 1, '2024-12-20 16:45:00'),
 -- Enero 2025
 (9, 'COT-2025-5', 'RECHAZADA', 'Necesito entrega rápida', 'Juan Pérez', 'DNI', '12345678', '987654321', 'juan@example.com', 1, '2025-01-10 11:00:00'),
 (10, 'COT-2025-6', 'EN_PROCESO', 'Revisar stock', 'María López', 'DNI', '87654321', '987123456', 'maria@example.com', 2, '2025-01-25 15:30:00'),
