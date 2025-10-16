@@ -68,10 +68,11 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
             )
             FROM CotizacionDetalle cd
             JOIN cd.cotizacion c
-            GROUP BY c.id, c.numero, c.estado
+            WHERE c.estado IN (com.ecommerce.backend.enums.CotizacionEstadoEnum.PENDIENTE, com.ecommerce.backend.enums.CotizacionEstadoEnum.EN_PROCESO)
+            GROUP BY c.id, c.numero, c.estado, c.creacion
             ORDER BY c.creacion DESC
             """)
-    List<CotizacionResumenDTO> obtenerUltimas5Cotizaciones();
+    List<CotizacionResumenDTO> obtenerUltimasCotizaciones(Pageable pageable);
 
     Page<Cotizacion> findAllByOrderByCreacionDesc(Pageable pageable);
 }

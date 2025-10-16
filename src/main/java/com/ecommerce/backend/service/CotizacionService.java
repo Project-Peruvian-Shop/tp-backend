@@ -11,6 +11,7 @@ import com.ecommerce.backend.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -138,7 +139,7 @@ public class CotizacionService {
     }
 
     public List<CotizacionResumenDTO> get_last_cotizaciones() {
-        return cotizacionRepository.obtenerUltimas5Cotizaciones();
+        return cotizacionRepository.obtenerUltimasCotizaciones(PageRequest.of(0, 5));
     }
 
     public List<MensajeDashboardDTO> get_mensajes_pendientes_mes() {
