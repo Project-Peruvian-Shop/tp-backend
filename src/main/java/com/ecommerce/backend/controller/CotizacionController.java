@@ -211,6 +211,23 @@ public class CotizacionController {
                 .body(GlobalResponse.success(data, "Cotizaciones del usuario obtenidas exitosamente"));
     }
 
+    @GetMapping("/by-usuario-paginated/{id}")
+    @Operation(
+            summary = "Traer cotizaciones del usuario paginadas",
+            description = "Ubicación: cotizaciones del mismo usuario  \n" +
+                    "Seguridad: Usuario, Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse<Page<CotizacionByUsuarioResponseDTO>>> getCotizacionesByUsuarioPaginated(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CotizacionByUsuarioResponseDTO> data = cotizacionService.getByUserPaginated(id, pageable);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Cotizaciones del usuario obtenidas exitosamente"));
+    }
+
 
     @GetMapping("/{id}")
     @Operation(
@@ -224,6 +241,7 @@ public class CotizacionController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Cotización obtenida exitosamente"));
     }
+
     @PutMapping("/observaciones/{id}")
     @Operation(
             summary = " Agregar o Actualizar observaciones de una cotización",
@@ -239,6 +257,7 @@ public class CotizacionController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Observaciones de la cotización actualizadas exitosamente"));
     }
+
     @PutMapping("change_state/{id}")
     @Operation(
             summary = "Cambiar estado de la cotización",
@@ -248,10 +267,10 @@ public class CotizacionController {
     public ResponseEntity<GlobalResponse<CotizacionFullResponseDTO>> change_state(
             @PathVariable Long id,
             @RequestBody EstadoCotizacionRequestDTO estadoCotizacionRequestDTO
-    ){
-        CotizacionFullResponseDTO data = cotizacionService.change_state(id,estadoCotizacionRequestDTO);
+    ) {
+        CotizacionFullResponseDTO data = cotizacionService.change_state(id, estadoCotizacionRequestDTO);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(GlobalResponse.success(data,"Estado de la cotizacion actualizada exitosamente"));
+                .body(GlobalResponse.success(data, "Estado de la cotizacion actualizada exitosamente"));
     }
 }
