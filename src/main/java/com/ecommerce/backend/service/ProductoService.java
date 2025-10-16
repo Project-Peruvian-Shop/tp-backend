@@ -60,7 +60,7 @@ public class ProductoService {
 
 
     public Page<ProductoDashboardResponseDTO> findAllPaginatedDashboard(Pageable pageable) {
-        return productoRepository.findAll(pageable)
+        return productoRepository.findAllOrderByNombreIgnoreCase(pageable)
                 .map(ProductoMapper::toDashboardDTO);
     }
 

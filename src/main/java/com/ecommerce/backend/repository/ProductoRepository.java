@@ -34,4 +34,11 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
     );
 
     Page<Producto> findByCategoriaId(Long categoriaId, Pageable pageable);
+
+    @Query("""
+    SELECT p
+    FROM Producto p
+    ORDER BY LOWER(p.nombre) ASC
+    """)
+    Page<Producto> findAllOrderByNombreIgnoreCase(Pageable pageable);
 }
