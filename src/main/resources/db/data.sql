@@ -167,7 +167,7 @@ insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, 
 -- Septiembre 2025
 (18, 'COT-2025-14', 'EN_PROCESO', 'Entrega programada', 'Natalia Ramos', 'DNI', '10101010', '987101010', 'natalia@example.com', 1, '2025-10-12 11:35:00'),
 -- Octubre 2025
-(19, 'COT-2025-15', 'PENDIENTE', 'Necesito entrega rápida', 'Juan Pérez', 'DNI', '12345678', '987654321', 'juan@example.com', 1, '2025-10-02 08:00:00');
+(19, 'COT-2025-15', 'PENDIENTE', 'Necesito entrega rápida', 'Juan Pérez', 'DNI', '12345678', '987654321', 'juan@example.com', 1, '2025-10-13 08:00:00');
 
 -- Detalles de cotización (continuación y completado)
 insert into cotizacion_detalle (producto_id, cotizacion_id, cantidad) values
