@@ -3,6 +3,7 @@ package com.ecommerce.backend.service;
 import com.ecommerce.backend.dto.cotizacion.CategoriaMesDTO;
 import com.ecommerce.backend.dto.cotizacion.*;
 import com.ecommerce.backend.dto.cotizacion.ProductoCotizadoMesDTO;
+import com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO;
 import com.ecommerce.backend.entity.*;
 import com.ecommerce.backend.enums.CotizacionEstadoEnum;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
@@ -214,5 +215,9 @@ public class CotizacionService {
         Cotizacion updatedCotizacion = cotizacionRepository.save(cotizacion);
 
         return CotizacionMapper.toDTOGetByID(updatedCotizacion);
+    }
+
+    public List<ProductoCarritoDetalleDTO> productos(Long id) {
+        return detalleRepository.obtenerProductosPorCotizacion(id);
     }
 }

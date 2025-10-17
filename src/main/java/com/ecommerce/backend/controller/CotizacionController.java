@@ -3,6 +3,7 @@ package com.ecommerce.backend.controller;
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.cotizacion.*;
+import com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO;
 import com.ecommerce.backend.service.CotizacionService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -272,5 +273,18 @@ public class CotizacionController {
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Estado de la cotizacion actualizada exitosamente"));
+    }
+
+    @GetMapping("/productos-por-cotizacion/{cotizacionId}")
+    @Operation(
+            summary = "Traer productos por cotización",
+            description = "Ubicación: Detalle de la cotización  \n" +
+                    "Seguridad: Usuario, Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse<List<ProductoCarritoDetalleDTO>>> getProductosPorCotizacion(@PathVariable Long cotizacionId) {
+        List<ProductoCarritoDetalleDTO> data = cotizacionService.productos(cotizacionId);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Productos de la cotización obtenidos exitosamente"));
     }
 }
