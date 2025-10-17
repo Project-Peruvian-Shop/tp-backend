@@ -114,7 +114,7 @@ public class CotizacionService {
         LocalDate now = LocalDate.now();
         int m = (year != null) ? mes : now.getMonthValue();
         int y = (year != null) ? year : now.getYear();
-        return detalleRepository.productos_cotizados_mes(m, y);
+        return detalleRepository.productos_cotizados_mes(m, y, PageRequest.of(0, 5));
     }
 
     public List<CategoriaMesDTO> get_lineas_cotizadas_mes(Integer mes, Integer year) {
