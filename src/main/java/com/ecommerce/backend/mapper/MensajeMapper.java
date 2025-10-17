@@ -38,6 +38,8 @@ public class MensajeMapper {
                 .tipo(mensaje.getTipo())
                 .estado(mensaje.getEstado())
                 .creacion(mensaje.getCreacion())
+                .tipoDocumento(mensaje.getTipo_documento())
+                .documento(mensaje.getDocumento())
                 .usuario(mensaje.getUsuario())
                 .build();
     }
