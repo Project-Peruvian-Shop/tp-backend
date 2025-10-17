@@ -87,28 +87,49 @@ insert into producto (nombre, descripcion, imagen_id, categoria_id) values
 ('Tuberias para Alcantarillado 200mm UF', 'Tubería de 200mm para conducción eficiente de aguas residuales.', 6, 6);
 
 -- Mensajes
-insert into mensaje
+INSERT INTO mensaje
 (nombre, tipo_documento, documento, telefono, email, contenido, tipo, estado, medio_respuesta, usuario_id, creacion)
-values
+VALUES
 ('Juan Pérez', 'DNI', '12345678', '+987654321', 'juanperez@gmail.com',
- 'Estoy interesado en sus productos, por favor envíenme un catálogo.',
- 'CONTACTENOS', 'PENDIENTE', null, 1, '2024-12-05 11:30:30'),
+ 'Estoy interesado en sus productos de PVC de 2 pulgadas. ¿Podrían enviarme una cotización detallada?',
+ 'CONTACTENOS', 'PENDIENTE', NULL, 1, '2024-12-05 11:30:30'),
 
-('María Gómez', 'RUC', '87654321', '+912345678', 'maria.gomez@yahoo.com',
- 'Esta es una queja sobre el servicio recibido en su tienda.',
+('María Gómez', 'RUC', '20654321987', '+912345678', 'maria.gomez@yahoo.com',
+ 'Realicé una compra hace dos semanas y el pedido llegó incompleto. Necesito una solución urgente.',
  'QUEJA', 'EN_PROCESO', 'EMAIL', 1, '2023-08-30 11:30:30'),
 
-('Carla', 'PASAPORTE', '111222333', '+12345678', 'cliente.anonimo@test.com',
- 'Por favor, envíenme información sobre la garantía de sus productos.',
+('Carla Rivas', 'PASAPORTE', 'PZ1122334', '+12345678', 'cliente.anonimo@test.com',
+ '¿Qué tipo de garantía ofrecen en las tuberías de PVC clase 10? Estoy considerando una compra mayorista.',
  'CONTACTENOS', 'CERRADO', 'WHATSAPP', NULL, '2024-12-05 11:30:30'),
 
 ('Carlos López', 'DNI', '11223344', '+999888777', 'carlos.lopez@hotmail.com',
- 'Quiero presentar un reclamo formal sobre un producto defectuoso que compré.',
+ 'Compré tuberías de PVC de 3 pulgadas y algunas vinieron con defectos de fabricación. Deseo presentar un reclamo.',
  'RECLAMO', 'CERRADO', 'PRESENCIAL', 2, '2025-01-25 11:30:30'),
 
 ('Ana Torres', 'OTRO', '94810122', '+955666444', 'ana.torres@gmail.com',
- 'Estoy inconforme con la atención que recibí, por favor contacten conmigo.',
- 'CONTACTENOS', 'RESUELTO', 'PRESENCIAL', NULL, '2025-10-16 11:30:30');
+ 'La atención en la sucursal de San Isidro fue deficiente. Agradecería que me contacten para resolverlo.',
+ 'QUEJA', 'RESUELTO', 'PRESENCIAL', NULL, '2025-10-16 11:30:30'),
+
+('Pedro Salazar', 'DNI', '44556677', '+988776655', 'pedro.salazar@empresa.com',
+ 'Estoy buscando cotización para 100 metros de tubería PVC de 4" y accesorios de unión.',
+ 'CONTACTENOS', 'PENDIENTE', NULL, 3, '2025-10-10 10:15:20'),
+
+('Lucía Fernández', 'RUC', '20588741236', '+976543210', 'ventas@constructoraandes.pe',
+ 'Requerimos cotización por mayor para tuberías de PVC clase 10 y 15. Favor de enviar proforma por correo.',
+ 'CONTACTENOS', 'EN_PROCESO', 'EMAIL', 1, '2025-09-02 14:40:50'),
+
+('Diego Ramos', 'DNI', '33445566', '+933221100', 'diegoramos@gmail.com',
+ 'He intentado comunicarme varias veces sin respuesta. Necesito saber el estado de mi pedido.',
+ 'QUEJA', 'EN_PROCESO', 'WHATSAPP', 4, '2025-08-21 09:25:00'),
+
+('Rosa Medina', 'DNI', '55667788', '+977665544', 'rosa.medina@outlook.com',
+ 'Deseo obtener información sobre los métodos de pago para pedidos al por mayor.',
+ 'CONTACTENOS', 'RESUELTO', 'EMAIL', NULL, '2025-07-15 16:45:10'),
+
+('Miguel Torres', 'DNI', '66778899', '+911223344', 'miguel.torres@gmail.com',
+ 'Recibí un producto diferente al solicitado, por lo que quiero dejar constancia de mi reclamo.',
+ 'RECLAMO', 'PENDIENTE', 'TELEFONO', 2, '2025-06-28 08:35:00');
+
 
 -- cotizaciones
 insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id, creacion) values
