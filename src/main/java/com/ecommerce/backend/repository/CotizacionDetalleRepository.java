@@ -2,6 +2,7 @@ package com.ecommerce.backend.repository;
 
 import com.ecommerce.backend.dto.cotizacion.CategoriaMesDTO;
 import com.ecommerce.backend.dto.cotizacion.ProductoCotizadoMesDTO;
+import com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO;
 import com.ecommerce.backend.entity.CotizacionDetalle;
 import com.ecommerce.backend.entity.CotizacionDetalleId;
 import org.springframework.data.domain.Pageable;
@@ -35,4 +36,24 @@ public interface CotizacionDetalleRepository extends JpaRepository<CotizacionDet
             "GROUP BY cat.id, cat.nombre " +
             "ORDER BY SUM(d.cantidad) DESC")
     List<CategoriaMesDTO> lineasCotizadasMes(@Param("mes") int mes, @Param("year") int year);
+
+    @Query("""
+                SELECT new com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO(
+                    p.id,
+                    p.nombre,
+                    cat.nombre,
+                    cat.norma,
+                    img.enlace,
+                    img.alt,
+                    d.cantidad
+                )
+                FROM CotizacionDetalle d
+                JOIN d.producto p
+                JOIN p.categoria cat
+                JOIN p.imagen img
+                JOIN d.cotizacion c
+                WHERE c.id = :cotizacionId
+            """)
+    List<ProductoCarritoDetalleDTO> obtenerProductosPorCotizacion(@Param("cotizacionId") Long cotizacionId);
+
 }
