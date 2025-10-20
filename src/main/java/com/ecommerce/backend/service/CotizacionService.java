@@ -46,8 +46,11 @@ public class CotizacionService {
         Usuario usuario = usuarioRepository.findById(request.getUsuarioID())
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
+        String numeroCotizacion = this.getNumberFromDB();
+        //System.out.println(numeroCotizacion);
+
         Cotizacion cotizacion = new Cotizacion();
-        cotizacion.setNumero(this.getNumberFromDB());
+        cotizacion.setNumero(numeroCotizacion);
         cotizacion.setEstado(CotizacionEstadoEnum.PENDIENTE);
         cotizacion.setCreacion(LocalDateTime.now());
         cotizacion.setComentario(request.getComentario());
