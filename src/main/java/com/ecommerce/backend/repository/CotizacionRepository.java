@@ -77,22 +77,23 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
     Page<Cotizacion> findAllByOrderByCreacionDesc(Pageable pageable);
 
     @Query("""
-              SELECT COUNT(c)
-              FROM Cotizacion c
-              WHERE c.estado = com.ecommerce.backend.enums.CotizacionEstadoEnum.PENDIENTE
-                AND c.creacion >= CURRENT_DATE
-                AND c.creacion < FUNCTION('DATEADD', DAY, 1, CURRENT_DATE)
+                SELECT COUNT(c)
+                FROM Cotizacion c
+                WHERE c.estado = com.ecommerce.backend.enums.CotizacionEstadoEnum.PENDIENTE
+                  AND c.creacion BETWEEN :fechaInicio AND :fechaFin
             """)
-    Long countCotizacionesPendientesHoy();
+    Long countCotizacionesPendientesPorPeriodo(@Param("fechaInicio") java.time.LocalDateTime fechaInicio,
+                                               @Param("fechaFin") java.time.LocalDateTime fechaFin);
 
 
     @Query("""
-              SELECT COUNT(c)
-              FROM Cotizacion c
-              WHERE c.estado = com.ecommerce.backend.enums.CotizacionEstadoEnum.ACEPTADA
-                AND c.creacion >= CURRENT_DATE
-                AND c.creacion < FUNCTION('DATEADD', DAY, 1, CURRENT_DATE)
+                SELECT COUNT(c)
+                FROM Cotizacion c
+                WHERE c.estado = com.ecommerce.backend.enums.CotizacionEstadoEnum.ACEPTADA
+                  AND c.creacion BETWEEN :fechaInicio AND :fechaFin
             """)
-    Long countCotizacionesAceptadasHoy();
+    Long countCotizacionesAceptadasPorPeriodo(@Param("fechaInicio") java.time.LocalDateTime fechaInicio,
+                                              @Param("fechaFin") java.time.LocalDateTime fechaFin);
+
 
 }

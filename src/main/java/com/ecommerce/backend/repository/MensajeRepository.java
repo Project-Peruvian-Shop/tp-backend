@@ -71,11 +71,12 @@ public interface MensajeRepository extends JpaRepository<Mensaje, Long> {
     Page<Mensaje> findAllOrderByCreacionDesc(Pageable pageable);
 
     @Query("""
-              SELECT COUNT(m)
-              FROM Mensaje m
-              WHERE m.estado = com.ecommerce.backend.enums.MensajeEstadoEnum.PENDIENTE
-                AND m.creacion >= CURRENT_DATE
-                AND m.creacion < FUNCTION('DATEADD', DAY, 1, CURRENT_DATE)
+                SELECT COUNT(m)
+                FROM Mensaje m
+                WHERE m.estado = com.ecommerce.backend.enums.MensajeEstadoEnum.PENDIENTE
+                  AND m.creacion BETWEEN :fechaInicio AND :fechaFin
             """)
-    Long countMensajesPendientesHoy();
+    Long countMensajesPendientesPorPeriodo(@Param("fechaInicio") java.time.LocalDateTime fechaInicio,
+                                           @Param("fechaFin") java.time.LocalDateTime fechaFin);
+
 }
