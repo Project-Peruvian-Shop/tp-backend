@@ -4,6 +4,8 @@ import com.ecommerce.backend.dto.cotizacion.*;
 import com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO;
 import com.ecommerce.backend.entity.*;
 import com.ecommerce.backend.enums.CotizacionEstadoEnum;
+import com.ecommerce.backend.exceptions.BadRequestException;
+import com.ecommerce.backend.exceptions.EntityAlreadyExistsException;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.CotizacionMapper;
 import com.ecommerce.backend.repository.*;
@@ -34,6 +36,7 @@ public class CotizacionService {
     private final CotizacionRepository cotizacionRepository;
     private final CotizacionDetalleRepository detalleRepository;
     private final CotizacionPdfRepository pdfRepository;
+    private final CotizacionHistorialEstadoRepository cotizacionHistorialEstadoRepository;
     private final FileUploadService fileUploadService;
     private final MensajeRepository mensajeRepository;
 
@@ -191,15 +194,42 @@ public class CotizacionService {
         return CotizacionMapper.toDTOGetByID(updatedCotizacion);
     }
 
-    public CotizacionFullResponseDTO change_state(Long id, EstadoCotizacionRequestDTO nuevoEstado) {
+    @Transactional
+    public CotizacionFullResponseDTO change_state(Long id, EstadoCotizacionRequestDTO request) {
         Cotizacion cotizacion = cotizacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cotización no encontrada con id: " + id));
 
-        cotizacion.setEstado(nuevoEstado.getNuevoEstado());
+        CotizacionEstadoEnum estadoAnterior = cotizacion.getEstado();
+        CotizacionEstadoEnum nuevoEstado = request.getNuevoEstado();
+
+        // Verifica que realmente haya un cambio
+        if (estadoAnterior.equals(nuevoEstado)) {
+            throw new BadRequestException("La cotización ya se encuentra en el estado: " + nuevoEstado);
+        }
+
+        // Actualiza el estado actual
+        cotizacion.setEstado(nuevoEstado);
         Cotizacion updatedCotizacion = cotizacionRepository.save(cotizacion);
 
+        // Crear registro en historial
+        CotizacionHistorialEstado historial = new CotizacionHistorialEstado();
+        historial.setCotizacion(cotizacion);
+        historial.setEstadoAnterior(estadoAnterior);
+        historial.setEstadoNuevo(nuevoEstado);
+        historial.setObservacion(request.getObservacion());
+
+        // Si tu DTO incluye usuarioId (quién cambió el estado)
+        if (request.getUsuarioId() != null) {
+            Usuario usuario = usuarioRepository.findById(request.getUsuarioId()).orElse(null);
+            historial.setUsuario(usuario);
+        }
+
+        cotizacionHistorialEstadoRepository.save(historial);
+
+        // Devuelve la cotización actualizada
         return CotizacionMapper.toDTOGetByID(updatedCotizacion);
     }
+
 
     public List<ProductoCarritoDetalleDTO> productos(Long id) {
         return detalleRepository.obtenerProductosPorCotizacion(id);
