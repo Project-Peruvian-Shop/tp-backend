@@ -4,6 +4,7 @@ import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.cotizacion.*;
 import com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO;
+import com.ecommerce.backend.entity.CotizacionHistorialEstado;
 import com.ecommerce.backend.service.CotizacionService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -253,4 +254,13 @@ public class CotizacionController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Productos de la cotización obtenidos exitosamente"));
     }
+
+    @GetMapping("/{id}/historial")
+    public ResponseEntity<GlobalResponse<List<CotizacionHistorialEstadoResponseDTO>>> obtenerHistorial(@PathVariable Long id) {
+        List<CotizacionHistorialEstadoResponseDTO> historial = cotizacionService.obtenerHistorialPorCotizacion(id);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(historial, "Historial de estados de la cotización obtenido exitosamente"));
+    }
+
 }

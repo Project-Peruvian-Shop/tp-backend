@@ -26,6 +26,7 @@ import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -230,8 +231,24 @@ public class CotizacionService {
         return CotizacionMapper.toDTOGetByID(updatedCotizacion);
     }
 
-
     public List<ProductoCarritoDetalleDTO> productos(Long id) {
         return detalleRepository.obtenerProductosPorCotizacion(id);
+    }
+
+    public List<CotizacionHistorialEstadoResponseDTO> obtenerHistorialPorCotizacion(Long cotizacionId) {
+        Cotizacion cotizacion = cotizacionRepository.findById(cotizacionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cotización no encontrada con id: " + cotizacionId));
+
+        List<CotizacionHistorialEstado> historial = cotizacionHistorialEstadoRepository.findByCotizacionIdOrderByFechaCambioAsc(cotizacionId);
+
+        return historial.stream().map(h -> new CotizacionHistorialEstadoResponseDTO(
+                h.getId(),
+                h.getEstadoAnterior().name(),
+                h.getEstadoNuevo().name(),
+                h.getObservacion(),
+                h.getFechaCambio(),
+                h.getUsuario() != null ? h.getUsuario().getNombre() + " " + h.getUsuario().getApellidos() : null,
+                h.getUsuario() != null ? h.getUsuario().getEmail() : null
+        )).collect(Collectors.toList());
     }
 }
