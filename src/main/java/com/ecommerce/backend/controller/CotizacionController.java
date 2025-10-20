@@ -70,40 +70,6 @@ public class CotizacionController {
     }
 
 
-    @GetMapping("/productos_mes")
-    @Operation(
-            summary = "Traer productos cotizados del mes",
-            description = "Ubicación: cotizaciones del dashboard  \n" +
-                    "Seguridad: Manager, Admin"
-    )
-    public ResponseEntity<GlobalResponse<List<ProductoCotizadoMesDTO>>> productos_cotizados_mes(
-            @RequestParam(required = false) Integer mes,
-            @RequestParam(required = false) Integer year
-    ) {
-        List<ProductoCotizadoMesDTO> data = cotizacionService.get_productos_cotizados_mes(mes, year);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(GlobalResponse.success(data, "Productos cotizados del mes obtenidos exitosamente"));
-    }
-
-
-    @GetMapping("/lineas_mes")
-    @Operation(
-            summary = "Traer lineas cotizadas del mes",
-            description = "Ubicación: cotizaciones del dashboard  \n" +
-                    "Seguridad: Manager, Admin"
-    )
-    public ResponseEntity<GlobalResponse<List<CategoriaMesDTO>>> get_lineas_mes(
-            @RequestParam(required = false) Integer mes,
-            @RequestParam(required = false) Integer year
-    ) {
-        List<CategoriaMesDTO> data = cotizacionService.get_lineas_cotizadas_mes(mes, year);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(GlobalResponse.success(data, "Lineas cotizadas del mes obtenidas exitosamente"));
-    }
-
-
     @GetMapping("/cotizaciones_year")
     @Operation(
             summary = "Traer cotizaciones del año",

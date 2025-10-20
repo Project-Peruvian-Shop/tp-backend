@@ -1,8 +1,6 @@
 package com.ecommerce.backend.service;
 
-import com.ecommerce.backend.dto.cotizacion.CategoriaMesDTO;
 import com.ecommerce.backend.dto.cotizacion.*;
-import com.ecommerce.backend.dto.cotizacion.ProductoCotizadoMesDTO;
 import com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO;
 import com.ecommerce.backend.entity.*;
 import com.ecommerce.backend.enums.CotizacionEstadoEnum;
@@ -109,20 +107,6 @@ public class CotizacionService {
                 guardado.getCreacion(),
                 guardado.getCotizacion().getId()
         );
-    }
-
-    public List<ProductoCotizadoMesDTO> get_productos_cotizados_mes(Integer mes, Integer year) {
-        LocalDate now = LocalDate.now();
-        int m = (year != null) ? mes : now.getMonthValue();
-        int y = (year != null) ? year : now.getYear();
-        return detalleRepository.productos_cotizados_mes(m, y, PageRequest.of(0, 5));
-    }
-
-    public List<CategoriaMesDTO> get_lineas_cotizadas_mes(Integer mes, Integer year) {
-        LocalDate now = LocalDate.now();
-        int m = (mes != null) ? mes : now.getMonthValue();
-        int y = (year != null) ? year : now.getYear();
-        return detalleRepository.lineasCotizadasMes(m, y);
     }
 
     public List<CotizacionYearDTO> get_cotizacion_year(Integer year) {
