@@ -2,6 +2,8 @@ package com.ecommerce.backend.repository;
 
 import com.ecommerce.backend.dto.cotizacion.CategoriaMesDTO;
 import com.ecommerce.backend.dto.cotizacion.ProductoCotizadoMesDTO;
+import com.ecommerce.backend.dto.dashboard.CategoriaCotizadaDTO;
+import com.ecommerce.backend.dto.dashboard.ProductoCotizadoDTO;
 import com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO;
 import com.ecommerce.backend.entity.CotizacionDetalle;
 import com.ecommerce.backend.entity.CotizacionDetalleId;
@@ -16,7 +18,7 @@ import java.util.List;
 @Repository
 public interface CotizacionDetalleRepository extends JpaRepository<CotizacionDetalle, CotizacionDetalleId> {
 
-    @Query("SELECT new com.ecommerce.backend.dto.cotizacion.ProductoCotizadoMesDTO(p.nombre, SUM(d.cantidad)) " +
+    @Query("SELECT new com.ecommerce.backend.dto.dashboard.ProductoCotizadoDTO(p.id, p.nombre, SUM(d.cantidad)) " +
             "FROM CotizacionDetalle d " +
             "JOIN d.producto p " +
             "JOIN d.cotizacion c " +
@@ -24,9 +26,12 @@ public interface CotizacionDetalleRepository extends JpaRepository<CotizacionDet
             "AND YEAR(c.creacion) = :year " +
             "GROUP BY p.nombre " +
             "ORDER BY SUM(d.cantidad) DESC")
-    List<ProductoCotizadoMesDTO> productos_cotizados_mes(@Param("mes") int mes, @Param("year") int year, Pageable pageable);
+    List<ProductoCotizadoDTO> productosMasDemandados(
+            @Param("mes") int mes,
+            @Param("year") int year,
+            Pageable pageable);
 
-    @Query("SELECT new com.ecommerce.backend.dto.cotizacion.CategoriaMesDTO(cat.id, cat.nombre, SUM(d.cantidad)) " +
+    @Query("SELECT new com.ecommerce.backend.dto.dashboard.CategoriaCotizadaDTO(cat.id, cat.nombre, SUM(d.cantidad)) " +
             "FROM CotizacionDetalle d " +
             "JOIN d.producto p " +
             "JOIN p.categoria cat " +
@@ -35,7 +40,10 @@ public interface CotizacionDetalleRepository extends JpaRepository<CotizacionDet
             "AND YEAR(c.creacion) = :year " +
             "GROUP BY cat.id, cat.nombre " +
             "ORDER BY SUM(d.cantidad) DESC")
-    List<CategoriaMesDTO> lineasCotizadasMes(@Param("mes") int mes, @Param("year") int year);
+    List<CategoriaCotizadaDTO> categoriasMasDemandadas(
+            @Param("mes") int mes,
+            @Param("year") int year,
+            Pageable pageable);
 
     @Query("""
                 SELECT new com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO(
@@ -56,4 +64,36 @@ public interface CotizacionDetalleRepository extends JpaRepository<CotizacionDet
             """)
     List<ProductoCarritoDetalleDTO> obtenerProductosPorCotizacion(@Param("cotizacionId") Long cotizacionId);
 
+    @Query("""
+                SELECT new com.ecommerce.backend.dto.dashboard.ProductoCotizadoDTO(p.id, p.nombre, COUNT(d))
+                FROM CotizacionDetalle d
+                JOIN d.producto p
+                JOIN d.cotizacion c
+                WHERE MONTH(c.creacion) = :mes
+                  AND YEAR(c.creacion) = :year
+                GROUP BY p.nombre
+                ORDER BY COUNT(d) DESC
+            """)
+    List<ProductoCotizadoDTO> productosMasApariciones(
+            @Param("mes") int mes,
+            @Param("year") int year,
+            Pageable pageable
+    );
+
+    @Query("""
+                SELECT new com.ecommerce.backend.dto.dashboard.CategoriaCotizadaDTO(cat.id, cat.nombre, COUNT(DISTINCT c))
+                FROM CotizacionDetalle d
+                JOIN d.producto p
+                JOIN p.categoria cat
+                JOIN d.cotizacion c
+                WHERE MONTH(c.creacion) = :mes
+                  AND YEAR(c.creacion) = :year
+                GROUP BY cat.id, cat.nombre
+                ORDER BY COUNT(DISTINCT c) DESC
+            """)
+    List<CategoriaCotizadaDTO> categoriasMasApariciones(
+            @Param("mes") int mes,
+            @Param("year") int year,
+            Pageable pageable
+    );
 }
