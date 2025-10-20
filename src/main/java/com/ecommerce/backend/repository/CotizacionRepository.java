@@ -1,6 +1,7 @@
 package com.ecommerce.backend.repository;
 
 import com.ecommerce.backend.dto.cotizacion.CotizacionResumenDTO;
+import com.ecommerce.backend.dto.dashboard.CotizacionesPorMesDTO;
 import com.ecommerce.backend.entity.Cotizacion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,8 +84,8 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
                 WHERE c.estado = com.ecommerce.backend.enums.CotizacionEstadoEnum.PENDIENTE
                   AND c.creacion BETWEEN :fechaInicio AND :fechaFin
             """)
-    Long countCotizacionesPendientesPorPeriodo(@Param("fechaInicio") java.time.LocalDateTime fechaInicio,
-                                               @Param("fechaFin") java.time.LocalDateTime fechaFin);
+    Long countCotizacionesPendientesPorPeriodo(@Param("fechaInicio") LocalDateTime fechaInicio,
+                                               @Param("fechaFin") LocalDateTime fechaFin);
 
 
     @Query("""
@@ -92,8 +94,23 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
                 WHERE c.estado = com.ecommerce.backend.enums.CotizacionEstadoEnum.ACEPTADA
                   AND c.creacion BETWEEN :fechaInicio AND :fechaFin
             """)
-    Long countCotizacionesAceptadasPorPeriodo(@Param("fechaInicio") java.time.LocalDateTime fechaInicio,
-                                              @Param("fechaFin") java.time.LocalDateTime fechaFin);
+    Long countCotizacionesAceptadasPorPeriodo(@Param("fechaInicio") LocalDateTime fechaInicio,
+                                              @Param("fechaFin") LocalDateTime fechaFin);
 
 
+    @Query("""
+            SELECT 
+                YEAR(c.creacion), 
+                MONTH(c.creacion), 
+                COUNT(c)
+            FROM Cotizacion c
+            WHERE c.estado = com.ecommerce.backend.enums.CotizacionEstadoEnum.ACEPTADA
+              AND c.creacion BETWEEN :fechaInicio AND :fechaFin
+            GROUP BY YEAR(c.creacion), MONTH(c.creacion)
+            ORDER BY YEAR(c.creacion), MONTH(c.creacion)
+            """)
+    List<Object[]> countCotizacionesAceptadasPorRango(
+            @Param("fechaInicio") LocalDateTime fechaInicio,
+            @Param("fechaFin") LocalDateTime fechaFin
+    );
 }
