@@ -1,10 +1,15 @@
 package com.ecommerce.backend.service;
 
+import com.ecommerce.backend.dto.dashboard.CategoriaCotizadaDTO;
 import com.ecommerce.backend.dto.dashboard.CotizacionesPorMesDTO;
 import com.ecommerce.backend.dto.dashboard.KPISResponseDTO;
+import com.ecommerce.backend.dto.dashboard.ProductoCotizadoDTO;
+import com.ecommerce.backend.enums.Modo;
 import com.ecommerce.backend.enums.Periodo;
 import com.ecommerce.backend.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,6 +24,7 @@ import java.util.stream.Collectors;
 public class DashboardService {
 
     private final CotizacionRepository cotizacionRepository;
+    private final CotizacionDetalleRepository cotizacionDetalleRepository;
     private final MensajeRepository mensajeRepository;
 
 
@@ -75,4 +81,61 @@ public class DashboardService {
         return listaFinal;
     }
 
+    public List<CategoriaCotizadaDTO> obtenerCategoriasMasCotizadas(Modo modo, Integer mes, Integer year) {
+        LocalDate now = LocalDate.now();
+        int m = (year != null) ? mes : now.getMonthValue();
+        int y = (year != null) ? year : now.getYear();
+
+        switch (modo) {
+            case APARICION:
+                return cotizacionDetalleRepository.categoriasMasApariciones(m, y, PageRequest.of(0, 5))
+                        .stream()
+                        .map(c -> new CategoriaCotizadaDTO(
+                                c.getCategoriaId(),
+                                c.getNombreCategoria(),
+                                c.getCantidadCotizaciones()
+                        ))
+                        .toList();
+
+            case DEMANDA:
+            default:
+                return cotizacionDetalleRepository.categoriasMasDemandadas(m, y, PageRequest.of(0, 5))
+                        .stream()
+                        .map(c -> new CategoriaCotizadaDTO(
+                                c.getCategoriaId(),
+                                c.getNombreCategoria(),
+                                c.getCantidadCotizaciones()
+                        ))
+                        .toList();
+        }
+    }
+
+    public List<ProductoCotizadoDTO> obtenerProductosMasCotizados(Modo modo, Integer mes, Integer year) {
+        LocalDate now = LocalDate.now();
+        int m = (year != null) ? mes : now.getMonthValue();
+        int y = (year != null) ? year : now.getYear();
+
+        switch (modo) {
+            case APARICION:
+                return cotizacionDetalleRepository.productosMasApariciones(m, y, PageRequest.of(0, 5))
+                        .stream()
+                        .map(p -> new ProductoCotizadoDTO(
+                                p.getProductoId(),
+                                p.getNombreProducto(),
+                                p.getCantidadApariciones()
+                        ))
+                        .toList();
+
+            case DEMANDA:
+            default:
+                return cotizacionDetalleRepository.productosMasDemandados(m, y, PageRequest.of(0, 5))
+                        .stream()
+                        .map(p -> new ProductoCotizadoDTO(
+                                p.getProductoId(),
+                                p.getNombreProducto(),
+                                p.getCantidadApariciones()
+                        ))
+                        .toList();
+        }
+    }
 }

@@ -2,8 +2,11 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
+import com.ecommerce.backend.dto.dashboard.CategoriaCotizadaDTO;
 import com.ecommerce.backend.dto.dashboard.CotizacionesPorMesDTO;
 import com.ecommerce.backend.dto.dashboard.KPISResponseDTO;
+import com.ecommerce.backend.dto.dashboard.ProductoCotizadoDTO;
+import com.ecommerce.backend.enums.Modo;
 import com.ecommerce.backend.enums.Periodo;
 import com.ecommerce.backend.service.CotizacionService;
 import com.ecommerce.backend.service.DashboardService;
@@ -41,5 +44,29 @@ public class DashboardController {
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Cotizaciones por mes obtenidas exitosamente"));
+    }
+
+    @GetMapping("/categorias-mas-cotizadas")
+    public ResponseEntity<GlobalResponse<List<CategoriaCotizadaDTO>>> getProductosMasCotizados(
+            @RequestParam(defaultValue = "APARICION") Modo modo,
+            @RequestParam(required = false) Integer mes,
+            @RequestParam(required = false) Integer year
+    ) {
+        List<CategoriaCotizadaDTO> data = dashboardService.obtenerCategoriasMasCotizadas(modo, mes, year);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Categorias más cotizadas obtenidos exitosamente"));
+    }
+
+    @GetMapping("/productos-mas-cotizados")
+    public ResponseEntity<GlobalResponse<List<ProductoCotizadoDTO>>> getCategoriasMasCotizadas(
+            @RequestParam(defaultValue = "APARICION") Modo modo,
+            @RequestParam(required = false) Integer mes,
+            @RequestParam(required = false) Integer year
+    ) {
+        List<ProductoCotizadoDTO> data = dashboardService.obtenerProductosMasCotizados(modo, mes, year);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Productos más cotizados obtenidos exitosamente"));
     }
 }
