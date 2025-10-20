@@ -12,4 +12,9 @@ import lombok.NoArgsConstructor;
 public class EstadoCotizacionRequestDTO {
     @NotNull(message = "nuevoEstado field cannot be null")
     private CotizacionEstadoEnum nuevoEstado;
+
+    @NotNull(message = "observacion field cannot be null")
+    private String observacion;
+
+    private Long usuarioId = 1L;
 }

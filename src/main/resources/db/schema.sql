@@ -99,3 +99,16 @@ create TABLE IF NOT EXISTS mensaje (
     usuario_id INT NULL,
     FOREIGN KEY (usuario_id) REFERENCES usuario (id) ON delete SET NULL ON update CASCADE
 );
+
+--! Table cotizacion_historial_estado
+CREATE TABLE IF NOT EXISTS cotizacion_historial_estado (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cotizacion_id INT NOT NULL,
+    estado_anterior VARCHAR(20) NOT NULL CHECK (estado_anterior IN ('PENDIENTE', 'EN_PROCESO', 'ENVIADA', 'ACEPTADA', 'RECHAZADA', 'CERRADA')),
+    estado_nuevo VARCHAR(20) NOT NULL CHECK (estado_nuevo IN ('PENDIENTE', 'EN_PROCESO', 'ENVIADA', 'ACEPTADA', 'RECHAZADA', 'CERRADA')),
+    observacion TEXT NULL,
+    fecha_cambio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    usuario_id INT NULL,
+    FOREIGN KEY (cotizacion_id) REFERENCES cotizacion(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE SET NULL ON UPDATE CASCADE
+);
