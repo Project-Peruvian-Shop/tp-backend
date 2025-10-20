@@ -75,4 +75,24 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
     List<CotizacionResumenDTO> obtenerUltimasCotizaciones(Pageable pageable);
 
     Page<Cotizacion> findAllByOrderByCreacionDesc(Pageable pageable);
+
+    @Query("""
+              SELECT COUNT(c)
+              FROM Cotizacion c
+              WHERE c.estado = com.ecommerce.backend.enums.CotizacionEstadoEnum.PENDIENTE
+                AND c.creacion >= CURRENT_DATE
+                AND c.creacion < FUNCTION('DATEADD', DAY, 1, CURRENT_DATE)
+            """)
+    Long countCotizacionesPendientesHoy();
+
+
+    @Query("""
+              SELECT COUNT(c)
+              FROM Cotizacion c
+              WHERE c.estado = com.ecommerce.backend.enums.CotizacionEstadoEnum.ACEPTADA
+                AND c.creacion >= CURRENT_DATE
+                AND c.creacion < FUNCTION('DATEADD', DAY, 1, CURRENT_DATE)
+            """)
+    Long countCotizacionesAceptadasHoy();
+
 }
