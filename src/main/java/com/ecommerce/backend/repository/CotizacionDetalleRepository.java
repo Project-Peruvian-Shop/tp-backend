@@ -71,7 +71,7 @@ public interface CotizacionDetalleRepository extends JpaRepository<CotizacionDet
                 JOIN d.cotizacion c
                 WHERE MONTH(c.creacion) = :mes
                   AND YEAR(c.creacion) = :year
-                GROUP BY p.nombre
+                GROUP BY p.id, p.nombre
                 ORDER BY COUNT(d) DESC
             """)
     List<ProductoCotizadoDTO> productosMasApariciones(

@@ -26,7 +26,10 @@ public class SecurityConfig {
                         // Endpoints públicos
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
+
                         .requestMatchers(HttpMethod.GET, "/api/v1/producto/{id}", "/api/v1/producto/paginated").permitAll()
+
+                        .requestMatchers(HttpMethod.GET , "/api/v1/categoria/all-and-quantity").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/api/v1/imagen/{id}").permitAll()
 
@@ -36,14 +39,16 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/refresh-token").permitAll()
+                        .requestMatchers("/uploads/**").permitAll()
 
                         .requestMatchers("/h2-console/**", "/v3/api-docs/**", "/webjars/swagger-ui/**"  , "/swagger-ui/**").permitAll()
 
                         // Endpoints con rol de :  USER  ADMIN o MANAGER
                         .requestMatchers(HttpMethod.GET, "/api/v1/cotizacion/{id}","/api/v1/cotizacion/{id}/historial","/api/v1/cotizacion/productos-por-cotizacion/{cotizacionId}").hasAnyRole("USER", "ADMIN", "MANAGER")
-                        .requestMatchers(HttpMethod.POST , "/api/v1/cotizacion/by-usuario/{id}").hasAnyRole("USER", "ADMIN", "MANAGER")
-                        .requestMatchers(HttpMethod.POST , "/api/v1/cotizacion/by-usuario-paginated/{id}").hasAnyRole("USER", "ADMIN", "MANAGER")
+                        .requestMatchers(HttpMethod.GET , "/api/v1/cotizacion/by-usuario/{id}").hasAnyRole("USER", "ADMIN", "MANAGER")
+                        .requestMatchers(HttpMethod.GET , "/api/v1/cotizacion/by-usuario-paginated/{id}").hasAnyRole("USER", "ADMIN", "MANAGER")
                         .requestMatchers(HttpMethod.GET , "/api/v1/usuario/{id}").hasAnyRole("USER", "ADMIN", "MANAGER")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/create").hasAnyRole("USER", "ADMIN", "MANAGER")
 
 
                         // Endpoints con rol de : ADMIN o MANAGER
@@ -55,7 +60,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET , "/api/v1/usuario/dashboard-paginated").hasAnyRole("ADMIN", "MANAGER")
 
                         //Endpoint PRODUCTO
-                        .requestMatchers(HttpMethod.GET , "/api/v1/producto/{id}").hasAnyRole("ADMIN", "MANAGER")
                         .requestMatchers(HttpMethod.GET , "/api/v1/producto/dashboard-search").hasAnyRole("ADMIN", "MANAGER")
                         .requestMatchers(HttpMethod.GET , "/api/v1/producto/dashboard-quantity").hasAnyRole("ADMIN", "MANAGER")
                         .requestMatchers(HttpMethod.GET , "/api/v1/producto/dashboard-paginated").hasAnyRole("ADMIN", "MANAGER")
@@ -78,7 +82,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET , "/api/v1/categoria/dashboard-search").hasAnyRole("ADMIN", "MANAGER")
                         .requestMatchers(HttpMethod.GET , "/api/v1/categoria/dashboard-quantity").hasAnyRole("ADMIN", "MANAGER")
                         .requestMatchers(HttpMethod.GET , "/api/v1/categoria/dashboard-paginated").hasAnyRole("ADMIN", "MANAGER")
-                        .requestMatchers(HttpMethod.GET , "/api/v1/categoria/all-and-quantity").hasAnyRole("ADMIN", "MANAGER")
 
                         //Endpoint DASHBOARD
                         .requestMatchers(HttpMethod.GET , "/api/v1/dashboard/resumen-kpis").hasAnyRole("ADMIN", "MANAGER")
@@ -104,6 +107,8 @@ public class SecurityConfig {
                         //Endpoint COTIZACION
                         .requestMatchers(HttpMethod.PUT , "/api/v1/cotizacion/observaciones/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT , "/api/v1/cotizacion/change-state/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST , "/api/v1/cotizacion/create_pdf/{id}").hasRole("ADMIN")
+
 
                         //Endpoint CATEGORIA
                         .requestMatchers(HttpMethod.POST , "/api/v1/categoria/").hasRole("ADMIN")
