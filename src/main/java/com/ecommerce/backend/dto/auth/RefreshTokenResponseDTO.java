@@ -1,6 +1,5 @@
 package com.ecommerce.backend.dto.auth;
 
-import com.ecommerce.backend.enums.UsuarioRolEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,13 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LoginResponseDTO {
-    private Long id;
-    private String nombre;
-    private String apellidos;
-    private String email;
-    private String telefono;
-    private UsuarioRolEnum rol;
+public class RefreshTokenResponseDTO {
     private String accessToken;
     private String refreshToken;
 }

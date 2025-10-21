@@ -12,6 +12,7 @@ import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.AuthMapper;
 import com.ecommerce.backend.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {
         if (usuarioRepository.existsByEmail(registerRequestDTO.getEmail())) {
@@ -26,6 +28,7 @@ public class AuthService {
         }
         Usuario usuario = AuthMapper.toEntity(registerRequestDTO);
         usuario.setRol(UsuarioRolEnum.ROLE_USER);
+        usuario.setPasswordd(passwordEncoder.encode((registerRequestDTO.getPasswordd())));
         Usuario savedUsuario = usuarioRepository.save(usuario);
 
         return AuthMapper.registerToDTO(savedUsuario);
@@ -38,9 +41,14 @@ public class AuthService {
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con el email: " + email));
 
-        if (!usuario.getPasswordd().equals(passwordd)) {
+        if (!passwordEncoder.matches(passwordd,usuario.getPasswordd())) {
             throw new InvalidCredentialsException("Contraseña incorrecta, intente de nuevo.");
         }
         return AuthMapper.loginToDTO(usuario);
+    }
+    public String getRoleByEmail(String email) {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con el email: " + email));
+        return usuario.getRol().toString();
     }
 }

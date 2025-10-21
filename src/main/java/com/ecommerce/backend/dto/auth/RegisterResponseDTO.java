@@ -17,4 +17,6 @@ public class RegisterResponseDTO {
     private String email;
     private String telefono;
     private UsuarioRolEnum rol;
+    private String accessToken;
+    private String refreshToken;
 }
