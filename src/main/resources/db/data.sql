@@ -1,7 +1,5 @@
 insert into usuario (nombre, apellidos, email, passwordd, telefono, rol) values
 ('Wilmer', 'Guevara', 'wilmer@mail.com', 'wilmer123', '999000000', 'ROLE_ADMIN'),
-('Franco', 'Tineo', 'tineo@mail.com', 'franco123', '999111111', 'ROLE_ADMIN'),
-('Joao', 'Urteaga', 'joao@mail.com', 'joatix123', '999222222', 'ROLE_ADMIN'),
 ('Cliente', 'Cliente', 'cliente@mail.com', 'cliente123', '0987654321', 'ROLE_USER'),
 ('Socio', 'TP', 'socio@mail.com', 'socio123', '0987654321', 'ROLE_ADMIN'),
 ('Jorge', 'Luis', 'jorge@mail.com', 'user123', '0987654321', 'ROLE_MANAGER'),
