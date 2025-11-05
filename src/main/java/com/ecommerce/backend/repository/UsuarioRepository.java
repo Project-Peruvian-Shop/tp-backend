@@ -38,7 +38,15 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
                OR LOWER(u.email) LIKE LOWER(CONCAT('%', :filtro, '%'))
                OR LOWER(u.telefono) LIKE LOWER(CONCAT('%', :filtro, '%'))
                OR LOWER(u.rol) LIKE LOWER(CONCAT('%', :filtro, '%'))
-            ORDER BY u.rol ASC, u.apellidos ASC
+            ORDER BY 
+                CASE 
+                    WHEN u.rol = 'ROLE_SUPERADMIN' THEN 1
+                    WHEN u.rol = 'ROLE_ADMINISTRADOR' THEN 2
+                    WHEN u.rol = 'ROLE_SUPERVISOR' THEN 3
+                    WHEN u.rol = 'ROLE_CLIENTE' THEN 4
+                    ELSE 5
+                END,
+                u.apellidos ASC
             """)
     Page<Usuario> searchByNombreApellidosEmailTelefonoRol(
             @Param("filtro") String filtro,
@@ -51,7 +59,15 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     @Query("""
             SELECT u
             FROM Usuario u
-            ORDER BY u.rol ASC, u.apellidos ASC
+            ORDER BY 
+                CASE 
+                    WHEN u.rol = 'ROLE_SUPERADMIN' THEN 1
+                    WHEN u.rol = 'ROLE_ADMINISTRADOR' THEN 2
+                    WHEN u.rol = 'ROLE_SUPERVISOR' THEN 3
+                    WHEN u.rol = 'ROLE_CLIENTE' THEN 4
+                    ELSE 5
+                END,
+                u.apellidos ASC
             """)
     Page<Usuario> findAllOrderByRolAndApellidos(Pageable pageable);
 }
