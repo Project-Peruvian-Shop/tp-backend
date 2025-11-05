@@ -143,23 +143,23 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/usuario/delete/{id}").hasRole("SUPERADMIN")
 
                         // PRODUCTO
-                        .requestMatchers(HttpMethod.POST, "/api/v1/producto/").hasRole("SUPERADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/producto/{id}").hasRole("SUPERADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/producto/").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/producto/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
 
                         // MENSAJE
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/mensaje/change-state/{id}").hasRole("SUPERADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/mensaje/change-state/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
 
                         // COTIZACION
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/cotizacion/observaciones/{id}").hasRole("SUPERADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/cotizacion/change-state/{id}").hasRole("SUPERADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/create_pdf/{id}").hasRole("SUPERADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/cotizacion/observaciones/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/cotizacion/change-state/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/create_pdf/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
 
                         // CATEGORIA
-                        .requestMatchers(HttpMethod.POST, "/api/v1/categoria/").hasRole("SUPERADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/categoria/{id}").hasRole("SUPERADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/categoria/").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/categoria/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
 
                         // IMAGEN
-                        .requestMatchers(HttpMethod.POST, "/api/v1/imagen").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/imagen").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
 
                         // -------------------------------------------------
                         // Todo lo demás requiere autenticación
