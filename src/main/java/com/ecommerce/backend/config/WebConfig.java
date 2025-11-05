@@ -17,8 +17,10 @@ public class WebConfig {
                 registry.addMapping("/**")
                         .allowedOrigins("http://localhost:5173") // frontend vite
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        .allowCredentials(false);
             }
+
             // Configuración para mostrar archivos estáticos desde el sistema de archivos
             @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
