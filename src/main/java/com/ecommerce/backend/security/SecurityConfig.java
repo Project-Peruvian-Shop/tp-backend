@@ -36,63 +36,81 @@ public class SecurityConfig {
                         .requestMatchers("/uploads/**", "/h2-console/**", "/v3/api-docs/**", "/webjars/swagger-ui/**", "/swagger-ui/**").permitAll()
 
                         // -------------------------------------------------
-                        // Endpoints con rol: CLIENTE, ADMINISTRADOR o SUPERADMIN
-                        // (antes: USER, MANAGER, ADMIN)
+                        // Endpoints con rol: CLIENTE, SUPERVISOR, ADMINISTRADOR o SUPERADMIN
                         // -------------------------------------------------
                         .requestMatchers(HttpMethod.GET,
                                 "/api/v1/cotizacion/{id}",
                                 "/api/v1/cotizacion/{id}/historial",
                                 "/api/v1/cotizacion/productos-por-cotizacion/{cotizacionId}")
+                        .hasAnyRole("CLIENTE", "SUPERVISOR", "ADMINISTRADOR", "SUPERADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/v1/cotizacion/by-usuario/{id}")
+                        .hasAnyRole("CLIENTE", "SUPERVISOR", "ADMINISTRADOR", "SUPERADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/v1/cotizacion/by-usuario-paginated/{id}")
+                        .hasAnyRole("CLIENTE", "SUPERVISOR", "ADMINISTRADOR", "SUPERADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/v1/usuario/{id}")
+                        .hasAnyRole("CLIENTE", "SUPERVISOR", "ADMINISTRADOR", "SUPERADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/create")
                         .hasAnyRole("CLIENTE", "ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/cotizacion/by-usuario/{id}").hasAnyRole("CLIENTE", "ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/cotizacion/by-usuario-paginated/{id}").hasAnyRole("CLIENTE", "ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/usuario/{id}").hasAnyRole("CLIENTE", "ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/create").hasAnyRole("CLIENTE", "ADMINISTRADOR", "SUPERADMIN")
 
                         // -------------------------------------------------
-                        // Endpoints con rol: ADMINISTRADOR o SUPERADMIN
-                        // (antes: MANAGER o ADMIN)
+                        // Endpoints con rol: ADMINISTRADOR, SUPERVISOR o SUPERADMIN
                         // -------------------------------------------------
 
                         // USUARIO
-                        .requestMatchers(HttpMethod.GET, "/api/v1/usuario/{id}/workers").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/usuario/dashboard-search").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/usuario/dashboard-quantity").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/usuario/dashboard-paginated").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/v1/usuario/{id}/workers",
+                                "/api/v1/usuario/dashboard-search",
+                                "/api/v1/usuario/dashboard-quantity",
+                                "/api/v1/usuario/dashboard-paginated")
+                        .hasAnyRole("ADMINISTRADOR", "SUPERVISOR", "SUPERADMIN")
+
 
                         // PRODUCTO
-                        .requestMatchers(HttpMethod.GET, "/api/v1/producto/dashboard-search").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/producto/dashboard-quantity").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/producto/dashboard-paginated").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/v1/producto/dashboard-search",
+                                "/api/v1/producto/dashboard-quantity",
+                                "/api/v1/producto/dashboard-paginated")
+                        .hasAnyRole("ADMINISTRADOR", "SUPERVISOR", "SUPERADMIN")
 
                         // MENSAJE
-                        .requestMatchers(HttpMethod.GET, "/api/v1/mensaje/{id}").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/mensaje/dashboard-search").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/mensaje/dashboard-quantity/{mes}").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/mensaje/dashboard-paginated").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/v1/mensaje/{id}",
+                                "/api/v1/mensaje/dashboard-search",
+                                "/api/v1/mensaje/dashboard-quantity/{mes}",
+                                "/api/v1/mensaje/dashboard-paginated")
+                        .hasAnyRole("ADMINISTRADOR", "SUPERVISOR", "SUPERADMIN")
 
                         // COTIZACION
-                        .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/mensajes-mes").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/last-cotizaciones").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/dashboard-search").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/dashboard-quantity").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/dashboard-paginated").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
+                        .requestMatchers(HttpMethod.POST,
+                                "/api/v1/cotizacion/mensajes-mes",
+                                "/api/v1/cotizacion/last-cotizaciones",
+                                "/api/v1/cotizacion/dashboard-search",
+                                "/api/v1/cotizacion/dashboard-quantity",
+                                "/api/v1/cotizacion/dashboard-paginated")
+                        .hasAnyRole("ADMINISTRADOR", "SUPERVISOR", "SUPERADMIN")
 
                         // CATEGORIA
-                        .requestMatchers(HttpMethod.GET, "/api/v1/categoria/{id}").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/categoria/dashboard-search").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/categoria/dashboard-quantity").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/categoria/dashboard-paginated").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/v1/categoria/{id}",
+                                "/api/v1/categoria/dashboard-search",
+                                "/api/v1/categoria/dashboard-quantity",
+                                "/api/v1/categoria/dashboard-paginated")
+                        .hasAnyRole("ADMINISTRADOR", "SUPERVISOR", "SUPERADMIN")
 
                         // DASHBOARD
-                        .requestMatchers(HttpMethod.GET, "/api/v1/dashboard/resumen-kpis").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/dashboard/productos-mas-cotizados").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/dashboard/cotizaciones-por-mes").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/dashboard/categorias-mas-cotizadas").hasAnyRole("ADMINISTRADOR", "SUPERADMIN")
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/v1/dashboard/resumen-kpis",
+                                "/api/v1/dashboard/productos-mas-cotizados",
+                                "/api/v1/dashboard/cotizaciones-por-mes",
+                                "/api/v1/dashboard/categorias-mas-cotizadas")
+                        .hasAnyRole("ADMINISTRADOR", "SUPERVISOR", "SUPERADMIN")
 
                         // -------------------------------------------------
                         // Endpoints exclusivos del rol SUPERADMIN
-                        // (antes: ADMIN)
                         // -------------------------------------------------
 
                         // USUARIO
