@@ -95,7 +95,7 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario not found - id: " + id));
 
-        List<UserRole> roles = List.of(UserRole.ROLE_ADMIN, UserRole.ROLE_MANAGER);
+        List<UserRole> roles = List.of(UserRole.ROLE_SUPERADMIN, UserRole.ROLE_ADMINISTRADOR);
 
         return usuarioRepository.findByRolesExcludingId(roles, id, pageable)
                 .map(UsuarioMapper::toSimpleDTO);

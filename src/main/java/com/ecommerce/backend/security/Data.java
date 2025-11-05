@@ -23,8 +23,8 @@ public class Data implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         List<Usuario> usuarios = List.of(
-                new Usuario(null,"Franco", "Tineo", "tineo@mail.com", bCryptPasswordEncoder.encode("franco123"), "999111111", UsuarioRolEnum.ROLE_ADMIN),
-                new Usuario(null,"Joao", "Urteaga", "joao@mail.com", bCryptPasswordEncoder.encode("joatix123"), "999222222", UsuarioRolEnum.ROLE_ADMIN)
+                new Usuario(null, "Franco", "Tineo", "tineo@mail.com", bCryptPasswordEncoder.encode("franco123"), "999111111", UsuarioRolEnum.ROLE_SUPERADMIN),
+                new Usuario(null, "Joao", "Urteaga", "joao@mail.com", bCryptPasswordEncoder.encode("joatix123"), "999222222", UsuarioRolEnum.ROLE_SUPERADMIN)
         );
 
         usuarioRepository.saveAll(usuarios);

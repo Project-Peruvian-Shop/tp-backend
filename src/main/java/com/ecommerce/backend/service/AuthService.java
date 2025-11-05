@@ -27,7 +27,7 @@ public class AuthService {
             throw new EntityAlreadyExistsException("El email " + registerRequestDTO.getEmail() + " ya está en uso.");
         }
         Usuario usuario = AuthMapper.toEntity(registerRequestDTO);
-        usuario.setRol(UsuarioRolEnum.ROLE_USER);
+        usuario.setRol(UsuarioRolEnum.ROLE_CLIENTE);
         usuario.setPasswordd(passwordEncoder.encode((registerRequestDTO.getPasswordd())));
         Usuario savedUsuario = usuarioRepository.save(usuario);
 
