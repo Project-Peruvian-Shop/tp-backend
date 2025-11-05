@@ -1,12 +1,12 @@
 insert into usuario (nombre, apellidos, email, passwordd, telefono, rol) values
-('Wilmer', 'Guevara', 'wilmer@mail.com', 'wilmer123', '999000000', 'ROLE_ADMIN'),
-('Cliente', 'Cliente', 'cliente@mail.com', 'cliente123', '0987654321', 'ROLE_USER'),
-('Socio', 'TP', 'socio@mail.com', 'socio123', '0987654321', 'ROLE_ADMIN'),
-('Jorge', 'Luis', 'jorge@mail.com', 'user123', '0987654321', 'ROLE_MANAGER'),
-('Steve', 'Harrington', 'steve@mail.com', 'user123', '0987654321', 'ROLE_MANAGER'),
-('Felix', 'Ruiz', 'felix@mail.com', 'user123', '0987654321', 'ROLE_MANAGER'),
-('Sebastian', 'Perez', 'seb@mail.com', 'user123', '0987654321', 'ROLE_MANAGER'),
-('Charles', 'Leclerc', 'charles@mail.com', 'user123', '0987654321', 'ROLE_MANAGER');
+('Wilmer', 'Guevara', 'wilmer@mail.com', 'wilmer123', '999000000', 'ROLE_SUPERADMIN'),
+('Cliente', 'Cliente', 'cliente@mail.com', 'cliente123', '0987654321', 'ROLE_CLIENTE'),
+('Socio', 'TP', 'socio@mail.com', 'socio123', '0987654321', 'ROLE_SUPERADMIN'),
+('Jorge', 'Luis', 'jorge@mail.com', 'user123', '0987654321', 'ROLE_ADMINISTRADOR'),
+('Steve', 'Harrington', 'steve@mail.com', 'user123', '0987654321', 'ROLE_ADMINISTRADOR'),
+('Felix', 'Ruiz', 'felix@mail.com', 'user123', '0987654321', 'ROLE_ADMINISTRADOR'),
+('Sebastian', 'Perez', 'seb@mail.com', 'user123', '0987654321', 'ROLE_ADMINISTRADOR'),
+('Charles', 'Leclerc', 'charles@mail.com', 'user123', '0987654321', 'ROLE_ADMINISTRADOR');
 
 insert into imagen (enlace, nombre, alt) values
 ('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Fluidos-a-Presion-12-SP-scaled.png', 'NTP 399.002', 'NTP-399.002'),

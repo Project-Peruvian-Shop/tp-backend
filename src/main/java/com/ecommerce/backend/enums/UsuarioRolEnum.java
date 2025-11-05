@@ -1,7 +1,8 @@
 package com.ecommerce.backend.enums;
 
 public enum UsuarioRolEnum {
-    ROLE_ADMIN,
-    ROLE_MANAGER,
-    ROLE_USER
+    ROLE_SUPERADMIN,
+    ROLE_ADMINISTRADOR,
+    ROLE_SUPERVISOR,
+    ROLE_CLIENTE
 }

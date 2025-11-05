@@ -3,9 +3,10 @@ package com.ecommerce.backend.role;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum UserRole {
-    ROLE_ADMIN,
-    ROLE_MANAGER,
-    ROLE_USER;
+    ROLE_SUPERADMIN,
+    ROLE_ADMINISTRADOR,
+    ROLE_SUPERVISOR,
+    ROLE_CLIENTE;
 
     @JsonCreator
     public static UserRole fromString(String value) {
