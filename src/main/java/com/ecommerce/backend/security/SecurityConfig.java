@@ -27,7 +27,7 @@ public class SecurityConfig {
                         // Endpoints públicos
                         // ---------------------
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/producto/{id}", "/api/v1/producto/paginated").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/producto/{id}", "/api/v1/producto/paginated", "/api/v1/producto/sugeridos").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/categoria/all-and-quantity").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/imagen/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/mensaje/reclamaciones").permitAll()
@@ -55,6 +55,13 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/create")
                         .hasAnyRole("CLIENTE", "ADMINISTRADOR", "SUPERADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/v1/cotizacion/cotizaciones_year")
+                        .hasAnyRole("ADMINISTRADOR", "SUPERVISOR", "SUPERADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/v1/categoria/productos/{id}")
+                        .hasAnyRole("CLIENTE", "SUPERVISOR", "ADMINISTRADOR", "SUPERADMIN")
+
 
                         // -------------------------------------------------
                         // Endpoints con rol: ADMINISTRADOR, SUPERVISOR o SUPERADMIN
