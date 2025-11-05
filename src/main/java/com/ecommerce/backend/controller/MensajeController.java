@@ -75,7 +75,7 @@ public class MensajeController {
     }
 
 
-    @PutMapping("/change_state/{id}")
+    @PutMapping("/change-state/{id}")
     @Operation(
             summary = "Cambiar estado del mensaje",
             description = "Ubicación: Dashboard  \n" +

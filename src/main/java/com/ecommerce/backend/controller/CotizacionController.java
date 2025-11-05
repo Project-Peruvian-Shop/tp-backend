@@ -226,7 +226,7 @@ public class CotizacionController {
                 .body(GlobalResponse.success(data, "Observaciones de la cotización actualizadas exitosamente"));
     }
 
-    @PutMapping("change_state/{id}")
+    @PutMapping("change-state/{id}")
     @Operation(
             summary = "Cambiar estado de la cotización",
             description = "Ubicación: Dashboard  \n" +
