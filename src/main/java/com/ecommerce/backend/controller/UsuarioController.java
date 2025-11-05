@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
-
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/{id}")
     @Operation(
@@ -45,6 +46,7 @@ public class UsuarioController {
     )
     public ResponseEntity<GlobalResponse<UsuarioResponseDTO>> saveUsuario(@Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
         System.out.println("usuarioRequestDTO = " + usuarioRequestDTO);
+        usuarioRequestDTO.setPasswordd(passwordEncoder.encode(usuarioRequestDTO.getPasswordd()));
         UsuarioResponseDTO data = usuarioService.save(usuarioRequestDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED)
