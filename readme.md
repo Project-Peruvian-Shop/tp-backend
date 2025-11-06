@@ -48,7 +48,7 @@ iniciarlo.
    Para iniciar la aplicación localmente con Docker, ejecuta el siguiente comando:
 
    ```bash
-   docker-compose -f docker-compose.yml up --build -d
+   docker compose -f docker-compose.yml up --build -d
    ```
 
    Este comando:
@@ -66,7 +66,7 @@ los endpoints disponibles.
 Para detener los contenedores en ejecución, utiliza el siguiente comando:
 
 ```bash
-docker-compose -f docker-compose.yml down
+docker compose -f docker-compose.yml down
 ```
 
 Esto detendrá y eliminará los contenedores, pero mantendrá intactos los datos de la base de datos en el volumen.
@@ -77,7 +77,7 @@ Si deseas detener los contenedores y también eliminar los recursos asociados, c
 por Docker Compose, ejecuta:
 
 ```bash
-docker-compose -f docker-compose.yml down --volumes --rmi all
+docker compose -f docker-compose.yml down --volumes --rmi all
 ```
 
 Este comando limpiará todos los recursos, incluidos los datos de MySQL que se hayan persistido.
