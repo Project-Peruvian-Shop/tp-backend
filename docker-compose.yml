@@ -1,36 +1,35 @@
-version: '3.8'
-
 services:
   # MySQL instance for ecommerce
   ecommerce-db:
-    container_name: mysqldb
+    container_name: ecommerce-db
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-
+      MYSQL_DATABASE: tuberiasperuanito_v1
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
       - ecommerce-network
-    ports:
-      - "3307:3306"
 
   # ecommerce-db application
   ecommerce-service:
+    container_name: ecommerce-service
     build:
-      context: .  # Context is the current directory (ecommerce-service)
+      context: .
     ports:
       - "8080:8080"
     environment:
-      SPRING_JDBC_URL: jdbc:mysql://ecommerce-db:3306/tuberiasperuanito_v1?createDatabaseIfNotExist=true
-      SPRING_JDBC_USERNAME: root
-      SPRING_JDBC_PASSWORD: rootpassword
-      ENV_PROFILE: mysql
+      SPRING_DATASOURCE_URL: jdbc:mysql://ecommerce-db:3306/tuberiasperuanito_v1?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: rootpassword
+      SPRING_PROFILES_ACTIVE: mysql
     depends_on:
       ecommerce-db:
         condition: service_healthy

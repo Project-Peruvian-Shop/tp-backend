@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy the pom.xml and download project dependencies
 COPY pom.xml .
-RUN mvn dependency:resolve -B
+RUN mvn dependency:go-offline -B
 
 # Copy the source code
 COPY src ./src
@@ -20,18 +20,13 @@ FROM eclipse-temurin:17-jdk-alpine
 # Set the working directory inside the container
 WORKDIR /app
 
+RUN apk add --no-cache netcat-openbsd
+
 # Copy the built .jar file from the previous stage
 COPY --from=build /app/target/*.jar app.jar
 
 # Expose the task-service port
 EXPOSE 8080
-
-# Set environment variables for R2DBC URL and credentials
-ENV SPRING_JDBC_URL=${SPRING_JDBC_URL}
-ENV SPRING_JDBC_USERNAME=${SPRING_JDBC_USERNAME}
-ENV SPRING_JDBC_PASSWORD=${SPRING_JDBC_PASSWORD}
-
-ENV ACTIVE_PROFILE=${ACTIVE_PROFILE}
 
 # Command to run the application
 ENTRYPOINT ["sh", "-c", "while ! nc -z ecommerce-db 3306 ; do sleep 1; done; java -jar app.jar"]
