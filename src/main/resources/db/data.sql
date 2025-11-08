@@ -381,8 +381,29 @@ insert into cotizacion_detalle (producto_id, cotizacion_id, cantidad) values
 
 -- Cotización 50
 (28, 50, 10),
-(30, 50, 15);
+(30, 50, 15),
 
+-- Cotizacion 54
+(1, 51, 10),
+(2, 51, 15),
+(3, 51, 20),
+(4, 51, 25),
+(5, 51, 30),
+
+(6, 52, 12),
+(7, 52, 18),
+(8, 52, 24),
+(9, 52, 30),
+
+(10, 53, 14),
+(11, 53, 21),
+(12, 53, 28),
+(13, 53, 35),
+
+(14, 54, 16),
+(15, 54, 24),
+(16, 54, 32),
+(17, 54, 40);
 
 insert into cotizacion_pdf (enlace, cotizacion_id) values
 ('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578-300x300.jpg', 2),
