@@ -4,7 +4,6 @@ import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.cotizacion.*;
 import com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO;
-import com.ecommerce.backend.entity.CotizacionHistorialEstado;
 import com.ecommerce.backend.service.CotizacionService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
