@@ -3,6 +3,7 @@ package com.ecommerce.backend.controller;
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.cotizacion.*;
+import com.ecommerce.backend.dto.dashboard.ProductoCotizadoDTO;
 import com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO;
 import com.ecommerce.backend.service.CotizacionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -262,4 +264,20 @@ public class CotizacionController {
                 .body(GlobalResponse.success(historial, "Historial de estados de la cotización obtenido exitosamente"));
     }
 
+    @GetMapping("/{id}/productos-cotizados")
+    @Operation(
+            summary = "Obtener productos cotizados de una cotización",
+            description = "Ubicación: Detalle de la cotización  \n" +
+                    "Seguridad: Usuario, Manager, Admin"
+    )
+    public ResponseEntity<GlobalResponse<Page<ProductoCarritoDetalleDTO>>> obtenerProductosCotizados(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("p.nombre").ascending());
+        Page<ProductoCarritoDetalleDTO> data = cotizacionService.obtenerProductosDeCotizacion(id, pageable);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(data, "Productos cotizados obtenidos exitosamente"));
+    }
 }
