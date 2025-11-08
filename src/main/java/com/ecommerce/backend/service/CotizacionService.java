@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -253,5 +254,9 @@ public class CotizacionService {
                 h.getUsuario() != null ? h.getUsuario().getNombre() + " " + h.getUsuario().getApellidos() : null,
                 h.getUsuario() != null ? h.getUsuario().getEmail() : null
         )).collect(Collectors.toList());
+    }
+
+    public Page<ProductoCarritoDetalleDTO> obtenerProductosDeCotizacion(Long cotizacionId, Pageable pageable) {
+        return detalleRepository.findProductosByCotizacionId(cotizacionId, pageable);
     }
 }

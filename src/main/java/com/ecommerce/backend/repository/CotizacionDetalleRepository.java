@@ -7,6 +7,7 @@ import com.ecommerce.backend.dto.dashboard.ProductoCotizadoDTO;
 import com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO;
 import com.ecommerce.backend.entity.CotizacionDetalle;
 import com.ecommerce.backend.entity.CotizacionDetalleId;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -96,4 +97,24 @@ public interface CotizacionDetalleRepository extends JpaRepository<CotizacionDet
             @Param("year") int year,
             Pageable pageable
     );
+
+    @Query("""
+            SELECT new com.ecommerce.backend.dto.producto.ProductoCarritoDetalleDTO(
+                p.id,
+                p.nombre,
+                cat.nombre,
+                cat.norma,
+                img.enlace,
+                img.alt,
+                d.cantidad
+            )
+            FROM CotizacionDetalle d
+            JOIN d.producto p
+            JOIN p.categoria cat
+            JOIN p.imagen img
+            JOIN d.cotizacion c
+            WHERE c.id = :cotizacionId
+            """)
+    Page<ProductoCarritoDetalleDTO>
+    findProductosByCotizacionId(@Param("cotizacionId") Long cotizacionId, Pageable pageable);
 }
