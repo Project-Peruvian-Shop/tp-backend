@@ -264,7 +264,7 @@ public class CotizacionController {
                 .body(GlobalResponse.success(historial, "Historial de estados de la cotización obtenido exitosamente"));
     }
 
-    @GetMapping("/{id}/productos-cotizados")
+    @GetMapping("/{id}/productos")
     @Operation(
             summary = "Obtener productos cotizados de una cotización",
             description = "Ubicación: Detalle de la cotización  \n" +
