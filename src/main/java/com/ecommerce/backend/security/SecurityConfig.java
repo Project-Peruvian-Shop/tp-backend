@@ -25,6 +25,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("http://localhost:5173");
         configuration.addAllowedOrigin("https://shop-frontend-puce.vercel.app");
+        configuration.addAllowedOrigin("https://www.tuberiasperuanito.com");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(false);
