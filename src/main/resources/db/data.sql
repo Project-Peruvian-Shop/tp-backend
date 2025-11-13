@@ -9,12 +9,12 @@ insert into usuario (nombre, apellidos, email, passwordd, telefono, rol) values
 ('Charles', 'Leclerc', 'charles@mail.com', 'user123', '0987654321', 'ROLE_ADMINISTRADOR');
 
 insert into imagen (enlace, nombre, alt) values
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Fluidos-a-Presion-12-SP-scaled.png', 'NTP 399.002', 'NTP-399.002'),
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Desague-1-12%E2%80%B3-SP-1-scaled-e1750740124332.png', 'NTP 399.003', 'NTP-399.003'),
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Instalacion-Electrica-1-12%E2%80%B3-SP-scaled-e1751253145336.png', 'NTP 399.006', 'NTP-399.006'),
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Fluidos-a-Presion-con-Union-Roscada-1-12-1-scaled.png', 'NTP 399.166', 'NTP-399.166'),
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/1000008612-removebg-preview.png', 'NTP ISO 1452-2', 'NTP-ISO-1452-2'),
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/Tuberias-para-Alcantarillado-110mm-UF-scaled-e1750736328578.jpg', 'NTP ISO 4435', 'NTP-ISO-4435'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763057276/399.002_pw5cce.png', 'NTP 399.002', 'NTP-399.002'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763057317/399.003_oeauqf.png', 'NTP 399.003', 'NTP-399.003'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763057325/399.006_czg8ym.png', 'NTP 399.006', 'NTP-399.006'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763057334/399.166_cvhdxy.png', 'NTP 399.166', 'NTP-399.166'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763057340/1452_wzx7o1.png', 'NTP ISO 1452-2', 'NTP-ISO-1452-2'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763057364/4435_suvvvs.png', 'NTP ISO 4435', 'NTP-ISO-4435'),
 --IMAGENES DE LAS CATEGORIAS:
 ('https://tuberiasperuanito.com/wp-content/uploads/2025/04/NTP-399.002.png', 'Conducción de fluidos a presión Unión SP', 'NTP 399.002'),
 ('https://tuberiasperuanito.com/wp-content/uploads/2025/04/NTP-399.003.png', 'Instalaciones de desagüe', 'NTP 399.003'),
