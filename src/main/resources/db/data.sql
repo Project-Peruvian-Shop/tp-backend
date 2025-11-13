@@ -16,12 +16,12 @@ insert into imagen (enlace, nombre, alt) values
 ('https://res.cloudinary.com/dbxcev580/image/upload/v1763057340/1452_wzx7o1.png', 'NTP ISO 1452-2', 'NTP-ISO-1452-2'),
 ('https://res.cloudinary.com/dbxcev580/image/upload/v1763057364/4435_suvvvs.png', 'NTP ISO 4435', 'NTP-ISO-4435'),
 --IMAGENES DE LAS CATEGORIAS:
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/NTP-399.002.png', 'Conducción de fluidos a presión Unión SP', 'NTP 399.002'),
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/NTP-399.003.png', 'Instalaciones de desagüe', 'NTP 399.003'),
-('https://tuberiasperuanito.com/wp-content/uploads/2025/10/NTP-399.006.png', 'Instalaciones eléctricas', 'NTP 399.006'),
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/NTP-399.166.png', 'Conducción de fluidos a presión Unión Roscada', 'NTP 399.166'),
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/NTP-ISO-1452-2-2.png', 'Abastecimiento de agua, drenaje y alcantarillado con presión', 'NTP ISO 1452-2'),
-('https://tuberiasperuanito.com/wp-content/uploads/2025/04/NTP-ISO-4435.png', 'Alcantarillado y drenaje sin presión', 'NTP ISO 4435');
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763060393/002_paay0r.png', 'Conducción de fluidos a presión Unión SP', 'NTP 399.002'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763060411/003_vngyhs.png', 'Instalaciones de desagüe', 'NTP 399.003'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763060436/006_ata5wl.png', 'Instalaciones eléctricas', 'NTP 399.006'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763060454/166_p6hszr.png', 'Conducción de fluidos a presión Unión Roscada', 'NTP 399.166'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763060337/-1452_ve7j4p.png', 'Abastecimiento de agua, drenaje y alcantarillado con presión', 'NTP ISO 1452-2'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763060372/-4435_oxacn4.png', 'Alcantarillado y drenaje sin presión', 'NTP ISO 4435');
 
 
 
