@@ -13,7 +13,7 @@ como base de datos, asegurando una configuración consistente y confiable tanto 
 
 La documentación de la API Swagger se puede acceder en `http://localhost:8080/swagger-ui/index.html`.
 
-## Ejecutar Luxury Wear Service Localmente con Docker
+## Ejecutar Tuberias Peruanito Service Localmente con Docker
 
 Esta sección explica cómo ejecutar **Tuberias Peruanito** localmente utilizando Docker. El archivo
 `docker-compose.yml` provisiona tanto la base de datos MySQL como la aplicación Spring Boot en contenedores separados,
