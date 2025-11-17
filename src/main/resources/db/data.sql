@@ -9,74 +9,90 @@ insert into usuario (nombre, apellidos, email, passwordd, telefono, rol) values
 ('Diego', 'Vargas', 'diego@mail.com', 'diego123', '987999999', 'ROLE_CLIENTE');
 
 insert into imagen (enlace, nombre, alt) values
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763057276/399.002_pw5cce.png', 'NTP 399.002', 'NTP-399.002'),
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763057317/399.003_oeauqf.png', 'NTP 399.003', 'NTP-399.003'),
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763057325/399.006_czg8ym.png', 'NTP 399.006', 'NTP-399.006'),
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763057334/399.166_cvhdxy.png', 'NTP 399.166', 'NTP-399.166'),
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763057340/1452_wzx7o1.png', 'NTP ISO 1452-2', 'NTP-ISO-1452-2'),
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763057364/4435_suvvvs.png', 'NTP ISO 4435', 'NTP-ISO-4435'),
---IMAGENES DE LAS CATEGORIAS:
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763060393/002_paay0r.png', 'Conducción de fluidos a presión Unión SP', 'NTP 399.002'),
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763060411/003_vngyhs.png', 'Instalaciones de desagüe', 'NTP 399.003'),
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763060436/006_ata5wl.png', 'Instalaciones eléctricas', 'NTP 399.006'),
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763060454/166_p6hszr.png', 'Conducción de fluidos a presión Unión Roscada', 'NTP 399.166'),
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763060337/-1452_ve7j4p.png', 'Abastecimiento de agua, drenaje y alcantarillado con presión', 'NTP ISO 1452-2'),
-('https://res.cloudinary.com/dbxcev580/image/upload/v1763060372/-4435_oxacn4.png', 'Alcantarillado y drenaje sin presión', 'NTP ISO 4435');
+-- images 002
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763414719/p-1_pubfcz.png', 'NTP 399.002', 'NTP-399.002'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763414719/p-2_qfgmkn.png', 'NTP 399.002', 'NTP-399.002'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763414720/p-3_g8inhg.png', 'NTP 399.002', 'NTP-399.002'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763414719/p-4_mzn9y3.png', 'NTP 399.002', 'NTP-399.002'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763414928/cat_i6fbwp.png', 'Conducción de fluidos a presión Unión SP', 'NTP-399.002'),
+-- images 003
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763414818/p-1_aog6es.png', 'NTP 399.003', 'NTP-399.003'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763414819/p-2_cjzbic.png', 'NTP 399.003', 'NTP-399.003'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763414968/cat_qilmg5.png', 'Instalaciones de desagüe', 'NTP-399.003'),
+-- images 006
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415081/p-1_g0bpdc.png', 'NTP 399.006', 'NTP-399.006'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415079/p-3_muj4fn.png', 'NTP 399.006', 'NTP-399.006'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415079/p-2_bbcygx.png', 'NTP 399.006', 'NTP-399.006'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415080/p-4_eyhkqw.png', 'NTP 399.006', 'NTP-399.006'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763414990/cat_jazzq2.png', 'Instalaciones eléctricas', 'NTP-399.006'),
+-- images 166
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415178/p-1_tyocqb.png', 'NTP 399.166', 'NTP-399.166'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415177/p-2_ayg4dp.png', 'NTP 399.166', 'NTP-399.166'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415178/cat_c38aiu.png', 'Conducción de fluidos a presión Unión Roscada', 'NTP-399.166'),
+-- images 1452
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415294/p-1_yjsgzs.png', 'NTP 399.166', 'NTP-399.166'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415292/p-2_g10aim.png', 'NTP 399.166', 'NTP-399.166'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415293/cat_ozb84u.png', 'Abastecimiento de agua, drenaje y alcantarillado con presión', 'NTP-399.166'),
+-- images 4435
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415912/p-1_ikj6w3.png', 'NTP 399.166', 'NTP-399.166'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415331/p-2_behpvf.png', 'NTP 399.166', 'NTP-399.166'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415331/p-3_qxe13a.png', 'NTP 399.166', 'NTP-399.166'),
+('https://res.cloudinary.com/dbxcev580/image/upload/v1763415330/cat_d5rljp.png', 'Alcantarillado y drenaje sin presión', 'NTP-399.166');
 
 
 insert into categoria (nombre, norma, imagen_id, usos) values
-('Conducción de fluidos a presión Unión SP', 'NTP 399.002', 7, 'Los tubos de PVC para agua a presión con unión tipo Campana-Espiga, son diseñados para soportar diferentes rangos de presiones según su presion nominal, lo que es ideal para instalaciones como riego, descarga con presión, agua potable a una temperatura de 25°C, el uso de unión con cemento solvente garantiza un unión hermética y duradera.'),
+('Conducción de fluidos a presión Unión SP', 'NTP 399.002', 5, 'Los tubos de PVC para agua a presión con unión tipo Campana-Espiga, son diseñados para soportar diferentes rangos de presiones según su presion nominal, lo que es ideal para instalaciones como riego, descarga con presión, agua potable a una temperatura de 25°C, el uso de unión con cemento solvente garantiza un unión hermética y duradera.'),
 ('Instalaciones de desagüe', 'NTP 399.003', 8, 'Los tubos de desagüe, se fabrican por el proceso de extrusión se usan como componentes esenciales en sistemas de fontanería para la evacuación de aguas residuales, instalaciones domiciliarias de desagüe y descarga de fluidos sin presión.'),
-('Instalaciones eléctricas', 'NTP 399.006', 9, 'Los tubos de PVC para electricidad son ideales para instalaciones de baja y mediana tensión, por su uso se puede instalar tanto de forma aérea como enterrado, ya que su diseño le permite soportar esfuerzos externos, además de su fácil manipulación es ideal para protección de cables en casas, oficinas, tiendas supermercados.'),
-('Conducción de fluidos a presión Unión Roscada', 'NTP 399.166', 10, 'Los tubos de PVC para agua a presión con unión tipo rosca, son diseñados para soportar presiones de hasta 10 bar de forma continua en instalaciones de servicio de agua potable a una temperatura de 25°C, el uso de la rosca garantiza la fácil manipulación o cambio en caso de reparación a la vez que brinda una buena heremeticidad con el ajuste.'),
-('Abastecimiento de agua, drenaje y alcantarillado con presión', 'NTP ISO 1452-2', 11, 'Los tubos de PVC para agua a presión de norma NTP ISO 1452-2 son adecuados para diferentes tipo de instalaciones: conducciones de agua principales y derivaciones enterradas; transporte de agua en conducciones aéreas, en el exterior y en el interior de edificios; y drenaje y alcantarillado, enterrado o aéreo con presión, además que por su unión con anillo elastomérico son de fácil instalación sin uso de cementos manteniéndose una excelente hermeticidad.'),
-('Alcantarillado y drenaje sin presión', 'NTP ISO 4435', 12, 'Los tubos de norma NTP ISO 4435 son diseñados para para sistemas sin presión de drenaje y alcantarillado, que transportan desagües domésticos e industriales, así como aguas superficiales; además de sus grandes propiedades a la corrosión es ideal para aguas servidas. Su fácil instalación con su unión con anillo elastomérico da una ventaja en la rapidez y tiempo.');
+('Instalaciones eléctricas', 'NTP 399.006', 13, 'Los tubos de PVC para electricidad son ideales para instalaciones de baja y mediana tensión, por su uso se puede instalar tanto de forma aérea como enterrado, ya que su diseño le permite soportar esfuerzos externos, además de su fácil manipulación es ideal para protección de cables en casas, oficinas, tiendas supermercados.'),
+('Conducción de fluidos a presión Unión Roscada', 'NTP 399.166', 16, 'Los tubos de PVC para agua a presión con unión tipo rosca, son diseñados para soportar presiones de hasta 10 bar de forma continua en instalaciones de servicio de agua potable a una temperatura de 25°C, el uso de la rosca garantiza la fácil manipulación o cambio en caso de reparación a la vez que brinda una buena heremeticidad con el ajuste.'),
+('Abastecimiento de agua, drenaje y alcantarillado con presión', 'NTP ISO 1452-2', 19, 'Los tubos de PVC para agua a presión de norma NTP ISO 1452-2 son adecuados para diferentes tipo de instalaciones: conducciones de agua principales y derivaciones enterradas; transporte de agua en conducciones aéreas, en el exterior y en el interior de edificios; y drenaje y alcantarillado, enterrado o aéreo con presión, además que por su unión con anillo elastomérico son de fácil instalación sin uso de cementos manteniéndose una excelente hermeticidad.'),
+('Alcantarillado y drenaje sin presión', 'NTP ISO 4435', 23, 'Los tubos de norma NTP ISO 4435 son diseñados para para sistemas sin presión de drenaje y alcantarillado, que transportan desagües domésticos e industriales, así como aguas superficiales; además de sus grandes propiedades a la corrosión es ideal para aguas servidas. Su fácil instalación con su unión con anillo elastomérico da una ventaja en la rapidez y tiempo.');
 
 -- Productos relacionados con las categorías existentes
 insert into producto (nombre, descripcion, imagen_id, categoria_id) values
 -- CATEGORÍA 1: Tuberías para conducción de fluidos a presión Unión SP (imagen_id = 1)
 ('Tuberias para Fluidos a Presión 1/2" SP', 'Tubería de 1/2" para conducción de fluidos a presión, segura y eficiente.', 1, 1),
-('Tuberias para Fluidos a Presión 3/4" SP', 'Tubería de 3/4" de alta durabilidad para sistemas de presión.', 1, 1),
-('Tuberias para Fluidos a Presión 1" SP', 'Tubería de 1" diseñada para instalaciones hidráulicas bajo presión.', 1, 1),
-('Tuberias para Fluidos a Presión 1 1/2" SP', 'Tubería de 1 1/2" resistente, ideal para sistemas presurizados.', 1, 1),
-('Tuberias para Fluidos a Presión 2" SP', 'Tubería de 2" para transporte eficiente de fluidos a presión.', 1, 1),
-('Tuberias para Fluidos a Presión 3" SP', 'Tubería de 3" para sistemas hidráulicos con estándares NTP - 399.002.', 1, 1),
+('Tuberias para Fluidos a Presión 3/4" SP', 'Tubería de 3/4" de alta durabilidad para sistemas de presión.', 2, 1),
+('Tuberias para Fluidos a Presión 1" SP', 'Tubería de 1" diseñada para instalaciones hidráulicas bajo presión.', 3, 1),
+('Tuberias para Fluidos a Presión 1 1/2" SP', 'Tubería de 1 1/2" resistente, ideal para sistemas presurizados.', 4, 1),
+('Tuberias para Fluidos a Presión 2" SP', 'Tubería de 2" para transporte eficiente de fluidos a presión.', 4, 1),
+('Tuberias para Fluidos a Presión 3" SP', 'Tubería de 3" para sistemas hidráulicos con estándares NTP - 399.002.', 2, 1),
 ('Tuberias para Fluidos a Presión 4" SP', 'Tubería de 4" de alta calidad para conducción de fluidos.', 1, 1),
-('Tuberias para Fluidos a Presión 6" SP', 'Tubería de 6" con excelente resistencia a la presión.', 1, 1),
-('Tuberias para Fluidos a Presión 8" SP', 'Tubería de 8" para aplicaciones industriales de fluidos a presión.', 1, 1),
+('Tuberias para Fluidos a Presión 6" SP', 'Tubería de 6" con excelente resistencia a la presión.', 2, 1),
+('Tuberias para Fluidos a Presión 8" SP', 'Tubería de 8" para aplicaciones industriales de fluidos a presión.', 3, 1),
 -- CATEGORÍA 2: Tuberías para conducción de desagüe (imagen_id = 2)
-('Tuberias para Desague 1 1/2" SP', 'Tubería de 1/2" para sistemas de desagüe, durable y eficiente.', 2, 2),
-('Tuberias para Desague 2" SP', 'Tubería de 2" diseñada para drenaje y evacuación de líquidos.', 2, 2),
-('Tuberias para Desague 3" SP', 'Tubería de 3" para desagüe, fabricada con altos estándares de calidad.', 2, 2),
-('Tuberias para Desague 4" SP', 'Tubería de 4" para sistemas de drenaje confiables y resistentes.', 2, 2),
-('Tuberias para Desague 6" SP', 'Tubería de 6" para evacuación de aguas residuales en grandes instalaciones.', 2, 2),
-('Tuberias para Desague 8" SP', 'Tubería de 8" para desagüe, ideal para redes de saneamiento.', 2, 2),
+('Tuberias para Desague 1 1/2" SP', 'Tubería de 1/2" para sistemas de desagüe, durable y eficiente.', 6, 2),
+('Tuberias para Desague 2" SP', 'Tubería de 2" diseñada para drenaje y evacuación de líquidos.', 7, 2),
+('Tuberias para Desague 3" SP', 'Tubería de 3" para desagüe, fabricada con altos estándares de calidad.', 6, 2),
+('Tuberias para Desague 4" SP', 'Tubería de 4" para sistemas de drenaje confiables y resistentes.', 7, 2),
+('Tuberias para Desague 6" SP', 'Tubería de 6" para evacuación de aguas residuales en grandes instalaciones.', 6, 2),
+('Tuberias para Desague 8" SP', 'Tubería de 8" para desagüe, ideal para redes de saneamiento.', 7, 2),
 -- CATEGORÍA 3: Tuberías para instalaciones eléctricas de desagüe (imagen_id = 3)
-('Tuberias para Desague 1/2" SP', 'Tubería de 1/2" para instalación eléctrica, resistente y flexible.', 3, 3),
-('Tuberias para Desague 5/8" SP', 'Tubería de 5/8" ideal para canalización eléctrica segura.', 3, 3),
-('Tuberias para Desague 3/4" SP', 'Tubería de 3/4" para protección de cables eléctricos.', 3, 3),
-('Tuberias para Desague 1" SP', 'Tubería de 1" para instalaciones eléctricas con alta durabilidad.', 3, 3),
-('Tuberias para Desague 1 1/2" SP', 'Tubería de 1 1/2" para canalización eficiente de conductores eléctricos.', 3, 3),
-('Tuberias para Desague 2" SP', 'Tubería de 2" para infraestructura eléctrica, segura y confiable.', 3, 3),
+('Tuberias para Desague 1/2" SP', 'Tubería de 1/2" para instalación eléctrica, resistente y flexible.', 9, 3),
+('Tuberias para Desague 5/8" SP', 'Tubería de 5/8" ideal para canalización eléctrica segura.', 10, 3),
+('Tuberias para Desague 3/4" SP', 'Tubería de 3/4" para protección de cables eléctricos.', 11, 3),
+('Tuberias para Desague 1" SP', 'Tubería de 1" para instalaciones eléctricas con alta durabilidad.', 12, 3),
+('Tuberias para Desague 1 1/2" SP', 'Tubería de 1 1/2" para canalización eficiente de conductores eléctricos.', 11, 3),
+('Tuberias para Desague 2" SP', 'Tubería de 2" para infraestructura eléctrica, segura y confiable.', 10, 3),
 -- CATEGORÍA 4: Tuberías para fluidos a presión Unión Roscada (imagen_id = 4)
-('Tuberias para Fluidos a Presion con Unión Roscada 1/2"', 'Tubería de 1/2" con unión roscada para fácil instalación en sistemas de presión.', 4, 4),
-('Tuberias para Fluidos a Presion con Unión Roscada 3/4"', 'Tubería de 3/4" con rosca, ideal para conexiones hidráulicas.', 4, 4),
-('Tuberias para Fluidos a Presion con Unión Roscada 1"', 'Tubería de 1" con unión roscada, resistente y segura.', 4, 4),
-('Tuberias para Fluidos a Presion con Unión Roscada 1 1/4"', 'Tubería de 1 1/4" con rosca para sistemas de presión confiables.', 4, 4),
-('Tuberias para Fluidos a Presion con Unión Roscada 1 1/2"', 'Tubería de 1 1/2" con unión roscada para montaje rápido.', 4, 4),
-('Tuberias para Fluidos a Presion con Unión Roscada 2"', 'Tubería de 2" con conexión roscada, ideal para redes de presión.', 4, 4),
+('Tuberias para Fluidos a Presion con Unión Roscada 1/2"', 'Tubería de 1/2" con unión roscada para fácil instalación en sistemas de presión.', 14, 4),
+('Tuberias para Fluidos a Presion con Unión Roscada 3/4"', 'Tubería de 3/4" con rosca, ideal para conexiones hidráulicas.', 15, 4),
+('Tuberias para Fluidos a Presion con Unión Roscada 1"', 'Tubería de 1" con unión roscada, resistente y segura.', 14, 4),
+('Tuberias para Fluidos a Presion con Unión Roscada 1 1/4"', 'Tubería de 1 1/4" con rosca para sistemas de presión confiables.', 15, 4),
+('Tuberias para Fluidos a Presion con Unión Roscada 1 1/2"', 'Tubería de 1 1/2" con unión roscada para montaje rápido.', 14, 4),
+('Tuberias para Fluidos a Presion con Unión Roscada 2"', 'Tubería de 2" con conexión roscada, ideal para redes de presión.', 15, 4),
 -- CATEGORÍA 5: Tuberías para abastecimiento de agua, drenaje y alcantarillado con presión (imagen_id = 5)
-('Tuberias para Fluidos a Presión 63mm UF', 'Tubería de 63mm para sistemas de presión, fabricada según NTP - ISO 1452.', 5, 5),
-('Tuberias para Fluidos a Presión 75mm UF', 'Tubería de 75mm para conducción de fluidos a presión, conforme a normativas.', 5, 5),
-('Tuberias para Fluidos a Presión 90mm UF', 'Tubería de 90mm ideal para redes de fluidos presurizados, resistente y confiable.', 5, 5),
-('Tuberias para Fluidos a Presión 110mm UF', 'Tubería de 110mm diseñada para soportar presión en sistemas hidráulicos.', 5, 5),
-('Tuberias para Fluidos a Presión 140mm UF', 'Tubería de 140mm con alta resistencia para aplicaciones de presión.', 5, 5),
-('Tuberias para Fluidos a Presión 160mm UF', 'Tubería de 160mm para redes de presión, garantizando durabilidad y seguridad.', 5, 5),
-('Tuberias para Fluidos a Presión 200mm UF', 'Tubería de 200mm para grandes instalaciones de fluidos a presión.', 5, 5),
+('Tuberias para Fluidos a Presión 63mm UF', 'Tubería de 63mm para sistemas de presión, fabricada según NTP - ISO 1452.', 17, 5),
+('Tuberias para Fluidos a Presión 75mm UF', 'Tubería de 75mm para conducción de fluidos a presión, conforme a normativas.', 18, 5),
+('Tuberias para Fluidos a Presión 90mm UF', 'Tubería de 90mm ideal para redes de fluidos presurizados, resistente y confiable.', 17, 5),
+('Tuberias para Fluidos a Presión 110mm UF', 'Tubería de 110mm diseñada para soportar presión en sistemas hidráulicos.', 18, 5),
+('Tuberias para Fluidos a Presión 140mm UF', 'Tubería de 140mm con alta resistencia para aplicaciones de presión.', 17, 5),
+('Tuberias para Fluidos a Presión 160mm UF', 'Tubería de 160mm para redes de presión, garantizando durabilidad y seguridad.', 18, 5),
+('Tuberias para Fluidos a Presión 200mm UF', 'Tubería de 200mm para grandes instalaciones de fluidos a presión.', 17, 5),
 -- CATEGORÍA 6: Tuberías para alcantarillado y drenaje sin presión (imagen_id = 6)
-('Tuberias para Alcantarillado 110mm UF', 'Tubería de 110mm para redes de alcantarillado, resistente y durable.', 6, 6),
-('Tuberias para Alcantarillado 160mm UF', 'Tubería de 160mm ideal para sistemas de drenaje y alcantarillado.', 6, 6),
-('Tuberias para Alcantarillado 200mm UF', 'Tubería de 200mm para conducción eficiente de aguas residuales.', 6, 6);
+('Tuberias para Alcantarillado 110mm UF', 'Tubería de 110mm para redes de alcantarillado, resistente y durable.', 20, 6),
+('Tuberias para Alcantarillado 160mm UF', 'Tubería de 160mm ideal para sistemas de drenaje y alcantarillado.', 21, 6),
+('Tuberias para Alcantarillado 200mm UF', 'Tubería de 200mm para conducción eficiente de aguas residuales.', 22, 6);
 
 -- Mensajes
 insert into mensaje
