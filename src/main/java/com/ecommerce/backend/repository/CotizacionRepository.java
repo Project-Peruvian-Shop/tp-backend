@@ -39,7 +39,7 @@ public interface CotizacionRepository extends JpaRepository<Cotizacion, Long> {
             "ORDER BY FUNCTION('MONTH', c.creacion)")
     List<Object[]> cotizacionesForYear(@Param("year") int year);
 
-    Optional<Cotizacion> findTopByOrderByCreacionDesc();
+    Optional<Cotizacion> findTopByNumeroStartingWithOrderByCreacionDesc(String yearPrefix);
 
     List<Cotizacion> findByUsuarioIdOrderByCreacionDesc(Long usuarioId);
 

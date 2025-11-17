@@ -177,16 +177,22 @@ public class CotizacionService {
 
     private String getNumberFromDB() {
         int year = java.time.Year.now().getValue();
-        Optional<Cotizacion> ultimaCotizacion = cotizacionRepository.findTopByOrderByCreacionDesc();
+        String yearPrefix = "COT-" + year + "-";
+
+        Optional<Cotizacion> ultimaCotizacion = cotizacionRepository
+                .findTopByNumeroStartingWithOrderByCreacionDesc(yearPrefix);
+
+        int nuevoNumero = 1; // Por defecto si no hay registros del año
 
         if (ultimaCotizacion.isPresent()) {
-            String numero = ultimaCotizacion.get().getNumero();
-            String[] lista = numero.split("-");
-            String nuevoNumero = String.valueOf(Integer.parseInt(lista[2]) + 1);
-            return "COT-" + year + "-" + nuevoNumero;
+            String numero = ultimaCotizacion.get().getNumero(); // ej: "COT-2025-054"
+            String[] partes = numero.split("-");
+            nuevoNumero = Integer.parseInt(partes[2]) + 1;
         }
 
-        return "COT-" + year + "-1";
+        String numeroFormateado = String.format("%03d", nuevoNumero);
+
+        return yearPrefix + numeroFormateado;
     }
 
     public CotizacionFullResponseDTO updateObservaciones(Long id, String observaciones) {
