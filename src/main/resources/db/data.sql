@@ -1,12 +1,12 @@
 insert into usuario (nombre, apellidos, email, passwordd, telefono, rol) values
-('Wilmer', 'Guevara', 'wilmer@mail.com', 'wilmer123', '999000000', 'ROLE_SUPERADMIN'),
-('Cliente', 'Cliente', 'cliente@mail.com', 'cliente123', '0987654321', 'ROLE_CLIENTE'),
-('Socio', 'TP', 'socio@mail.com', 'socio123', '0987654321', 'ROLE_SUPERADMIN'),
-('Jorge', 'Luis', 'jorge@mail.com', 'user123', '0987654321', 'ROLE_ADMINISTRADOR'),
-('Steve', 'Harrington', 'steve@mail.com', 'user123', '0987654321', 'ROLE_ADMINISTRADOR'),
-('Felix', 'Ruiz', 'felix@mail.com', 'user123', '0987654321', 'ROLE_ADMINISTRADOR'),
-('Sebastian', 'Perez', 'seb@mail.com', 'user123', '0987654321', 'ROLE_ADMINISTRADOR'),
-('Charles', 'Leclerc', 'charles@mail.com', 'user123', '0987654321', 'ROLE_ADMINISTRADOR');
+('Wilmer', 'Guevara', 'wilmer@mail.com', 'wilmer123', '987321654', 'ROLE_SUPERADMIN'),
+('Alexa', 'Torres', 'alexa@mail.com', 'alexa123', '987111111', 'ROLE_SUPERVISOR'),
+('Pedro', 'Ramírez', 'pedro@mail.com', 'pedro123', '987222222', 'ROLE_ADMINISTRADOR'),
+('Carla', 'Díaz', 'carla@mail.com', 'carla123', '987333333', 'ROLE_CLIENTE'),
+('Jorge', 'Medina', 'jorge@mail.com', 'jorge123', '987444444', 'ROLE_CLIENTE'),
+('Sofía', 'Cruz', 'sofia@mail.com', 'sofia123', '987666666', 'ROLE_CLIENTE'),
+('Laura', 'Martínez', 'laura@mail.com', 'laura123', '985678901', 'ROLE_CLIENTE'),
+('Diego', 'Vargas', 'diego@mail.com', 'diego123', '987999999', 'ROLE_CLIENTE');
 
 insert into imagen (enlace, nombre, alt) values
 ('https://res.cloudinary.com/dbxcev580/image/upload/v1763057276/399.002_pw5cce.png', 'NTP 399.002', 'NTP-399.002'),
@@ -22,7 +22,6 @@ insert into imagen (enlace, nombre, alt) values
 ('https://res.cloudinary.com/dbxcev580/image/upload/v1763060454/166_p6hszr.png', 'Conducción de fluidos a presión Unión Roscada', 'NTP 399.166'),
 ('https://res.cloudinary.com/dbxcev580/image/upload/v1763060337/-1452_ve7j4p.png', 'Abastecimiento de agua, drenaje y alcantarillado con presión', 'NTP ISO 1452-2'),
 ('https://res.cloudinary.com/dbxcev580/image/upload/v1763060372/-4435_oxacn4.png', 'Alcantarillado y drenaje sin presión', 'NTP ISO 4435');
-
 
 
 insert into categoria (nombre, norma, imagen_id, usos) values
@@ -45,7 +44,6 @@ insert into producto (nombre, descripcion, imagen_id, categoria_id) values
 ('Tuberias para Fluidos a Presión 4" SP', 'Tubería de 4" de alta calidad para conducción de fluidos.', 1, 1),
 ('Tuberias para Fluidos a Presión 6" SP', 'Tubería de 6" con excelente resistencia a la presión.', 1, 1),
 ('Tuberias para Fluidos a Presión 8" SP', 'Tubería de 8" para aplicaciones industriales de fluidos a presión.', 1, 1),
-
 -- CATEGORÍA 2: Tuberías para conducción de desagüe (imagen_id = 2)
 ('Tuberias para Desague 1 1/2" SP', 'Tubería de 1/2" para sistemas de desagüe, durable y eficiente.', 2, 2),
 ('Tuberias para Desague 2" SP', 'Tubería de 2" diseñada para drenaje y evacuación de líquidos.', 2, 2),
@@ -53,7 +51,6 @@ insert into producto (nombre, descripcion, imagen_id, categoria_id) values
 ('Tuberias para Desague 4" SP', 'Tubería de 4" para sistemas de drenaje confiables y resistentes.', 2, 2),
 ('Tuberias para Desague 6" SP', 'Tubería de 6" para evacuación de aguas residuales en grandes instalaciones.', 2, 2),
 ('Tuberias para Desague 8" SP', 'Tubería de 8" para desagüe, ideal para redes de saneamiento.', 2, 2),
-
 -- CATEGORÍA 3: Tuberías para instalaciones eléctricas de desagüe (imagen_id = 3)
 ('Tuberias para Desague 1/2" SP', 'Tubería de 1/2" para instalación eléctrica, resistente y flexible.', 3, 3),
 ('Tuberias para Desague 5/8" SP', 'Tubería de 5/8" ideal para canalización eléctrica segura.', 3, 3),
@@ -61,7 +58,6 @@ insert into producto (nombre, descripcion, imagen_id, categoria_id) values
 ('Tuberias para Desague 1" SP', 'Tubería de 1" para instalaciones eléctricas con alta durabilidad.', 3, 3),
 ('Tuberias para Desague 1 1/2" SP', 'Tubería de 1 1/2" para canalización eficiente de conductores eléctricos.', 3, 3),
 ('Tuberias para Desague 2" SP', 'Tubería de 2" para infraestructura eléctrica, segura y confiable.', 3, 3),
-
 -- CATEGORÍA 4: Tuberías para fluidos a presión Unión Roscada (imagen_id = 4)
 ('Tuberias para Fluidos a Presion con Unión Roscada 1/2"', 'Tubería de 1/2" con unión roscada para fácil instalación en sistemas de presión.', 4, 4),
 ('Tuberias para Fluidos a Presion con Unión Roscada 3/4"', 'Tubería de 3/4" con rosca, ideal para conexiones hidráulicas.', 4, 4),
@@ -69,7 +65,6 @@ insert into producto (nombre, descripcion, imagen_id, categoria_id) values
 ('Tuberias para Fluidos a Presion con Unión Roscada 1 1/4"', 'Tubería de 1 1/4" con rosca para sistemas de presión confiables.', 4, 4),
 ('Tuberias para Fluidos a Presion con Unión Roscada 1 1/2"', 'Tubería de 1 1/2" con unión roscada para montaje rápido.', 4, 4),
 ('Tuberias para Fluidos a Presion con Unión Roscada 2"', 'Tubería de 2" con conexión roscada, ideal para redes de presión.', 4, 4),
-
 -- CATEGORÍA 5: Tuberías para abastecimiento de agua, drenaje y alcantarillado con presión (imagen_id = 5)
 ('Tuberias para Fluidos a Presión 63mm UF', 'Tubería de 63mm para sistemas de presión, fabricada según NTP - ISO 1452.', 5, 5),
 ('Tuberias para Fluidos a Presión 75mm UF', 'Tubería de 75mm para conducción de fluidos a presión, conforme a normativas.', 5, 5),
@@ -78,7 +73,6 @@ insert into producto (nombre, descripcion, imagen_id, categoria_id) values
 ('Tuberias para Fluidos a Presión 140mm UF', 'Tubería de 140mm con alta resistencia para aplicaciones de presión.', 5, 5),
 ('Tuberias para Fluidos a Presión 160mm UF', 'Tubería de 160mm para redes de presión, garantizando durabilidad y seguridad.', 5, 5),
 ('Tuberias para Fluidos a Presión 200mm UF', 'Tubería de 200mm para grandes instalaciones de fluidos a presión.', 5, 5),
-
 -- CATEGORÍA 6: Tuberías para alcantarillado y drenaje sin presión (imagen_id = 6)
 ('Tuberias para Alcantarillado 110mm UF', 'Tubería de 110mm para redes de alcantarillado, resistente y durable.', 6, 6),
 ('Tuberias para Alcantarillado 160mm UF', 'Tubería de 160mm ideal para sistemas de drenaje y alcantarillado.', 6, 6),
@@ -90,11 +84,11 @@ insert into mensaje
 values
 ('Juan Pérez', 'DNI', '12345678', '+987654321', 'juanperez@gmail.com',
  'Estoy interesado en sus productos de PVC de 2 pulgadas. ¿Podrían enviarme una cotización detallada?',
- 'CONTACTENOS', 'PENDIENTE', null, 1, '2024-12-05 11:30:30'),
+ 'CONTACTENOS', 'PENDIENTE', null, 4, '2024-12-05 11:30:30'),
 
 ('María Gómez', 'RUC', '20654321987', '+912345678', 'maria.gomez@yahoo.com',
  'Realicé una compra hace dos semanas y el pedido llegó incompleto. Necesito una solución urgente.',
- 'QUEJA', 'EN_PROCESO', 'EMAIL', 1, '2023-08-30 11:30:30'),
+ 'QUEJA', 'EN_PROCESO', 'EMAIL', 4, '2023-08-30 11:30:30'),
 
 ('Carla Rivas', 'PASAPORTE', 'PZ1122334', '+12345678', 'cliente.anonimo@test.com',
  '¿Qué tipo de garantía ofrecen en las tuberías de PVC clase 10? Estoy considerando una compra mayorista.',
@@ -102,7 +96,7 @@ values
 
 ('Carlos López', 'DNI', '11223344', '+999888777', 'carlos.lopez@hotmail.com',
  'Compré tuberías de PVC de 3 pulgadas y algunas vinieron con defectos de fabricación. Deseo presentar un reclamo.',
- 'RECLAMO', 'CERRADO', 'PRESENCIAL', 2, '2025-01-25 11:30:30'),
+ 'RECLAMO', 'CERRADO', 'PRESENCIAL', 5, '2025-01-25 11:30:30'),
 
 ('Ana Torres', 'OTRO', '94810122', '+955666444', 'ana.torres@gmail.com',
  'La atención en la sucursal de San Isidro fue deficiente. Agradecería que me contacten para resolverlo.',
@@ -110,15 +104,15 @@ values
 
 ('Pedro Salazar', 'DNI', '44556677', '+988776655', 'pedro.salazar@empresa.com',
  'Estoy buscando cotización para 100 metros de tubería PVC de 4" y accesorios de unión.',
- 'CONTACTENOS', 'PENDIENTE', NULL, 3, '2025-10-10 10:15:20'),
+ 'CONTACTENOS', 'PENDIENTE', NULL, 6, '2025-10-10 10:15:20'),
 
 ('Lucía Fernández', 'RUC', '20588741236', '+976543210', 'ventas@constructoraandes.pe',
  'Requerimos cotización por mayor para tuberías de PVC clase 10 y 15. Favor de enviar proforma por correo.',
- 'CONTACTENOS', 'EN_PROCESO', 'EMAIL', 1, '2025-09-02 14:40:50'),
+ 'CONTACTENOS', 'EN_PROCESO', 'EMAIL', 7, '2025-09-02 14:40:50'),
 
 ('Diego Ramos', 'DNI', '33445566', '+933221100', 'diegoramos@gmail.com',
  'He intentado comunicarme varias veces sin respuesta. Necesito saber el estado de mi pedido.',
- 'QUEJA', 'EN_PROCESO', 'WHATSAPP', 4, '2025-08-21 09:25:00'),
+ 'QUEJA', 'EN_PROCESO', 'WHATSAPP', 6, '2025-08-21 09:25:00'),
 
 ('Rosa Medina', 'DNI', '55667788', '+977665544', 'rosa.medina@outlook.com',
  'Deseo obtener información sobre los métodos de pago para pedidos al por mayor.',
@@ -126,64 +120,64 @@ values
 
 ('Miguel Torres', 'DNI', '66778899', '+911223344', 'miguel.torres@gmail.com',
  'Recibí un producto diferente al solicitado, por lo que quiero dejar constancia de mi reclamo.',
- 'RECLAMO', 'PENDIENTE', 'TELEFONO', 2, '2025-06-28 08:35:00');
+ 'RECLAMO', 'PENDIENTE', 'TELEFONO', 4, '2025-06-28 08:35:00');
 
 
 insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id, creacion) values
-(1, 'COT-2024-01', 'PENDIENTE', 'Entrega urgente', 'Ana Torres', 'DNI', '11111111', '987111111', 'ana@example.com', 1, '2024-10-20 09:15:00'),
-(2, 'COT-2024-02', 'EN_PROCESO', 'Revisar stock', 'Luis Ramírez', 'DNI', '22222222', '987222222', 'luis@example.com', 2, '2024-10-20 11:30:00'),
-(3, 'COT-2024-03', 'ENVIADA', 'Cliente solicita información', 'Carla Díaz', 'RUC', '33333333', '987333333', 'carla@example.com', 1, '2024-11-02 10:00:00'),
-(4, 'COT-2024-04', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 1, '2024-11-10 15:45:00'),
-(5, 'COT-2024-05', 'RECHAZADA', 'Cliente canceló pedido', 'Juan Pérez', 'DNI', '12345678', '987654321', 'juan@example.com', 1, '2024-12-01 09:00:00'),
-(6, 'COT-2024-06', 'CERRADA', 'Cotización finalizada', 'María López', 'DNI', '87654321', '987123456', 'maria@example.com', 2, '2024-12-05 14:30:00'),
-(7, 'COT-2025-07', 'PENDIENTE', 'Necesito entrega rápida', 'Pedro Gómez', 'RUC', '11223344', '986543210', 'pedro@example.com', 1, '2025-01-10 11:00:00'),
-(8, 'COT-2025-08', 'ENVIADA', 'Revisar stock', 'Laura Martínez', 'DNI', '99887766', '985678901', 'laura@example.com', 1, '2025-01-15 16:20:00'),
-(9, 'COT-2025-09', 'ACEPTADA', 'Entrega programada', 'Mario Silva', 'DNI', '55555555', '987555555', 'mario@example.com', 2, '2025-02-02 09:50:00'),
-(10, 'COT-2025-10', 'RECHAZADA', 'Cliente urgente', 'Sofía Cruz', 'RUC', '66666666', '987666666', 'sofia@example.com', 1, '2025-02-14 12:15:00'),
-(11, 'COT-2025-11', 'CERRADA', 'Revisar disponibilidad', 'Andrés Rojas', 'DNI', '77777777', '987777777', 'andres@example.com', 1, '2025-03-03 14:30:00'),
-(12, 'COT-2025-12', 'PENDIENTE', 'Entrega rápida', 'Carolina Paredes', 'DNI', '88888888', '987888888', 'carolina@example.com', 2, '2025-03-15 12:45:00'),
-(13, 'COT-2025-13', 'EN_PROCESO', 'Cliente urgente', 'Diego Vargas', 'RUC', '99999999', '987999999', 'diego@example.com', 1, '2025-04-01 09:20:00'),
-(14, 'COT-2025-14', 'ENVIADA', 'Entrega programada', 'Natalia Ramos', 'DNI', '10101010', '987101010', 'natalia@example.com', 1, '2025-04-12 11:35:00'),
-(15, 'COT-2025-15', 'ACEPTADA', 'Entrega rápida', 'Juan Pérez', 'DNI', '12345678', '987654321', 'juan@example.com', 1, '2025-05-02 08:00:00'),
-(16, 'COT-2025-16', 'RECHAZADA', 'Cotización enviada por correo', 'Luis Castro', 'DNI', '12121212', '987121212', 'luis.castro@mail.com', 2, '2025-05-02 09:15:00'),
-(17, 'COT-2025-17', 'CERRADA', 'Cliente aprobó la proforma', 'Marta Ruiz', 'RUC', '23232323', '987232323', 'marta.ruiz@mail.com', 1, '2025-05-02 10:00:00'),
-(18, 'COT-2025-18', 'PENDIENTE', 'Esperando confirmación', 'David Pérez', 'DNI', '34343434', '987343434', 'davidp@mail.com', 2, '2025-05-03 14:40:00'),
-(19, 'COT-2025-19', 'EN_PROCESO', 'Pago realizado', 'Andrea Sánchez', 'DNI', '45454545', '987454545', 'andrea@mail.com', 3, '2025-05-04 11:25:00'),
-(20, 'COT-2025-20', 'ENVIADA', 'Cliente desistió de la compra', 'José Ramos', 'RUC', '56565656', '987565656', 'jose.ramos@mail.com', 1, '2025-05-05 16:55:00'),
-(21, 'COT-2025-21', 'ACEPTADA', 'Se está preparando la cotización', 'Natalia Ortega', 'DNI', '67676767', '987676767', 'natalia@mail.com', 1, '2025-05-06 10:35:00'),
-(22, 'COT-2025-22', 'RECHAZADA', 'Pedido entregado', 'Héctor Salas', 'DNI', '78787878', '987787878', 'hector@mail.com', 2, '2025-05-07 12:00:00'),
-(23, 'COT-2025-23', 'CERRADA', 'Esperando confirmación de entrega', 'Daniela León', 'DNI', '89898989', '987898989', 'daniela@mail.com', 1, '2025-05-08 09:45:00'),
-(24, 'COT-2025-24', 'PENDIENTE', 'Solicitud información adicional', 'Lucía Fernández', 'DNI', '90909090', '987909090', 'lucia@mail.com', 2, '2025-05-10 09:15:00'),
-(25, 'COT-2025-25', 'EN_PROCESO', 'Revisión técnica', 'Pedro Gutiérrez', 'RUC', '91919191', '987919191', 'pedro.g@mail.com', 1, '2025-05-12 11:30:00'),
-(26, 'COT-2025-26', 'ENVIADA', 'Cotización enviada al cliente', 'Carolina Rojas', 'DNI', '92929292', '987929292', 'carolina.r@mail.com', 3, '2025-05-14 14:45:00'),
-(27, 'COT-2025-27', 'ACEPTADA', 'Cliente aprobó proforma', 'José Pérez', 'DNI', '93939393', '987939393', 'jose.p@mail.com', 1, '2025-05-16 10:00:00'),
-(28, 'COT-2025-28', 'RECHAZADA', 'Pago parcial recibido', 'María Vargas', 'RUC', '94949494', '987949494', 'maria.v@mail.com', 2, '2025-05-18 16:30:00'),
-(29, 'COT-2025-29', 'CERRADA', 'Pendiente confirmación medidas', 'Andrés Silva', 'DNI', '95959595', '987959595', 'andres@mail.com', 1, '2025-05-20 09:00:00'),
-(30, 'COT-2025-30', 'PENDIENTE', 'Revisión almacén', 'Carla Díaz', 'DNI', '96969696', '987969696', 'carla.diaz@mail.com', 1, '2025-05-22 13:20:00'),
-(31, 'COT-2025-31', 'EN_PROCESO', 'Cliente canceló pedido', 'Jorge Alarcón', 'DNI', '97979797', '987979797', 'jorge.a@mail.com', 2, '2025-05-23 08:40:00'),
-(32, 'COT-2025-32', 'ENVIADA', 'Pedido entregado con éxito', 'Ana Ruiz', 'RUC', '98989898', '987989898', 'ana.ruiz@mail.com', 1, '2025-05-25 12:10:00'),
-(33, 'COT-2025-33', 'ACEPTADA', 'Aprobado en obra', 'Luis Hernández', 'DNI', '99999990', '987999000', 'luis.h@mail.com', 3, '2025-05-30 15:45:00'),
-(34, 'COT-2025-34', 'RECHAZADA', 'Cotización urgente', 'Sofía Torres', 'DNI', '10101010', '987101010', 'sofia.torres@mail.com', 1, '2025-06-01 11:00:00'),
-(35, 'COT-2025-35', 'CERRADA', 'Cliente pagó', 'Miguel Gamarra', 'RUC', '20202020', '987202020', 'miguel.g@mail.com', 2, '2025-06-02 15:30:00'),
-(36, 'COT-2025-36', 'PENDIENTE', 'Validación técnica', 'Carmen Silva', 'DNI', '30303030', '987303030', 'carmen.s@mail.com', 3, '2025-06-03 09:50:00'),
-(37, 'COT-2025-37', 'ACEPTADA', 'Entrega programada', 'Ricardo Lozano', 'DNI', '40404040', '987404040', 'ricardo.l@mail.com', 1, '2025-08-04 17:25:00'),
-(38, 'COT-2025-38', 'ENVIADA', 'Esperando respuesta cliente', 'Paola Gutiérrez', 'RUC', '50505050', '987505050', 'paola.g@mail.com', 2, '2025-08-05 10:40:00'),
-(39, 'COT-2025-39', 'ACEPTADA', 'Cliente aprobó', 'Alberto Ramos', 'DNI', '60606060', '987606060', 'alberto@mail.com', 3, '2025-09-06 15:20:00'),
-(40, 'COT-2025-40', 'RECHAZADA', 'Falta confirmar cantidades', 'Camila Sánchez', 'DNI', '70707070', '987707070', 'camila@mail.com', 1, '2025-10-07 09:10:00'),
-(41, 'COT-2025-41', 'CERRADA', 'Entrega parcial aprobada', 'Juan Alvarado', 'RUC', '80808080', '987808080', 'juan.alvarado@mail.com', 2, '2025-10-08 13:45:00'),
-(42, 'COT-2025-42', 'PENDIENTE', 'Solicitó descuento', 'Rosa Castillo', 'DNI', '11111111', '987111111', 'rosa.c@mail.com', 3, '2025-11-09 08:30:00'),
-(43, 'COT-2025-43', 'EN_PROCESO', 'Aprobada cambios mínimos', 'Mario Vargas', 'DNI', '22222222', '987222222', 'mario.v@mail.com', 1, '2025-11-10 16:20:00'),
-(44, 'COT-2025-44', 'ACEPTADA', 'Esperando validación ingeniería', 'Gabriela Torres', 'RUC', '33333333', '987333333', 'gabriela@mail.com', 2, '2025-11-11 10:10:00'),
-(45, 'COT-2025-45', 'ACEPTADA', 'Cotización confirmada', 'Hugo Medina', 'DNI', '44444444', '987444444', 'hugo.m@mail.com', 3, '2025-11-11 14:55:00'),
-(46, 'COT-2025-46', 'RECHAZADA', 'Pendiente firma de contrato', 'Juliana Flores', 'DNI', '55555555', '987555555', 'juliana@mail.com', 1, '2025-11-11 11:15:00'),
-(47, 'COT-2025-47', 'ACEPTADA', 'Entrega completada', 'Ana Torres', 'DNI', '11111111', '987111111', 'ana@example.com', 1, '2025-11-12 09:15:00'),
-(48, 'COT-2025-48', 'ACEPTADA', 'Revisar stock', 'Luis Ramírez', 'DNI', '22222222', '987222222', 'luis@example.com', 2, '2025-11-12 10:30:00'),
-(49, 'COT-2025-49', 'ACEPTADA', 'Cliente solicita información', 'Carla Díaz', 'RUC', '33333333', '987333333', 'carla@example.com', 1, '2025-11-12 11:00:00'),
-(50, 'COT-2025-50', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 1, '2025-11-12 13:41:00'),
-(51, 'COT-2025-51', 'PENDIENTE', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 1, '2025-11-13 13:42:00'),
-(52, 'COT-2025-52', 'PENDIENTE', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 1, '2025-11-13 13:43:00'),
-(53, 'COT-2025-53', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 1, '2025-11-14 13:44:00'),
-(54, 'COT-2025-54', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 1, '2025-11-14 13:45:00');
+(1, 'COT-2024-001', 'PENDIENTE', 'Entrega urgente', 'Ana Torres', 'DNI', '11111111', '987111111', 'ana@example.com', 4, '2024-10-20 09:15:00'),
+(2, 'COT-2024-002', 'EN_PROCESO', 'Revisar stock', 'Luis Ramírez', 'DNI', '22222222', '987222222', 'luis@example.com', 4, '2024-10-20 11:30:00'),
+(3, 'COT-2024-003', 'ENVIADA', 'Cliente solicita información', 'Carla Díaz', 'RUC', '33333333', '987333333', 'carla@example.com', 4, '2024-11-02 10:00:00'),
+(4, 'COT-2024-004', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 5, '2024-11-10 15:45:00'),
+(5, 'COT-2024-005', 'RECHAZADA', 'Cliente canceló pedido', 'Juan Pérez', 'DNI', '12345678', '987654321', 'juan@example.com', 8, '2024-12-01 09:00:00'),
+(6, 'COT-2024-006', 'CERRADA', 'Cotización finalizada', 'María López', 'DNI', '87654321', '987123456', 'maria@example.com', 5, '2024-12-05 14:30:00'),
+(7, 'COT-2025-007', 'PENDIENTE', 'Necesito entrega rápida', 'Pedro Gómez', 'RUC', '11223344', '986543210', 'pedro@example.com', 4, '2025-01-10 11:00:00'),
+(8, 'COT-2025-008', 'ENVIADA', 'Revisar stock', 'Laura Martínez', 'DNI', '99887766', '985678901', 'laura@example.com', 6, '2025-01-15 16:20:00'),
+(9, 'COT-2025-009', 'ACEPTADA', 'Entrega programada', 'Mario Silva', 'DNI', '55555555', '987555555', 'mario@example.com', 7, '2025-02-02 09:50:00'),
+(10, 'COT-2025-010', 'RECHAZADA', 'Cliente urgente', 'Sofía Cruz', 'RUC', '66666666', '987666666', 'sofia@example.com', 6, '2025-02-14 12:15:00'),
+(11, 'COT-2025-011', 'CERRADA', 'Revisar disponibilidad', 'Andrés Rojas', 'DNI', '77777777', '987777777', 'andres@example.com', 5, '2025-03-03 14:30:00'),
+(12, 'COT-2025-012', 'PENDIENTE', 'Entrega rápida', 'Carolina Paredes', 'DNI', '88888888', '987888888', 'carolina@example.com', 5, '2025-03-15 12:45:00'),
+(13, 'COT-2025-013', 'EN_PROCESO', 'Cliente urgente', 'Diego Vargas', 'RUC', '99999999', '987999999', 'diego@example.com', 8, '2025-04-01 09:20:00'),
+(14, 'COT-2025-014', 'ENVIADA', 'Entrega programada', 'Natalia Ramos', 'DNI', '10101010', '987101010', 'natalia@example.com', 8, '2025-04-12 11:35:00'),
+(15, 'COT-2025-015', 'ACEPTADA', 'Entrega rápida', 'Juan Pérez', 'DNI', '12345678', '987654321', 'juan@example.com', 6, '2025-05-02 08:00:00'),
+(16, 'COT-2025-016', 'RECHAZADA', 'Cotización enviada por correo', 'Luis Castro', 'DNI', '12121212', '987121212', 'luis.castro@mail.com', 5, '2025-05-02 09:15:00'),
+(17, 'COT-2025-017', 'CERRADA', 'Cliente aprobó la proforma', 'Marta Ruiz', 'RUC', '23232323', '987232323', 'marta.ruiz@mail.com', 5, '2025-05-02 10:00:00'),
+(18, 'COT-2025-018', 'PENDIENTE', 'Esperando confirmación', 'David Pérez', 'DNI', '34343434', '987343434', 'davidp@mail.com', 5, '2025-05-03 14:40:00'),
+(19, 'COT-2025-019', 'EN_PROCESO', 'Pago realizado', 'Andrea Sánchez', 'DNI', '45454545', '987454545', 'andrea@mail.com', 8, '2025-05-04 11:25:00'),
+(20, 'COT-2025-020', 'ENVIADA', 'Cliente desistió de la compra', 'José Ramos', 'RUC', '56565656', '987565656', 'jose.ramos@mail.com', 8, '2025-05-05 16:55:00'),
+(21, 'COT-2025-021', 'ACEPTADA', 'Se está preparando la cotización', 'Natalia Ortega', 'DNI', '67676767', '987676767', 'natalia@mail.com', 5, '2025-05-06 10:35:00'),
+(22, 'COT-2025-022', 'RECHAZADA', 'Pedido entregado', 'Héctor Salas', 'DNI', '78787878', '987787878', 'hector@mail.com', 4, '2025-05-07 12:00:00'),
+(23, 'COT-2025-023', 'CERRADA', 'Esperando confirmación de entrega', 'Daniela León', 'DNI', '89898989', '987898989', 'daniela@mail.com', 5, '2025-05-08 09:45:00'),
+(24, 'COT-2025-024', 'PENDIENTE', 'Solicitud información adicional', 'Lucía Fernández', 'DNI', '90909090', '987909090', 'lucia@mail.com', 6, '2025-05-10 09:15:00'),
+(25, 'COT-2025-025', 'EN_PROCESO', 'Revisión técnica', 'Pedro Gutiérrez', 'RUC', '91919191', '987919191', 'pedro.g@mail.com', 7, '2025-05-12 11:30:00'),
+(26, 'COT-2025-026', 'ENVIADA', 'Cotización enviada al cliente', 'Carolina Rojas', 'DNI', '92929292', '987929292', 'carolina.r@mail.com', 8, '2025-05-14 14:45:00'),
+(27, 'COT-2025-027', 'ACEPTADA', 'Cliente aprobó proforma', 'José Pérez', 'DNI', '93939393', '987939393', 'jose.p@mail.com', 7, '2025-05-16 10:00:00'),
+(28, 'COT-2025-028', 'RECHAZADA', 'Pago parcial recibido', 'María Vargas', 'RUC', '94949494', '987949494', 'maria.v@mail.com', 7, '2025-05-18 16:30:00'),
+(29, 'COT-2025-029', 'CERRADA', 'Pendiente confirmación medidas', 'Andrés Silva', 'DNI', '95959595', '987959595', 'andres@mail.com', 7, '2025-05-20 09:00:00'),
+(30, 'COT-2025-030', 'PENDIENTE', 'Revisión almacén', 'Carla Díaz', 'DNI', '96969696', '987969696', 'carla.diaz@mail.com', 6, '2025-05-22 13:20:00'),
+(31, 'COT-2025-031', 'EN_PROCESO', 'Cliente canceló pedido', 'Jorge Alarcón', 'DNI', '97979797', '987979797', 'jorge.a@mail.com', 6, '2025-05-23 08:40:00'),
+(32, 'COT-2025-032', 'ENVIADA', 'Pedido entregado con éxito', 'Ana Ruiz', 'RUC', '98989898', '987989898', 'ana.ruiz@mail.com', 8, '2025-05-25 12:10:00'),
+(33, 'COT-2025-033', 'ACEPTADA', 'Aprobado en obra', 'Luis Hernández', 'DNI', '99999990', '987999000', 'luis.h@mail.com', 5, '2025-05-30 15:45:00'),
+(34, 'COT-2025-034', 'RECHAZADA', 'Cotización urgente', 'Sofía Torres', 'DNI', '10101010', '987101010', 'sofia.torres@mail.com', 4, '2025-06-01 11:00:00'),
+(35, 'COT-2025-035', 'CERRADA', 'Cliente pagó', 'Miguel Gamarra', 'RUC', '20202020', '987202020', 'miguel.g@mail.com', 5, '2025-06-02 15:30:00'),
+(36, 'COT-2025-036', 'PENDIENTE', 'Validación técnica', 'Carmen Silva', 'DNI', '30303030', '987303030', 'carmen.s@mail.com', 8, '2025-06-03 09:50:00'),
+(37, 'COT-2025-037', 'ACEPTADA', 'Entrega programada', 'Ricardo Lozano', 'DNI', '40404040', '987404040', 'ricardo.l@mail.com', 5, '2025-08-04 17:25:00'),
+(38, 'COT-2025-038', 'ENVIADA', 'Esperando respuesta cliente', 'Paola Gutiérrez', 'RUC', '50505050', '987505050', 'paola.g@mail.com', 6, '2025-08-05 10:40:00'),
+(39, 'COT-2025-039', 'ACEPTADA', 'Cliente aprobó', 'Alberto Ramos', 'DNI', '60606060', '987606060', 'alberto@mail.com', 5, '2025-09-06 15:20:00'),
+(40, 'COT-2025-040', 'RECHAZADA', 'Falta confirmar cantidades', 'Camila Sánchez', 'DNI', '70707070', '987707070', 'camila@mail.com', 4, '2025-10-07 09:10:00'),
+(41, 'COT-2025-041', 'CERRADA', 'Entrega parcial aprobada', 'Juan Alvarado', 'RUC', '80808080', '987808080', 'juan.alvarado@mail.com', 6, '2025-10-08 13:45:00'),
+(42, 'COT-2025-042', 'PENDIENTE', 'Solicitó descuento', 'Rosa Castillo', 'DNI', '11111111', '987111111', 'rosa.c@mail.com', 7, '2025-11-09 08:30:00'),
+(43, 'COT-2025-043', 'EN_PROCESO', 'Aprobada cambios mínimos', 'Mario Vargas', 'DNI', '22222222', '987222222', 'mario.v@mail.com', 8, '2025-11-10 16:20:00'),
+(44, 'COT-2025-044', 'ACEPTADA', 'Esperando validación ingeniería', 'Gabriela Torres', 'RUC', '33333333', '987333333', 'gabriela@mail.com', 6, '2025-11-11 10:10:00'),
+(45, 'COT-2025-045', 'ACEPTADA', 'Cotización confirmada', 'Hugo Medina', 'DNI', '44444444', '987444444', 'hugo.m@mail.com', 6, '2025-11-11 14:55:00'),
+(46, 'COT-2025-046', 'RECHAZADA', 'Pendiente firma de contrato', 'Juliana Flores', 'DNI', '55555555', '987555555', 'juliana@mail.com', 5, '2025-11-11 11:15:00'),
+(47, 'COT-2025-047', 'ACEPTADA', 'Entrega completada', 'Ana Torres', 'DNI', '11111111', '987111111', 'ana@example.com', 5, '2025-11-12 09:15:00'),
+(48, 'COT-2025-048', 'ACEPTADA', 'Revisar stock', 'Luis Ramírez', 'DNI', '22222222', '987222222', 'luis@example.com', 7, '2025-11-12 10:30:00'),
+(49, 'COT-2025-049', 'ACEPTADA', 'Cliente solicita información', 'Carla Díaz', 'RUC', '33333333', '987333333', 'carla@example.com', 8, '2025-11-12 11:00:00'),
+(50, 'COT-2025-050', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 5, '2025-11-12 13:41:00'),
+(51, 'COT-2025-051', 'PENDIENTE', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 4, '2025-11-13 13:42:00'),
+(52, 'COT-2025-052', 'PENDIENTE', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 5, '2025-11-13 13:43:00'),
+(53, 'COT-2025-053', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 7, '2025-11-14 13:44:00'),
+(54, 'COT-2025-054', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 6, '2025-11-14 13:45:00');
 
 
 -- Detalles de cotización (continuación y completado)
