@@ -49,6 +49,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/v1/producto/{id}", "/api/v1/producto/paginated", "/api/v1/producto/sugeridos").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/categoria/all-and-quantity").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/imagen/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/producto/dashboard-search").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/mensaje/reclamaciones").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/mensaje/contactenos").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/refresh-token").permitAll()
@@ -97,7 +98,6 @@ public class SecurityConfig {
 
                         // PRODUCTO
                         .requestMatchers(HttpMethod.GET,
-                                "/api/v1/producto/dashboard-search",
                                 "/api/v1/producto/dashboard-quantity",
                                 "/api/v1/producto/dashboard-paginated")
                         .hasAnyRole("ADMINISTRADOR", "SUPERVISOR", "SUPERADMIN")
