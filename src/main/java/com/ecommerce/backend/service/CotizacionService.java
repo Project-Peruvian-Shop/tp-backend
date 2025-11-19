@@ -92,7 +92,7 @@ public class CotizacionService {
         Cotizacion cotizacion = cotizacionRepository.findById(cotizacionId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cotización no encontrada"));
 
-        String fileName = this.getNumberFromDB() + ".pdf";
+        String fileName = "COT-2025-" + cotizacionId + ".pdf";
 
         String filePath = fileUploadService.uploadFile(archivo, fileName, "uploads/cotizaciones");
 
