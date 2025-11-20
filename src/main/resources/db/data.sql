@@ -193,7 +193,7 @@ insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, 
 (51, 'COT-2025-051', 'PENDIENTE', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 4, '2025-11-13 13:42:00'),
 (52, 'COT-2025-052', 'PENDIENTE', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 5, '2025-11-13 13:43:00'),
 (53, 'COT-2025-053', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 7, '2025-11-14 13:44:00'),
-(54, 'COT-2025-054', 'ACEPTADA', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 6, '2025-11-14 13:45:00');
+(54, 'COT-2025-054', 'EN_PROCESO', 'Entrega programada', 'Jorge Medina', 'DNI', '44444444', '987444444', 'jorge@example.com', 1, '2025-11-14 13:45:00');
 
 
 -- Detalles de cotización (continuación y completado)

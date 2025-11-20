@@ -47,7 +47,7 @@ public class CotizacionMapper {
                 .productos(productos)
                 .tipoDocumento(cotizacion.getTipo_documento())
                 .documento(cotizacion.getDocumento())
-                .cliente(cotizacion.getUsuario().getNombre())
+                .cliente(cotizacion.getNombre())
                 .email(cotizacion.getEmail())
                 .telefono(cotizacion.getTelefono())
                 .observaciones(cotizacion.getObservaciones())
