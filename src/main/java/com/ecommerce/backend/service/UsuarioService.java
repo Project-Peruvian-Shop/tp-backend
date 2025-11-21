@@ -62,11 +62,10 @@ public class UsuarioService {
     }
 
 
-    public void deleteById(Long id) {
-        if (!usuarioRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Usuario not found - id: " + id);
-        }
-        usuarioRepository.deleteById(id);
+    public void delete(Long id) {
+     Usuario usuarioEncontrado = usuarioRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Usuario not found - id: " + id));
+
+        usuarioRepository.delete(usuarioEncontrado);
     }
 
 
