@@ -168,4 +168,16 @@ public class ProductoController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Producto actualizado con id: " + id));
     }
+    @DeleteMapping("/{id}")
+    @Operation(
+            summary = "Eliminar productos",
+            description = "Ubicacion: Dashboard productos update  \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse<Object>> deleteProducto(@PathVariable Long id){
+        productoService.delete(id);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(null, "Producto deleted successfully - id: " + id));
+    }
 }
