@@ -6,6 +6,7 @@ import com.ecommerce.backend.dto.categoria.CategoriaRequestDTO;
 import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
 import com.ecommerce.backend.entity.Categoria;
 import com.ecommerce.backend.entity.Imagen;
+import com.ecommerce.backend.entity.Producto;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.CategoriaMapper;
 import com.ecommerce.backend.mapper.ProductoMapper;
@@ -95,5 +96,10 @@ public class CategoriaService {
         categoriaExistente.setImagen(imagen);
 
         return CategoriaMapper.toDashboardDTO(categoriaRepository.save(categoriaExistente));
+    }
+    public void delete(Long id){
+        Categoria categoriaEncontrada = categoriaRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Categoria no encontrada con id: " +id));
+
+        categoriaRepository.delete(categoriaEncontrada);
     }
 }
