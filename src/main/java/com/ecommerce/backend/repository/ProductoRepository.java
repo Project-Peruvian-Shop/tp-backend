@@ -44,4 +44,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
             ORDER BY LOWER(p.nombre) ASC
             """)
     Page<Producto> findAllOrderByNombreIgnoreCase(Pageable pageable);
+
+    long countByCategoriaId(Long categoriaId);
+
 }

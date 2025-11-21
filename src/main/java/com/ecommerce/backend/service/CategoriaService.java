@@ -11,6 +11,7 @@ import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.CategoriaMapper;
 import com.ecommerce.backend.mapper.ProductoMapper;
 import com.ecommerce.backend.repository.CategoriaRepository;
+import com.ecommerce.backend.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +25,7 @@ import java.util.List;
 public class CategoriaService {
     private final CategoriaRepository categoriaRepository;
     private final ImagenService imagenService;
+    private final ProductoRepository productoRepository;
 
     public List<AllAndQuantityResponseDTO> findAllAndQuantity() {
         return categoriaRepository.findAllAndQuantity()
@@ -98,8 +100,14 @@ public class CategoriaService {
         return CategoriaMapper.toDashboardDTO(categoriaRepository.save(categoriaExistente));
     }
     public void delete(Long id){
-        Categoria categoriaEncontrada = categoriaRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Categoria no encontrada con id: " +id));
+        Categoria categoria = categoriaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada"));
 
-        categoriaRepository.delete(categoriaEncontrada);
+        long count = productoRepository.countByCategoriaId(id);
+        if (count > 0) {
+            throw new IllegalStateException("No se puede eliminar la categoría porque tiene productos asociados");
+        }
+
+        categoriaRepository.delete(categoria);
     }
 }
