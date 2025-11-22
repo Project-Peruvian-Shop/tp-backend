@@ -7,6 +7,7 @@ import com.ecommerce.backend.dto.producto.PaginatedProductoResponseDTO;
 import com.ecommerce.backend.entity.Categoria;
 import com.ecommerce.backend.entity.Imagen;
 import com.ecommerce.backend.entity.Producto;
+import com.ecommerce.backend.exceptions.BadRequestException;
 import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.mapper.CategoriaMapper;
 import com.ecommerce.backend.mapper.ProductoMapper;
@@ -105,7 +106,7 @@ public class CategoriaService {
 
         long count = productoRepository.countByCategoriaId(id);
         if (count > 0) {
-            throw new IllegalStateException("No se puede eliminar la categoría porque tiene productos asociados");
+            throw new BadRequestException("No se puede eliminar la categoría porque tiene productos asociados");
         }
 
         categoriaRepository.delete(categoria);
