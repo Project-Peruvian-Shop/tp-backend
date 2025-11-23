@@ -152,4 +152,16 @@ public class CategoriaController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(data, "Categoria actualizada exitosamente"));
     }
+    @DeleteMapping("/{id}")
+    @Operation(
+            summary = "Eliminar Lineas",
+            description = "Ubicacion: Dashboard Lineas   \n" +
+                    "Seguridad: Admin, Manager"
+    )
+    public ResponseEntity<GlobalResponse<Object>> deleteCategoria(@PathVariable Long id){
+        categoriaService.delete(id);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GlobalResponse.success(null, "Categoria deleted successfully - id: " + id));
+    }
 }

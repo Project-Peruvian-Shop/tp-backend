@@ -106,5 +106,10 @@ public class ProductoService {
         productoEncontrado.setCategoria(categoria);
         return ProductoMapper.toDashboardDTO(productoRepository.save(productoEncontrado));
     }
+    public void delete(Long id){
+        Producto productoEncontrado = productoRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Producto no encontrado con id: " +id));
+
+        productoRepository.delete(productoEncontrado);
+    }
 }
 

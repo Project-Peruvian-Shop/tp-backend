@@ -147,6 +147,7 @@ public class SecurityConfig {
                         // PRODUCTO
                         .requestMatchers(HttpMethod.POST, "/api/v1/producto/").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/producto/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.DELETE,"/api/v1/producto/{id}").hasRole("SUPERADMIN")
 
                         // MENSAJE
                         .requestMatchers(HttpMethod.PUT, "/api/v1/mensaje/change-state/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
@@ -159,6 +160,7 @@ public class SecurityConfig {
                         // CATEGORIA
                         .requestMatchers(HttpMethod.POST, "/api/v1/categoria/").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/categoria/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/categoria/{id}").hasRole("SUPERADMIN")
 
                         // IMAGEN
                         .requestMatchers(HttpMethod.POST, "/api/v1/imagen").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")

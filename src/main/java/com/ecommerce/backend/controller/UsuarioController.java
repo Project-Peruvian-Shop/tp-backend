@@ -3,7 +3,6 @@ package com.ecommerce.backend.controller;
 import com.ecommerce.backend.config.Constant;
 import com.ecommerce.backend.dto.GlobalResponse;
 import com.ecommerce.backend.dto.usuario.*;
-import com.ecommerce.backend.enums.UsuarioRolEnum;
 import com.ecommerce.backend.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -72,8 +71,13 @@ public class UsuarioController {
 
 
     @DeleteMapping("/delete/{id}")
+    @Operation(
+            summary = "Eliminar un usuario",
+            description = "Ubicación: Mi perfil, Dashboard - Usuarios  \n" +
+                    "Seguridad:  Manager, Admin"
+    )
     public ResponseEntity<GlobalResponse<Object>> deleteUsuario(@PathVariable Long id) {
-        usuarioService.deleteById(id);
+        usuarioService.delete(id);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GlobalResponse.success(null, "Usuario deleted successfully - id: " + id));
