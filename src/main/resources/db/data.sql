@@ -102,43 +102,47 @@ insert into mensaje
 values
 ('Juan Pérez', 'DNI', '12345678', '+987654321', 'juanperez@gmail.com',
  'Estoy interesado en sus productos de PVC de 2 pulgadas. ¿Podrían enviarme una cotización detallada?',
- 'CONTACTENOS', 'PENDIENTE', null, 4, '2024-12-05 11:30:30'),
+ 'CONTACTENOS', 'PENDIENTE', null, 4, '2024-11-23 11:30:30'),
 
 ('María Gómez', 'RUC', '20654321987', '+912345678', 'maria.gomez@yahoo.com',
  'Realicé una compra hace dos semanas y el pedido llegó incompleto. Necesito una solución urgente.',
- 'QUEJA', 'EN_PROCESO', 'EMAIL', 4, '2023-08-30 11:30:30'),
+ 'QUEJA', 'EN_PROCESO', 'EMAIL', 4, '2023-11-24 11:30:30'),
 
 ('Carla Rivas', 'PASAPORTE', 'PZ1122334', '+12345678', 'cliente.anonimo@test.com',
  '¿Qué tipo de garantía ofrecen en las tuberías de PVC clase 10? Estoy considerando una compra mayorista.',
- 'CONTACTENOS', 'CERRADO', 'WHATSAPP', NULL, '2024-12-05 11:30:30'),
+ 'CONTACTENOS', 'CERRADO', 'WHATSAPP', NULL, '2024-11-24 11:30:30'),
 
 ('Carlos López', 'DNI', '11223344', '+999888777', 'carlos.lopez@hotmail.com',
  'Compré tuberías de PVC de 3 pulgadas y algunas vinieron con defectos de fabricación. Deseo presentar un reclamo.',
- 'RECLAMO', 'CERRADO', 'PRESENCIAL', 5, '2025-01-25 11:30:30'),
+ 'RECLAMO', 'CERRADO', 'PRESENCIAL', 5, '2025-11-25 11:30:30'),
 
 ('Ana Torres', 'OTRO', '94810122', '+955666444', 'ana.torres@gmail.com',
  'La atención en la sucursal de San Isidro fue deficiente. Agradecería que me contacten para resolverlo.',
- 'QUEJA', 'RESUELTO', 'PRESENCIAL', NULL, '2025-10-16 11:30:30'),
+ 'QUEJA', 'RESUELTO', 'PRESENCIAL', NULL, '2025-11-28 11:30:30'),
 
 ('Pedro Salazar', 'DNI', '44556677', '+988776655', 'pedro.salazar@empresa.com',
  'Estoy buscando cotización para 100 metros de tubería PVC de 4" y accesorios de unión.',
- 'CONTACTENOS', 'PENDIENTE', NULL, 6, '2025-10-10 10:15:20'),
+ 'CONTACTENOS', 'PENDIENTE', NULL, 6, '2025-11-29 10:15:20'),
 
 ('Lucía Fernández', 'RUC', '20588741236', '+976543210', 'ventas@constructoraandes.pe',
  'Requerimos cotización por mayor para tuberías de PVC clase 10 y 15. Favor de enviar proforma por correo.',
- 'CONTACTENOS', 'EN_PROCESO', 'EMAIL', 7, '2025-09-02 14:40:50'),
+ 'CONTACTENOS', 'PENDIENTE', 'EMAIL', 7, '2025-11-30 14:40:50'),
 
 ('Diego Ramos', 'DNI', '33445566', '+933221100', 'diegoramos@gmail.com',
  'He intentado comunicarme varias veces sin respuesta. Necesito saber el estado de mi pedido.',
- 'QUEJA', 'EN_PROCESO', 'WHATSAPP', 6, '2025-08-21 09:25:00'),
+ 'QUEJA', 'PENDIENTE', 'WHATSAPP', 6, '2025-12-01 06:25:00'),
 
 ('Rosa Medina', 'DNI', '55667788', '+977665544', 'rosa.medina@outlook.com',
  'Deseo obtener información sobre los métodos de pago para pedidos al por mayor.',
- 'CONTACTENOS', 'RESUELTO', 'EMAIL', NULL, '2025-07-15 16:45:10'),
+ 'CONTACTENOS', 'PENDIENTE', 'EMAIL', NULL, '2025-12-01 07:45:10'),
+
+ ('Rosa Perez', 'DNI', '55667788', '+977665544', 'rosa.medina@outlook.com',
+ 'Deseo obtener información',
+ 'CONTACTENOS', 'PENDIENTE', 'EMAIL', NULL, '2025-12-01 08:55:10'),
 
 ('Miguel Torres', 'DNI', '66778899', '+911223344', 'miguel.torres@gmail.com',
  'Recibí un producto diferente al solicitado, por lo que quiero dejar constancia de mi reclamo.',
- 'RECLAMO', 'PENDIENTE', 'TELEFONO', 4, '2025-06-28 08:35:00');
+ 'RECLAMO', 'PENDIENTE', 'TELEFONO', 4, '2025-12-01 09:35:00');
 
 
 insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, documento, telefono, email, usuario_id, creacion, observaciones) values
@@ -174,8 +178,8 @@ insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, 
 (30, 'COT-2025-030', 'PENDIENTE', 'Enviar propuesta final.', 'Global Ferreterías S.A.', 'RUC', '20458963214', '985678901', 'ventas@globalferreterias.com', 6, '2025-05-22 13:20:00', 'Propuesta final enviada con precios actualizados.'),
 (31, 'COT-2025-031', 'EN_PROCESO', 'Estoy evaluando internamente.', 'Global Ferreterías S.A.', 'RUC', '20458963214', '985678901', 'ventas@globalferreterias.com', 6, '2025-05-23 08:40:00', 'Cliente evaluando con su equipo interno la propuesta.'),
 (32, 'COT-2025-032', 'ENVIADA', '¿Pueden separar el pedido?', 'Agroexport Litoral S.A.', 'RUC', '20547896320', '934567812', 'export@agrolitoral.com', 8, '2025-05-25 12:10:00', 'Se indicó posibilidad de separar el pedido.'),
-(33, 'COT-2025-033', 'ACEPTADA', 'Aprobado en obra', 'TecnoLogix Perú S.R.L.', 'RUC', '20588741236', '987444444', 'info@tecnologix.com', 5, '2025-05-30 15:45:00', 'Cliente aprobó en obra sin requerir ajustes adicionales.'),
-(34, 'COT-2025-034', 'RECHAZADA', 'Cotización urgente', 'Comercial Andina S.A.C.', 'RUC', '20604587123', '987654321', 'contacto@comercialandina.com', 4, '2025-06-01 11:00:00', 'Se respondió con urgencia, cliente decidió no continuar.'),
+(33, 'COT-2025-033', 'PENDIENTE', 'Aprobado en obra', 'TecnoLogix Perú S.R.L.', 'RUC', '20588741236', '987444444', 'info@tecnologix.com', 5, '2025-05-30 15:45:00', 'Cliente aprobó en obra sin requerir ajustes adicionales.'),
+(34, 'COT-2025-034', 'PENDIENTE', 'Cotización urgente', 'Comercial Andina S.A.C.', 'RUC', '20604587123', '987654321', 'contacto@comercialandina.com', 4, '2025-06-01 11:00:00', 'Se respondió con urgencia, cliente decidió no continuar.'),
 (35, 'COT-2025-035', 'CERRADA', 'Necesito proforma.', 'TecnoLogix Perú S.R.L.', 'RUC', '20588741236', '987444444', 'info@tecnologix.com', 5, '2025-06-02 15:30:00', 'Proforma enviada correctamente al cliente.'),
 (36, 'COT-2025-036', 'PENDIENTE', 'Validación técnica', 'Agroexport Litoral S.A.', 'RUC', '20547896320', '934567812', 'export@agrolitoral.com', 8, '2025-06-03 09:50:00', 'En revisión técnica para confirmar compatibilidad.'),
 (37, 'COT-2025-037', 'ACEPTADA', 'Favor confirmar si el precio es unitario.', 'TecnoLogix Perú S.R.L.', 'RUC', '20588741236', '987444444', 'info@tecnologix.com', 5, '2025-08-04 17:25:00', 'Se aclaró que el precio es unitario; cliente conforme.'),
@@ -186,10 +190,10 @@ insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, 
 (42, 'COT-2025-042', 'PENDIENTE', 'Solicito descuento', 'Servicios Industriales Inca S.A.C.', 'RUC', '20457896321', '987555555', 'contacto@incaindustrial.com', 7, '2025-11-27 08:30:00', 'Se evaluó el descuento solicitado y se informó decisión.'),
 (43, 'COT-2025-043', 'EN_PROCESO', '¿Pueden enviar muestras?', 'Agroexport Litoral S.A.', 'RUC', '20547896320', '934567812', 'export@agrolitoral.com', 8, '2025-11-28 16:20:00', 'Muestras disponibles; se coordinó envío preliminar.'),
 (44, 'COT-2025-044', 'ACEPTADA', 'Necesito asesoría para elegir.', 'Global Ferreterías S.A.', 'RUC', '20458963214', '985678901', 'ventas@globalferreterias.com', 6, '2025-11-29 10:10:00', 'Se envió asesoría con alternativas sugeridas.'),
-(45, 'COT-2025-045', 'ACEPTADA', 'Confirmar plazo de validez.', 'Global Ferreterías S.A.', 'RUC', '20458963214', '985678901', 'ventas@globalferreterias.com', 6, '2025-11-29 14:55:00', 'Plazo de validez confirmado al cliente.'),
+(45, 'COT-2025-045', 'PENDIENTE', 'Confirmar plazo de validez.', 'Global Ferreterías S.A.', 'RUC', '20458963214', '985678901', 'ventas@globalferreterias.com', 6, '2025-11-29 14:55:00', 'Plazo de validez confirmado al cliente.'),
 (46, 'COT-2025-046', 'RECHAZADA', 'Enviar planos o diagramas.', 'TecnoLogix Perú S.R.L.', 'RUC', '20588741236', '987444444', 'info@tecnologix.com', 5, '2025-11-29 11:15:00', 'Planos y diagramas enviados para su análisis.'),
 (47, 'COT-2025-047', 'ACEPTADA', '¿Trabajan con crédito?', 'TecnoLogix Perú S.R.L.', 'RUC', '20588741236', '987444444', 'info@tecnologix.com', 5, '2025-11-30 09:15:00', 'Se explicó modalidad de crédito disponible.'),
-(48, 'COT-2025-048', 'ACEPTADA', 'Requiero entrega parcial.', 'Servicios Industriales Inca S.A.C.', 'RUC', '20457896321', '987555555', 'contacto@incaindustrial.com', 7, '2025-11-30 10:30:00', 'Entrega parcial coordinada según solicitud.'),
+(48, 'COT-2025-048', 'PENDIENTE', 'Requiero entrega parcial.', 'Servicios Industriales Inca S.A.C.', 'RUC', '20457896321', '987555555', 'contacto@incaindustrial.com', 7, '2025-11-30 10:30:00', 'Entrega parcial coordinada según solicitud.'),
 (49, 'COT-2025-049', 'ACEPTADA', 'Consulto por tiempos en feriados.', 'Agroexport Litoral S.A.', 'RUC', '20547896320', '934567812', 'export@agrolitoral.com', 8, '2025-11-30 11:00:00', 'Se informó sobre tiempos en fechas festivas.'),
 (50, 'COT-2025-050', 'ACEPTADA', '¿Pueden ofrecer mantenimiento?', 'TecnoLogix Perú S.R.L.', 'RUC', '20588741236', '987444444', 'info@tecnologix.com', 5, '2025-11-30 11:41:00', 'Se brindó detalle de servicios de mantenimiento.'),
 (51, 'COT-2025-051', 'PENDIENTE', 'Estoy validando especificaciones.', 'Comercial Andina S.A.C.', 'RUC', '20604587123', '987654321', 'contacto@comercialandina.com', 4, '2025-12-01 11:42:00', 'Se enviaron especificaciones detalladas para validación.'),
