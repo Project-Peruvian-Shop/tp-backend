@@ -147,14 +147,15 @@ public class SecurityConfig {
                         // PRODUCTO
                         .requestMatchers(HttpMethod.POST, "/api/v1/producto/").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/producto/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
-                        .requestMatchers(HttpMethod.DELETE,"/api/v1/producto/{id}").hasRole("SUPERADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/producto/{id}").hasRole("SUPERADMIN")
 
                         // MENSAJE
                         .requestMatchers(HttpMethod.PUT, "/api/v1/mensaje/change-state/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
 
                         // COTIZACION
                         .requestMatchers(HttpMethod.PUT, "/api/v1/cotizacion/observaciones/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/cotizacion/change-state/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/cotizacion/change-state/{id}")
+                        .hasAnyRole("CLIENTE", "SUPERVISOR", "ADMINISTRADOR", "SUPERADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/v1/cotizacion/create_pdf/{id}").hasAnyRole("SUPERADMIN", "ADMINISTRADOR")
 
                         // CATEGORIA
