@@ -199,7 +199,7 @@ insert into cotizacion (id, numero, estado, comentario, nombre, tipo_documento, 
 (51, 'COT-2025-051', 'PENDIENTE', 'Estoy validando especificaciones.', 'Comercial Andina S.A.C.', 'RUC', '20604587123', '987654321', 'contacto@comercialandina.com', 4, '2025-12-01 11:42:00', 'Se enviaron especificaciones detalladas para validación.'),
 (52, 'COT-2025-052', 'PENDIENTE', 'Solicito cotizar transporte aparte.', 'TecnoLogix Perú S.R.L.', 'RUC', '20588741236', '987444444', 'info@tecnologix.com', 5, '2025-12-01 11:43:00', 'Transporte cotizado por separado y enviado al cliente.'),
 (53, 'COT-2025-053', 'ACEPTADA', 'Necesito ampliación de información.', 'Servicios Industriales Inca S.A.C.', 'RUC', '20457896321', '987555555', 'contacto@incaindustrial.com', 7, '2025-12-01 11:44:00', 'Información ampliada enviada correctamente.'),
-(54, 'COT-2025-054', 'EN_PROCESO', 'Requiero respuesta urgente.', 'Servicios Industriales Inca S.A.C.', 'RUC', '20457896321', '987555555', 'contacto@incaindustrial.com', 9, '2025-12-01 11:45:00', 'Atención prioritaria dada; se envió respuesta inmediata.');
+(54, 'COT-2025-054', 'PENDIENTE', 'Requiero respuesta urgente.', 'Servicios Industriales Inca S.A.C.', 'RUC', '20457896321', '987555555', 'contacto@incaindustrial.com', 9, '2025-12-01 11:45:00', 'Atención prioritaria dada; se envió respuesta inmediata.');
 
 
 -- Detalles de cotización (continuación y completado)
