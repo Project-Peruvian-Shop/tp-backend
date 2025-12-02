@@ -7,7 +7,7 @@ insert into usuario (nombre, apellidos, email, passwordd, telefono, rol) values
 ('Sofía', 'Cruz', 'sofia@mail.com', 'sofia123', '987666666', 'ROLE_CLIENTE'),
 ('Laura', 'Martínez', 'laura@mail.com', 'laura123', '985678901', 'ROLE_CLIENTE'),
 ('Diego', 'Vargas', 'diego@mail.com', 'diego123', '987999999', 'ROLE_CLIENTE'),
-('Franco', 'Tineo', 'tineo.dev@gmail.com', 'franco123', '987999999', 'ROLE_CLIENTE');
+('Franco', 'Tineo', 'tineo.dev@gmail.com', 'franco123', '987555555', 'ROLE_CLIENTE');
 
 
 insert into imagen (enlace, nombre, alt) values
