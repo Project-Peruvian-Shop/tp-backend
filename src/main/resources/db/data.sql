@@ -70,12 +70,12 @@ insert into producto (nombre, descripcion, imagen_id, categoria_id) values
 ('Tuberias para Desagüe 6" SP', 'Tubería de 6" para evacuación de aguas residuales en grandes instalaciones.', 6, 2),
 ('Tuberias para Desagüe 8" SP', 'Tubería de 8" para desagüe, ideal para redes de saneamiento.', 7, 2),
 -- CATEGORÍA 3: Tuberías para instalaciones eléctricas de desagüe (imagen_id = 3)
-('Tuberias para Desagüe 1/2" SP', 'Tubería de 1/2" para instalación eléctrica, resistente y flexible.', 9, 3),
-('Tuberias para Desagüe 5/8" SP', 'Tubería de 5/8" ideal para canalización eléctrica segura.', 10, 3),
-('Tuberias para Desagüe 3/4" SP', 'Tubería de 3/4" para protección de cables eléctricos.', 11, 3),
-('Tuberias para Desagüe 1" SP', 'Tubería de 1" para instalaciones eléctricas con alta durabilidad.', 12, 3),
-('Tuberias para Desagüe 1 1/2" SP', 'Tubería de 1 1/2" para canalización eficiente de conductores eléctricos.', 11, 3),
-('Tuberias para Desagüe 2" SP', 'Tubería de 2" para infraestructura eléctrica, segura y confiable.', 10, 3),
+('Tuberias para instalaciones eléctricas 1/2" SP', 'Tubería de 1/2" para instalación eléctrica, resistente y flexible.', 9, 3),
+('Tuberias para instalaciones eléctricas 5/8" SP', 'Tubería de 5/8" ideal para canalización eléctrica segura.', 10, 3),
+('Tuberias para instalaciones eléctricas 3/4" SP', 'Tubería de 3/4" para protección de cables eléctricos.', 11, 3),
+('Tuberias para instalaciones eléctricas 1" SP', 'Tubería de 1" para instalaciones eléctricas con alta durabilidad.', 12, 3),
+('Tuberias para instalaciones eléctricas 1 1/2" SP', 'Tubería de 1 1/2" para canalización eficiente de conductores eléctricos.', 11, 3),
+('Tuberias para instalaciones eléctricas 2" SP', 'Tubería de 2" para infraestructura eléctrica, segura y confiable.', 10, 3),
 -- CATEGORÍA 4: Tuberías para fluidos a presión Unión Roscada (imagen_id = 4)
 ('Tuberias para Fluidos a Presion con Unión Roscada 1/2"', 'Tubería de 1/2" con unión roscada para fácil instalación en sistemas de presión.', 14, 4),
 ('Tuberias para Fluidos a Presion con Unión Roscada 3/4"', 'Tubería de 3/4" con rosca, ideal para conexiones hidráulicas.', 15, 4),

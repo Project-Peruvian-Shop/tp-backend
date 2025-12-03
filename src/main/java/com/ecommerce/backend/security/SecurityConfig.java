@@ -24,6 +24,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("http://localhost:5173");
+        configuration.addAllowedOrigin("http://localhost:8081");
         configuration.addAllowedOrigin("https://tp-frontend-sooty.vercel.app");
         configuration.addAllowedOrigin("https://www.tuberiasperuanito.com");
         configuration.addAllowedMethod("*");
